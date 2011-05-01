@@ -362,7 +362,7 @@ Copyright (C) 2008 Free Software Foundation, Inc.
 This config.status script is free software; the Free Software Foundation
 gives unlimited permission to copy, distribute and modify it."
 
-ac_pwd='/Users/mike/Code/ocRosa_Development/sqlcipher'
+ac_pwd='/Users/mike/Code/ocRosa/sqlcipher'
 srcdir='.'
 INSTALL='/usr/bin/install -c'
 AWK='awk'
@@ -484,7 +484,7 @@ GREP='/usr/bin/grep'
 EGREP='/usr/bin/grep -E'
 FGREP='/usr/bin/grep -F'
 LD='/usr/libexec/gcc/i686-apple-darwin10/4.2.1/ld'
-NM='/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/nm'
+NM='/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/nm'
 LN_S='ln -s'
 max_cmd_len='196608'
 ac_objext='o'
@@ -771,7 +771,7 @@ S["FGREP"]="/usr/bin/grep -F"
 S["LD"]="/usr/libexec/gcc/i686-apple-darwin10/4.2.1/ld"
 S["DUMPBIN"]=""
 S["ac_ct_DUMPBIN"]=""
-S["NM"]="/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/nm"
+S["NM"]="/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/nm"
 S["LN_S"]="ln -s"
 S["OBJDUMP"]="false"
 S["AR"]="ar"
