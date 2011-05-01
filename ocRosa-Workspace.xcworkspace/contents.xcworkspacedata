@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workspace
+   version = "1.0">
+   <FileRef
+      location = "group:iRosa/iRosa.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:ocRosa/ocRosa.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:sqlcipher/sqlcipher.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:openssl-1.0.0d/openssl.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:fmdb/fmdb.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:CHDataStructures/CHDataStructures-iOS.xcodeproj">
+   </FileRef>
+</Workspace>

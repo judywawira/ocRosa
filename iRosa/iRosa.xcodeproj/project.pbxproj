@@ -1,0 +1,530 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		2724F81F132C2B04009CECAF /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2724F81E132C2B04009CECAF /* UIKit.framework */; };
+		2724F821132C2B04009CECAF /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2724F820132C2B04009CECAF /* Foundation.framework */; };
+		2724F823132C2B04009CECAF /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2724F822132C2B04009CECAF /* CoreGraphics.framework */; };
+		2724F829132C2B04009CECAF /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2724F827132C2B04009CECAF /* InfoPlist.strings */; };
+		2724F82C132C2B04009CECAF /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2724F82B132C2B04009CECAF /* main.m */; };
+		2724F82F132C2B04009CECAF /* iRosaAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2724F82E132C2B04009CECAF /* iRosaAppDelegate.m */; };
+		2724F833132C2B04009CECAF /* iRosaAppDelegate_iPhone.m in Sources */ = {isa = PBXBuildFile; fileRef = 2724F832132C2B04009CECAF /* iRosaAppDelegate_iPhone.m */; };
+		2724F836132C2B04009CECAF /* MainWindow_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2724F834132C2B04009CECAF /* MainWindow_iPhone.xib */; };
+		2724F83A132C2B04009CECAF /* iRosaAppDelegate_iPad.m in Sources */ = {isa = PBXBuildFile; fileRef = 2724F839132C2B04009CECAF /* iRosaAppDelegate_iPad.m */; };
+		2724F83D132C2B04009CECAF /* MainWindow_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2724F83B132C2B04009CECAF /* MainWindow_iPad.xib */; };
+		2724F848132C2C3B009CECAF /* libCHDataStructures.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2724F843132C2C3B009CECAF /* libCHDataStructures.a */; };
+		2724F849132C2C3B009CECAF /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2724F844132C2C3B009CECAF /* libcrypto.a */; };
+		2724F84A132C2C3B009CECAF /* libFMDB.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2724F845132C2C3B009CECAF /* libFMDB.a */; };
+		2724F84B132C2C3B009CECAF /* libocRosa.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2724F846132C2C3B009CECAF /* libocRosa.a */; };
+		2724F84C132C2C3B009CECAF /* libsqlcipher.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2724F847132C2C3B009CECAF /* libsqlcipher.a */; };
+		2724F857132C2E45009CECAF /* ocRosa.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 2724F856132C2E45009CECAF /* ocRosa.sqlite */; };
+		27428A2E135B55240003E419 /* NumberView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 27428A2D135B55230003E419 /* NumberView.xib */; };
+		27428A32135B55460003E419 /* NumberView.m in Sources */ = {isa = PBXBuildFile; fileRef = 27428A31135B55450003E419 /* NumberView.m */; };
+		27428A35135B68FE0003E419 /* TextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 27428A34135B68FD0003E419 /* TextView.m */; };
+		27428A37135B69260003E419 /* TextView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 27428A36135B69250003E419 /* TextView.xib */; };
+		27428A39135B703F0003E419 /* DateView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 27428A38135B703E0003E419 /* DateView.xib */; };
+		27428A3C135B70F80003E419 /* DateView.m in Sources */ = {isa = PBXBuildFile; fileRef = 27428A3B135B70F70003E419 /* DateView.m */; };
+		27428A3F135B85390003E419 /* SelectView.m in Sources */ = {isa = PBXBuildFile; fileRef = 27428A3E135B85380003E419 /* SelectView.m */; };
+		27428A41135B85920003E419 /* SelectView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 27428A40135B85900003E419 /* SelectView.xib */; };
+		2765D74A135BB2AE00E4E184 /* FormDownloadViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2765D748135BB2AE00E4E184 /* FormDownloadViewController.m */; };
+		2765D74B135BB2AE00E4E184 /* FormDownloadViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2765D749135BB2AE00E4E184 /* FormDownloadViewController.xib */; };
+		27686CB2135948BE00C07594 /* SelectOneView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 27686CB1135948BE00C07594 /* SelectOneView.xib */; };
+		27776C381341593300473F80 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 27776C371341593300473F80 /* libxml2.dylib */; };
+		27834CFF13522099004ABC26 /* QuestionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 27834CFE13522099004ABC26 /* QuestionsViewController.m */; };
+		27834D2813526C1E004ABC26 /* QuestionController_iPhone.m in Sources */ = {isa = PBXBuildFile; fileRef = 27834D2713526C1E004ABC26 /* QuestionController_iPhone.m */; };
+		278717BF13528122007BA879 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 278717BE13528122007BA879 /* QuartzCore.framework */; };
+		27AE69141353BE2700C0A0DD /* QuestionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 27AE69131353BE2700C0A0DD /* QuestionView.m */; };
+		27AE69171353C56A00C0A0DD /* QuestionViewFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 27AE69161353C56A00C0A0DD /* QuestionViewFactory.m */; };
+		27BE7C7A1350E0710005698B /* FormsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 27BE7C781350E0710005698B /* FormsView.xib */; };
+		27BE7CB91350E4D40005698B /* FormsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 27BE7CB71350E4D40005698B /* FormsViewController.m */; };
+		27BE7CDA1351050E0005698B /* FormDetailsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 27BE7CD81351050E0005698B /* FormDetailsView.xib */; };
+		27BE7CE3135107470005698B /* FormDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 27BE7CE2135107460005698B /* FormDetailViewController.m */; };
+		27BE7CE613512F450005698B /* QuestionsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 27BE7CE413512F450005698B /* QuestionsView.xib */; };
+		27BE7CE913512F890005698B /* QuestionController.m in Sources */ = {isa = PBXBuildFile; fileRef = 27BE7CE813512F880005698B /* QuestionController.m */; };
+		27E0ADB6135529A7001A695D /* QuestionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 27E0ADB5135529A7001A695D /* QuestionView.xib */; };
+		27EFB7E21359232800B32CA3 /* SelectOneView.m in Sources */ = {isa = PBXBuildFile; fileRef = 27EFB7E11359232800B32CA3 /* SelectOneView.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		2724F81A132C2B04009CECAF /* iRosa.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iRosa.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		2724F81E132C2B04009CECAF /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		2724F820132C2B04009CECAF /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		2724F822132C2B04009CECAF /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		2724F826132C2B04009CECAF /* iRosa-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "iRosa-Info.plist"; sourceTree = "<group>"; };
+		2724F828132C2B04009CECAF /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		2724F82A132C2B04009CECAF /* iRosa-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "iRosa-Prefix.pch"; sourceTree = "<group>"; };
+		2724F82B132C2B04009CECAF /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		2724F82D132C2B04009CECAF /* iRosaAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = iRosaAppDelegate.h; sourceTree = "<group>"; };
+		2724F82E132C2B04009CECAF /* iRosaAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = iRosaAppDelegate.m; sourceTree = "<group>"; };
+		2724F831132C2B04009CECAF /* iRosaAppDelegate_iPhone.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = iRosaAppDelegate_iPhone.h; path = iPhone/iRosaAppDelegate_iPhone.h; sourceTree = "<group>"; };
+		2724F832132C2B04009CECAF /* iRosaAppDelegate_iPhone.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = iRosaAppDelegate_iPhone.m; path = iPhone/iRosaAppDelegate_iPhone.m; sourceTree = "<group>"; };
+		2724F835132C2B04009CECAF /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = iPhone/en.lproj/MainWindow_iPhone.xib; sourceTree = "<group>"; };
+		2724F838132C2B04009CECAF /* iRosaAppDelegate_iPad.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = iRosaAppDelegate_iPad.h; path = iPad/iRosaAppDelegate_iPad.h; sourceTree = "<group>"; };
+		2724F839132C2B04009CECAF /* iRosaAppDelegate_iPad.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = iRosaAppDelegate_iPad.m; path = iPad/iRosaAppDelegate_iPad.m; sourceTree = "<group>"; };
+		2724F83C132C2B04009CECAF /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = iPad/en.lproj/MainWindow_iPad.xib; sourceTree = "<group>"; };
+		2724F843132C2C3B009CECAF /* libCHDataStructures.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libCHDataStructures.a; sourceTree = SOURCE_ROOT; };
+		2724F844132C2C3B009CECAF /* libcrypto.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libcrypto.a; sourceTree = SOURCE_ROOT; };
+		2724F845132C2C3B009CECAF /* libFMDB.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libFMDB.a; sourceTree = SOURCE_ROOT; };
+		2724F846132C2C3B009CECAF /* libocRosa.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libocRosa.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		2724F847132C2C3B009CECAF /* libsqlcipher.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libsqlcipher.a; sourceTree = SOURCE_ROOT; };
+		2724F856132C2E45009CECAF /* ocRosa.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; name = ocRosa.sqlite; path = ../ocRosa/ocRosa.sqlite; sourceTree = "<group>"; };
+		27428A2D135B55230003E419 /* NumberView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NumberView.xib; sourceTree = "<group>"; };
+		27428A30135B55450003E419 /* NumberView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NumberView.h; sourceTree = "<group>"; };
+		27428A31135B55450003E419 /* NumberView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NumberView.m; sourceTree = "<group>"; };
+		27428A33135B68FD0003E419 /* TextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextView.h; sourceTree = "<group>"; };
+		27428A34135B68FD0003E419 /* TextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TextView.m; sourceTree = "<group>"; };
+		27428A36135B69250003E419 /* TextView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TextView.xib; sourceTree = "<group>"; };
+		27428A38135B703E0003E419 /* DateView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DateView.xib; sourceTree = "<group>"; };
+		27428A3A135B70F60003E419 /* DateView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DateView.h; sourceTree = "<group>"; };
+		27428A3B135B70F70003E419 /* DateView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DateView.m; sourceTree = "<group>"; };
+		27428A3D135B85370003E419 /* SelectView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectView.h; sourceTree = "<group>"; };
+		27428A3E135B85380003E419 /* SelectView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectView.m; sourceTree = "<group>"; };
+		27428A40135B85900003E419 /* SelectView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SelectView.xib; sourceTree = "<group>"; };
+		2765D747135BB2AE00E4E184 /* FormDownloadViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FormDownloadViewController.h; sourceTree = "<group>"; };
+		2765D748135BB2AE00E4E184 /* FormDownloadViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FormDownloadViewController.m; sourceTree = "<group>"; };
+		2765D749135BB2AE00E4E184 /* FormDownloadViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FormDownloadViewController.xib; sourceTree = "<group>"; };
+		27686CB1135948BE00C07594 /* SelectOneView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SelectOneView.xib; sourceTree = "<group>"; };
+		27776C371341593300473F80 /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
+		27834CFD13522099004ABC26 /* QuestionsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QuestionsViewController.h; sourceTree = "<group>"; };
+		27834CFE13522099004ABC26 /* QuestionsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuestionsViewController.m; sourceTree = "<group>"; };
+		27834D2613526C1E004ABC26 /* QuestionController_iPhone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QuestionController_iPhone.h; sourceTree = "<group>"; };
+		27834D2713526C1E004ABC26 /* QuestionController_iPhone.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuestionController_iPhone.m; sourceTree = "<group>"; };
+		278717BE13528122007BA879 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		27AE69121353BE2700C0A0DD /* QuestionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QuestionView.h; sourceTree = "<group>"; };
+		27AE69131353BE2700C0A0DD /* QuestionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuestionView.m; sourceTree = "<group>"; };
+		27AE69151353C56A00C0A0DD /* QuestionViewFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QuestionViewFactory.h; sourceTree = "<group>"; };
+		27AE69161353C56A00C0A0DD /* QuestionViewFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuestionViewFactory.m; sourceTree = "<group>"; };
+		27BE7C791350E0710005698B /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = iPhone/en.lproj/FormsView.xib; sourceTree = "<group>"; };
+		27BE7CB61350E4D40005698B /* FormsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FormsViewController.h; sourceTree = "<group>"; };
+		27BE7CB71350E4D40005698B /* FormsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FormsViewController.m; sourceTree = "<group>"; };
+		27BE7CD91351050E0005698B /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = iPhone/en.lproj/FormDetailsView.xib; sourceTree = "<group>"; };
+		27BE7CE1135107460005698B /* FormDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FormDetailViewController.h; sourceTree = "<group>"; };
+		27BE7CE2135107460005698B /* FormDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FormDetailViewController.m; sourceTree = "<group>"; };
+		27BE7CE513512F450005698B /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = iPhone/en.lproj/QuestionsView.xib; sourceTree = "<group>"; };
+		27BE7CE713512F870005698B /* QuestionController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QuestionController.h; sourceTree = "<group>"; };
+		27BE7CE813512F880005698B /* QuestionController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuestionController.m; sourceTree = "<group>"; };
+		27E0ADB5135529A7001A695D /* QuestionView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = QuestionView.xib; sourceTree = "<group>"; };
+		27EFB7E01359232700B32CA3 /* SelectOneView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectOneView.h; sourceTree = "<group>"; };
+		27EFB7E11359232800B32CA3 /* SelectOneView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectOneView.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		2724F817132C2B04009CECAF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				278717BF13528122007BA879 /* QuartzCore.framework in Frameworks */,
+				27776C381341593300473F80 /* libxml2.dylib in Frameworks */,
+				2724F848132C2C3B009CECAF /* libCHDataStructures.a in Frameworks */,
+				2724F849132C2C3B009CECAF /* libcrypto.a in Frameworks */,
+				2724F84A132C2C3B009CECAF /* libFMDB.a in Frameworks */,
+				2724F84B132C2C3B009CECAF /* libocRosa.a in Frameworks */,
+				2724F84C132C2C3B009CECAF /* libsqlcipher.a in Frameworks */,
+				2724F81F132C2B04009CECAF /* UIKit.framework in Frameworks */,
+				2724F821132C2B04009CECAF /* Foundation.framework in Frameworks */,
+				2724F823132C2B04009CECAF /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		2724F80F132C2B04009CECAF = {
+			isa = PBXGroup;
+			children = (
+				2724F855132C2E35009CECAF /* Resources */,
+				2724F824132C2B04009CECAF /* iRosa */,
+				2724F81D132C2B04009CECAF /* Frameworks */,
+				2724F81B132C2B04009CECAF /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		2724F81B132C2B04009CECAF /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				2724F81A132C2B04009CECAF /* iRosa.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		2724F81D132C2B04009CECAF /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				27776C371341593300473F80 /* libxml2.dylib */,
+				2724F843132C2C3B009CECAF /* libCHDataStructures.a */,
+				2724F844132C2C3B009CECAF /* libcrypto.a */,
+				2724F845132C2C3B009CECAF /* libFMDB.a */,
+				2724F846132C2C3B009CECAF /* libocRosa.a */,
+				2724F847132C2C3B009CECAF /* libsqlcipher.a */,
+				278717BE13528122007BA879 /* QuartzCore.framework */,
+				2724F81E132C2B04009CECAF /* UIKit.framework */,
+				2724F820132C2B04009CECAF /* Foundation.framework */,
+				2724F822132C2B04009CECAF /* CoreGraphics.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		2724F824132C2B04009CECAF /* iRosa */ = {
+			isa = PBXGroup;
+			children = (
+				2724F82D132C2B04009CECAF /* iRosaAppDelegate.h */,
+				2724F82E132C2B04009CECAF /* iRosaAppDelegate.m */,
+				2724F830132C2B04009CECAF /* iPhone */,
+				2724F837132C2B04009CECAF /* iPad */,
+				2724F825132C2B04009CECAF /* Supporting Files */,
+				27BE7CB61350E4D40005698B /* FormsViewController.h */,
+				27BE7CB71350E4D40005698B /* FormsViewController.m */,
+				27BE7CE1135107460005698B /* FormDetailViewController.h */,
+				27BE7CE2135107460005698B /* FormDetailViewController.m */,
+				27BE7CE713512F870005698B /* QuestionController.h */,
+				27BE7CE813512F880005698B /* QuestionController.m */,
+				27834CFD13522099004ABC26 /* QuestionsViewController.h */,
+				27834CFE13522099004ABC26 /* QuestionsViewController.m */,
+				2765D747135BB2AE00E4E184 /* FormDownloadViewController.h */,
+				2765D748135BB2AE00E4E184 /* FormDownloadViewController.m */,
+				2765D749135BB2AE00E4E184 /* FormDownloadViewController.xib */,
+			);
+			path = iRosa;
+			sourceTree = "<group>";
+		};
+		2724F825132C2B04009CECAF /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				2724F826132C2B04009CECAF /* iRosa-Info.plist */,
+				2724F827132C2B04009CECAF /* InfoPlist.strings */,
+				2724F82A132C2B04009CECAF /* iRosa-Prefix.pch */,
+				2724F82B132C2B04009CECAF /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		2724F830132C2B04009CECAF /* iPhone */ = {
+			isa = PBXGroup;
+			children = (
+				27834D2413526BD2004ABC26 /* Questions */,
+				2724F831132C2B04009CECAF /* iRosaAppDelegate_iPhone.h */,
+				2724F832132C2B04009CECAF /* iRosaAppDelegate_iPhone.m */,
+				2724F834132C2B04009CECAF /* MainWindow_iPhone.xib */,
+				27BE7C781350E0710005698B /* FormsView.xib */,
+				27BE7CD81351050E0005698B /* FormDetailsView.xib */,
+				27BE7CE413512F450005698B /* QuestionsView.xib */,
+			);
+			name = iPhone;
+			sourceTree = "<group>";
+		};
+		2724F837132C2B04009CECAF /* iPad */ = {
+			isa = PBXGroup;
+			children = (
+				2724F838132C2B04009CECAF /* iRosaAppDelegate_iPad.h */,
+				2724F839132C2B04009CECAF /* iRosaAppDelegate_iPad.m */,
+				2724F83B132C2B04009CECAF /* MainWindow_iPad.xib */,
+			);
+			name = iPad;
+			sourceTree = "<group>";
+		};
+		2724F855132C2E35009CECAF /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				2724F856132C2E45009CECAF /* ocRosa.sqlite */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		27834D2413526BD2004ABC26 /* Questions */ = {
+			isa = PBXGroup;
+			children = (
+				27AE69101353BDD500C0A0DD /* Views */,
+				27834D2613526C1E004ABC26 /* QuestionController_iPhone.h */,
+				27834D2713526C1E004ABC26 /* QuestionController_iPhone.m */,
+			);
+			name = Questions;
+			path = iPhone/Questions;
+			sourceTree = "<group>";
+		};
+		27AE69101353BDD500C0A0DD /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				27AE69121353BE2700C0A0DD /* QuestionView.h */,
+				27AE69131353BE2700C0A0DD /* QuestionView.m */,
+				27AE69151353C56A00C0A0DD /* QuestionViewFactory.h */,
+				27AE69161353C56A00C0A0DD /* QuestionViewFactory.m */,
+				27E0ADB5135529A7001A695D /* QuestionView.xib */,
+				27686CB1135948BE00C07594 /* SelectOneView.xib */,
+				27EFB7E01359232700B32CA3 /* SelectOneView.h */,
+				27EFB7E11359232800B32CA3 /* SelectOneView.m */,
+				27428A2D135B55230003E419 /* NumberView.xib */,
+				27428A30135B55450003E419 /* NumberView.h */,
+				27428A31135B55450003E419 /* NumberView.m */,
+				27428A33135B68FD0003E419 /* TextView.h */,
+				27428A34135B68FD0003E419 /* TextView.m */,
+				27428A36135B69250003E419 /* TextView.xib */,
+				27428A38135B703E0003E419 /* DateView.xib */,
+				27428A3A135B70F60003E419 /* DateView.h */,
+				27428A3B135B70F70003E419 /* DateView.m */,
+				27428A3D135B85370003E419 /* SelectView.h */,
+				27428A3E135B85380003E419 /* SelectView.m */,
+				27428A40135B85900003E419 /* SelectView.xib */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		2724F819132C2B04009CECAF /* iRosa */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2724F840132C2B04009CECAF /* Build configuration list for PBXNativeTarget "iRosa" */;
+			buildPhases = (
+				2724F816132C2B04009CECAF /* Sources */,
+				2724F817132C2B04009CECAF /* Frameworks */,
+				2724F818132C2B04009CECAF /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = iRosa;
+			productName = iRosa;
+			productReference = 2724F81A132C2B04009CECAF /* iRosa.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		2724F811132C2B04009CECAF /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				ORGANIZATIONNAME = n/a;
+			};
+			buildConfigurationList = 2724F814132C2B04009CECAF /* Build configuration list for PBXProject "iRosa" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 2724F80F132C2B04009CECAF;
+			productRefGroup = 2724F81B132C2B04009CECAF /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				2724F819132C2B04009CECAF /* iRosa */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		2724F818132C2B04009CECAF /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2724F829132C2B04009CECAF /* InfoPlist.strings in Resources */,
+				2724F836132C2B04009CECAF /* MainWindow_iPhone.xib in Resources */,
+				2724F83D132C2B04009CECAF /* MainWindow_iPad.xib in Resources */,
+				2724F857132C2E45009CECAF /* ocRosa.sqlite in Resources */,
+				27BE7C7A1350E0710005698B /* FormsView.xib in Resources */,
+				27BE7CDA1351050E0005698B /* FormDetailsView.xib in Resources */,
+				27BE7CE613512F450005698B /* QuestionsView.xib in Resources */,
+				27E0ADB6135529A7001A695D /* QuestionView.xib in Resources */,
+				27686CB2135948BE00C07594 /* SelectOneView.xib in Resources */,
+				27428A2E135B55240003E419 /* NumberView.xib in Resources */,
+				27428A37135B69260003E419 /* TextView.xib in Resources */,
+				27428A39135B703F0003E419 /* DateView.xib in Resources */,
+				27428A41135B85920003E419 /* SelectView.xib in Resources */,
+				2765D74B135BB2AE00E4E184 /* FormDownloadViewController.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		2724F816132C2B04009CECAF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2724F82C132C2B04009CECAF /* main.m in Sources */,
+				2724F82F132C2B04009CECAF /* iRosaAppDelegate.m in Sources */,
+				2724F833132C2B04009CECAF /* iRosaAppDelegate_iPhone.m in Sources */,
+				2724F83A132C2B04009CECAF /* iRosaAppDelegate_iPad.m in Sources */,
+				27BE7CB91350E4D40005698B /* FormsViewController.m in Sources */,
+				27BE7CE3135107470005698B /* FormDetailViewController.m in Sources */,
+				27BE7CE913512F890005698B /* QuestionController.m in Sources */,
+				27834CFF13522099004ABC26 /* QuestionsViewController.m in Sources */,
+				27834D2813526C1E004ABC26 /* QuestionController_iPhone.m in Sources */,
+				27AE69141353BE2700C0A0DD /* QuestionView.m in Sources */,
+				27AE69171353C56A00C0A0DD /* QuestionViewFactory.m in Sources */,
+				27EFB7E21359232800B32CA3 /* SelectOneView.m in Sources */,
+				27428A32135B55460003E419 /* NumberView.m in Sources */,
+				27428A35135B68FE0003E419 /* TextView.m in Sources */,
+				27428A3C135B70F80003E419 /* DateView.m in Sources */,
+				27428A3F135B85390003E419 /* SelectView.m in Sources */,
+				2765D74A135BB2AE00E4E184 /* FormDownloadViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		2724F827132C2B04009CECAF /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2724F828132C2B04009CECAF /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		2724F834132C2B04009CECAF /* MainWindow_iPhone.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2724F835132C2B04009CECAF /* en */,
+			);
+			name = MainWindow_iPhone.xib;
+			sourceTree = "<group>";
+		};
+		2724F83B132C2B04009CECAF /* MainWindow_iPad.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2724F83C132C2B04009CECAF /* en */,
+			);
+			name = MainWindow_iPad.xib;
+			sourceTree = "<group>";
+		};
+		27BE7C781350E0710005698B /* FormsView.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				27BE7C791350E0710005698B /* en */,
+			);
+			name = FormsView.xib;
+			sourceTree = "<group>";
+		};
+		27BE7CD81351050E0005698B /* FormDetailsView.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				27BE7CD91351050E0005698B /* en */,
+			);
+			name = FormDetailsView.xib;
+			sourceTree = "<group>";
+		};
+		27BE7CE413512F450005698B /* QuestionsView.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				27BE7CE513512F450005698B /* en */,
+			);
+			name = QuestionsView.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		2724F83E132C2B04009CECAF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = DEBUG;
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 3.0;
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-all_load",
+					"-lxml2",
+				);
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/../ocRosa/** $(SRCROOT)/../fmdb/src/** $(SRCROOT)/../sqlcipher/** $(SRCROOT)/../openssl-1.0.0d/** $(SRCROOT)/../CHDataStructures/source/**";
+			};
+			name = Debug;
+		};
+		2724F83F132C2B04009CECAF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 3.0;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-all_load",
+					"-lxml2",
+				);
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/../ocRosa/** $(SRCROOT)/../fmdb/src/** $(SRCROOT)/../sqlcipher/** $(SRCROOT)/../openssl-1.0.0d/** $(SRCROOT)/../CHDataStructures/source/**";
+			};
+			name = Release;
+		};
+		2724F841132C2B04009CECAF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "iRosa/iRosa-Prefix.pch";
+				INFOPLIST_FILE = "iRosa/iRosa-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)\"",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		2724F842132C2B04009CECAF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "iRosa/iRosa-Prefix.pch";
+				INFOPLIST_FILE = "iRosa/iRosa-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)\"",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				VALIDATE_PRODUCT = YES;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		2724F814132C2B04009CECAF /* Build configuration list for PBXProject "iRosa" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2724F83E132C2B04009CECAF /* Debug */,
+				2724F83F132C2B04009CECAF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		2724F840132C2B04009CECAF /* Build configuration list for PBXNativeTarget "iRosa" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2724F841132C2B04009CECAF /* Debug */,
+				2724F842132C2B04009CECAF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 2724F811132C2B04009CECAF /* Project object */;
+}
