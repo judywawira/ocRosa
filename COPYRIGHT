@@ -1,0 +1,25 @@
+ocRosa
+Copyright © 2011 by the following:
+
+# Contributing Organizations
+--
+
+# Contributing Individuals
+Michael Willekes (mikewillekes@gmail.com)
+
+
+# Third-Party Libraries / Code
+CHDataStructures (http://cocoaheads.byu.edu/code/CHDataStructures)
+FMDB (https://github.com/ccgus/fmdb)
+SQLCipher (http://sqlcipher.net)
+OpenSSL (http://www.openssl.org)
+OpenSSL-XCode (https://github.com/sjlombardo/openssl-xcode)
+Google Toolbox for Mac (http://code.google.com/p/google-toolbox-for-mac)
+GH-Unit (https://github.com/gabriel/gh-unit)
+SQLite (http://sqlite.org)
+
+# Other Sources
+Logging and Assert Macros taken from 'Cocoa is My Girlfriend' (http://www.cimgf.com/2010/05/02/my-current-prefix-pch-file)
+
+# Notes
+--
