@@ -64,8 +64,12 @@
                              error:(NSError **)error;
 
 - (NSNumber *)getFormRecordCount:(NSNumber *)formDBID
-                           state:(NSInteger)state
+                           state:(NSNumber *)state
                            error:(NSError **)error;
+
+- (NSArray *)getFormRecordDBIDs:(NSNumber *)formDBID
+                          state:(NSNumber *)state
+                          error:(NSError **)error;
 
 #pragma mark Model Parsing
 

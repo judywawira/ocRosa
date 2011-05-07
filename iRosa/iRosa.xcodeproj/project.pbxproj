@@ -23,6 +23,8 @@
 		2724F84B132C2C3B009CECAF /* libocRosa.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2724F846132C2C3B009CECAF /* libocRosa.a */; };
 		2724F84C132C2C3B009CECAF /* libsqlcipher.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2724F847132C2C3B009CECAF /* libsqlcipher.a */; };
 		2724F857132C2E45009CECAF /* ocRosa.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 2724F856132C2E45009CECAF /* ocRosa.sqlite */; };
+		272666D91375E6DB00FD28A3 /* RecordsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 272666D71375E6DB00FD28A3 /* RecordsViewController.m */; };
+		272666DA1375E6DB00FD28A3 /* RecordsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 272666D81375E6DB00FD28A3 /* RecordsViewController.xib */; };
 		27428A2E135B55240003E419 /* NumberView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 27428A2D135B55230003E419 /* NumberView.xib */; };
 		27428A32135B55460003E419 /* NumberView.m in Sources */ = {isa = PBXBuildFile; fileRef = 27428A31135B55450003E419 /* NumberView.m */; };
 		27428A35135B68FE0003E419 /* TextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 27428A34135B68FD0003E419 /* TextView.m */; };
@@ -73,6 +75,9 @@
 		2724F846132C2C3B009CECAF /* libocRosa.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libocRosa.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		2724F847132C2C3B009CECAF /* libsqlcipher.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libsqlcipher.a; sourceTree = SOURCE_ROOT; };
 		2724F856132C2E45009CECAF /* ocRosa.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; name = ocRosa.sqlite; path = ../ocRosa/ocRosa.sqlite; sourceTree = "<group>"; };
+		272666D61375E6DB00FD28A3 /* RecordsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecordsViewController.h; sourceTree = "<group>"; };
+		272666D71375E6DB00FD28A3 /* RecordsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecordsViewController.m; sourceTree = "<group>"; };
+		272666D81375E6DB00FD28A3 /* RecordsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RecordsViewController.xib; sourceTree = "<group>"; };
 		27428A2D135B55230003E419 /* NumberView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NumberView.xib; sourceTree = "<group>"; };
 		27428A30135B55450003E419 /* NumberView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NumberView.h; sourceTree = "<group>"; };
 		27428A31135B55450003E419 /* NumberView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NumberView.m; sourceTree = "<group>"; };
@@ -188,6 +193,9 @@
 				2765D747135BB2AE00E4E184 /* FormDownloadViewController.h */,
 				2765D748135BB2AE00E4E184 /* FormDownloadViewController.m */,
 				2765D749135BB2AE00E4E184 /* FormDownloadViewController.xib */,
+				272666D61375E6DB00FD28A3 /* RecordsViewController.h */,
+				272666D71375E6DB00FD28A3 /* RecordsViewController.m */,
+				272666D81375E6DB00FD28A3 /* RecordsViewController.xib */,
 			);
 			path = iRosa;
 			sourceTree = "<group>";
@@ -337,6 +345,7 @@
 				27428A39135B703F0003E419 /* DateView.xib in Resources */,
 				27428A41135B85920003E419 /* SelectView.xib in Resources */,
 				2765D74B135BB2AE00E4E184 /* FormDownloadViewController.xib in Resources */,
+				272666DA1375E6DB00FD28A3 /* RecordsViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -364,6 +373,7 @@
 				27428A3C135B70F80003E419 /* DateView.m in Sources */,
 				27428A3F135B85390003E419 /* SelectView.m in Sources */,
 				2765D74A135BB2AE00E4E184 /* FormDownloadViewController.m in Sources */,
+				272666D91375E6DB00FD28A3 /* RecordsViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

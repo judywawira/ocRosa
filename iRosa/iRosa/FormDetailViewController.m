@@ -214,19 +214,22 @@
                 case 0:
                     cell.textLabel.text = @"In-Progress";
                     cell.detailTextLabel.text = [NSString stringWithFormat:@"%@", 
-                                                    form.countInProgressRecords];
+                                                  [form countRecordsWithState:
+                                                    [NSNumber numberWithInt:kRecordState_InProgress]]];
                     break;
                     
                 case 1:
                     cell.textLabel.text = @"Completed";
                     cell.detailTextLabel.text = [NSString stringWithFormat:@"%@", 
-                                                    form.countCompletedRecords];
+                                                  [form countRecordsWithState:
+                                                    [NSNumber numberWithInt:kRecordState_Completed]]];
                     break;
                     
                 case 2:
                     cell.textLabel.text = @"Submitted";
                     cell.detailTextLabel.text = [NSString stringWithFormat:@"%@", 
-                                                    form.countSubmittedRecords];
+                                                  [form countRecordsWithState:
+                                                    [NSNumber numberWithInt:kRecordState_Submitted]]];
                     break;
             }
             

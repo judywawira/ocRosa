@@ -29,13 +29,12 @@
 @property (nonatomic, readonly) NSDate    *downloadDate;
 @property (nonatomic, readonly) NSNumber  *questionCount;
 
-- (NSArray *)getInProgressRecordDBIDs;
-- (NSNumber *)countInProgressRecords;
+// Get/Count all of this Form's Records
+- (NSArray *)getRecordDBIDs;    
+- (NSNumber *)countRecords;
 
-- (NSArray *)getCompletedRecordDBIDs;
-- (NSNumber *)countCompletedRecords;
-
-- (NSArray *)getSubmittedRecordDBIDs;
-- (NSNumber *)countSubmittedRecords;
+// Get/Count Records in a particular state
+- (NSArray *)getRecordDBIDsWithState:(NSNumber *)state;
+- (NSNumber *)countRecordsWithState:(NSNumber *)state;
 
 @end

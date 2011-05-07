@@ -56,23 +56,20 @@
     return questionCount;
 }
 
-- (NSArray *)getInProgressRecordDBIDs {return nil;}
-
-- (NSNumber *)countInProgressRecords {
-    return [operations getFormRecordCount:self.dbid state:kRecordState_InProgress error:&error];
+- (NSArray *)getRecordDBIDs {
+    return [self getRecordDBIDsWithState:nil];
 }
 
-- (NSArray *)getCompletedRecordDBIDs {return nil;}
-
-- (NSNumber *)countCompletedRecords {
-    return [operations getFormRecordCount:self.dbid state:kRecordState_Completed error:&error];
+- (NSNumber *)countRecords {
+    return [self countRecordsWithState:nil];
 }
 
-- (NSArray *)getSubmittedRecordDBIDs {return nil;}
-
-- (NSNumber *)countSubmittedRecords {
-    return [operations getFormRecordCount:self.dbid state:kRecordState_Submitted error:&error];
+- (NSArray *)getRecordDBIDsWithState:(NSNumber *)state {
+    return [operations getFormRecordDBIDs:self.dbid state:state error:&error];
 }
 
+- (NSNumber *)countRecordsWithState:(NSNumber *)state {
+    return [operations getFormRecordCount:self.dbid state:state error:&error];
+}
 
 @end

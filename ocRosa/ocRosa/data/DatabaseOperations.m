@@ -141,7 +141,7 @@
 }
 
 - (NSNumber *)getFormRecordCount:(NSNumber *)formDBID
-                           state:(NSInteger)state
+                           state:(NSNumber *)state
                            error:(NSError **)error {
     
     // Get the specified Form's (only) instance
@@ -150,12 +150,42 @@
     if (!instance)
         return nil;
     
+    if (!state) {
+        // state is nil - count all records
+        return [connection numberFromQuery:@"SELECT count(*) FROM Records WHERE instance_dbid = ?;" 
+                                 arguments:[NSArray arrayWithObjects:instance, nil] 
+                              errorMessage:@"Cannot count Records"
+                                     error:error];
+    }
+    
     return [connection numberFromQuery:@"SELECT count(*) FROM Records WHERE state = ? AND instance_dbid = ?;" 
-                             arguments:[NSArray arrayWithObjects:[NSNumber numberWithInt:state],
-                                                                instance, 
-                                                                nil] 
+                             arguments:[NSArray arrayWithObjects:state, instance, nil] 
                           errorMessage:@"Cannot count Records"
                                  error:error];
+}
+
+- (NSArray *)getFormRecordDBIDs:(NSNumber *)formDBID
+                          state:(NSNumber *)state
+                          error:(NSError **)error {
+    
+    // Get the specified Form's (only) instance
+    NSNumber *instance = [self getInstanceForForm:formDBID error:error];
+    
+    if (!instance)
+        return nil;
+    
+    if (!state) {
+        // state is nil - get all records
+        return [connection numberArrayFromQuery:@"SELECT dbid FROM Records WHERE instance_dbid = ? ORDER BY create_date;" 
+                                      arguments:[NSArray arrayWithObjects:instance, nil] 
+                                   errorMessage:@"Cannot get Records"
+                                          error:error];
+    }
+    
+    return [connection numberArrayFromQuery:@"SELECT dbid FROM Records WHERE state = ? AND instance_dbid = ? ORDER BY create_date;" 
+                                  arguments:[NSArray arrayWithObjects:state, instance, nil] 
+                               errorMessage:@"Cannot get Records"
+                                      error:error];
 }
 
 #pragma mark Model Parsing
