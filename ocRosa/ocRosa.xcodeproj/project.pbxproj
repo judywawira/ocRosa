@@ -36,8 +36,6 @@
 		2709D504133ACA9700F934E8 /* ValueParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 2709D503133ACA9500F934E8 /* ValueParser.m */; };
 		2709D505133AD02800F934E8 /* HintParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 2709D502133ACA7000F934E8 /* HintParser.m */; };
 		2709D506133AD02F00F934E8 /* ItemParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 2709D501133ACA6300F934E8 /* ItemParser.m */; };
-		270DA85F133E3B3600F08F92 /* Question.h in Headers */ = {isa = PBXBuildFile; fileRef = 270DA85D133E3B3600F08F92 /* Question.h */; };
-		270DA860133E3B3600F08F92 /* Question.m in Sources */ = {isa = PBXBuildFile; fileRef = 270DA85E133E3B3600F08F92 /* Question.m */; };
 		270DA864133E3B7100F08F92 /* Control.h in Headers */ = {isa = PBXBuildFile; fileRef = 270DA862133E3B7100F08F92 /* Control.h */; };
 		270DA865133E3B7100F08F92 /* Control.m in Sources */ = {isa = PBXBuildFile; fileRef = 270DA863133E3B7100F08F92 /* Control.m */; };
 		270DA868133E46CA00F08F92 /* DataClass.h in Headers */ = {isa = PBXBuildFile; fileRef = 270DA866133E46C900F08F92 /* DataClass.h */; };
@@ -59,8 +57,6 @@
 		2756979F133C26BD007842DC /* RecordXML.m in Sources */ = {isa = PBXBuildFile; fileRef = 2756979D133C26BD007842DC /* RecordXML.m */; };
 		275697A2133C26C7007842DC /* Record.h in Headers */ = {isa = PBXBuildFile; fileRef = 275697A0133C26C7007842DC /* Record.h */; };
 		275697A3133C26C7007842DC /* Record.m in Sources */ = {isa = PBXBuildFile; fileRef = 275697A1133C26C7007842DC /* Record.m */; };
-		275697A7133C26E4007842DC /* RecordManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 275697A5133C26E3007842DC /* RecordManager.h */; };
-		275697A8133C26E4007842DC /* RecordManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 275697A6133C26E3007842DC /* RecordManager.m */; };
 		27633E71132BF228001A6978 /* create_database.sql in Resources */ = {isa = PBXBuildFile; fileRef = 27633E6D132BF228001A6978 /* create_database.sql */; };
 		27633E79132BF32C001A6978 /* libCHDataStructures.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 27633E77132BF32C001A6978 /* libCHDataStructures.a */; };
 		27633E7A132BF32C001A6978 /* libsqlcipher.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 27633E78132BF32C001A6978 /* libsqlcipher.a */; };
@@ -127,8 +123,6 @@
 		2709D501133ACA6300F934E8 /* ItemParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItemParser.m; sourceTree = "<group>"; };
 		2709D502133ACA7000F934E8 /* HintParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HintParser.m; sourceTree = "<group>"; };
 		2709D503133ACA9500F934E8 /* ValueParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ValueParser.m; sourceTree = "<group>"; };
-		270DA85D133E3B3600F08F92 /* Question.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Question.h; sourceTree = "<group>"; };
-		270DA85E133E3B3600F08F92 /* Question.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Question.m; sourceTree = "<group>"; };
 		270DA862133E3B7100F08F92 /* Control.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Control.h; sourceTree = "<group>"; };
 		270DA863133E3B7100F08F92 /* Control.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Control.m; sourceTree = "<group>"; };
 		270DA866133E46C900F08F92 /* DataClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataClass.h; sourceTree = "<group>"; };
@@ -154,8 +148,6 @@
 		2756979D133C26BD007842DC /* RecordXML.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecordXML.m; sourceTree = "<group>"; };
 		275697A0133C26C7007842DC /* Record.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Record.h; sourceTree = "<group>"; };
 		275697A1133C26C7007842DC /* Record.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Record.m; sourceTree = "<group>"; };
-		275697A5133C26E3007842DC /* RecordManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecordManager.h; sourceTree = "<group>"; };
-		275697A6133C26E3007842DC /* RecordManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecordManager.m; sourceTree = "<group>"; };
 		2756FE6B134AC52E008C1884 /* ocRosa.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = ocRosa.sqlite; sourceTree = "<group>"; };
 		27633E6D132BF228001A6978 /* create_database.sql */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = create_database.sql; sourceTree = "<group>"; };
 		27633E77132BF32C001A6978 /* libCHDataStructures.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libCHDataStructures.a; sourceTree = SOURCE_ROOT; };
@@ -244,10 +236,6 @@
 				2756979D133C26BD007842DC /* RecordXML.m */,
 				275697A0133C26C7007842DC /* Record.h */,
 				275697A1133C26C7007842DC /* Record.m */,
-				275697A5133C26E3007842DC /* RecordManager.h */,
-				275697A6133C26E3007842DC /* RecordManager.m */,
-				270DA85D133E3B3600F08F92 /* Question.h */,
-				270DA85E133E3B3600F08F92 /* Question.m */,
 				270DA862133E3B7100F08F92 /* Control.h */,
 				270DA863133E3B7100F08F92 /* Control.m */,
 				273468421346B17900E4DA5C /* Binding.h */,
@@ -397,8 +385,6 @@
 				27569799133C236E007842DC /* Form.h in Headers */,
 				2756979E133C26BD007842DC /* RecordXML.h in Headers */,
 				275697A2133C26C7007842DC /* Record.h in Headers */,
-				275697A7133C26E4007842DC /* RecordManager.h in Headers */,
-				270DA85F133E3B3600F08F92 /* Question.h in Headers */,
 				270DA864133E3B7100F08F92 /* Control.h in Headers */,
 				270DA868133E46CA00F08F92 /* DataClass.h in Headers */,
 				270DA86C133ECE6900F08F92 /* DatabaseRecord.h in Headers */,
@@ -531,8 +517,6 @@
 				2756979A133C236E007842DC /* Form.m in Sources */,
 				2756979F133C26BD007842DC /* RecordXML.m in Sources */,
 				275697A3133C26C7007842DC /* Record.m in Sources */,
-				275697A8133C26E4007842DC /* RecordManager.m in Sources */,
-				270DA860133E3B3600F08F92 /* Question.m in Sources */,
 				270DA865133E3B7100F08F92 /* Control.m in Sources */,
 				270DA869133E46CA00F08F92 /* DataClass.m in Sources */,
 				270DA86D133ECE6900F08F92 /* DatabaseRecord.m in Sources */,
