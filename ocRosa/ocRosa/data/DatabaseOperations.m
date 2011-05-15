@@ -313,6 +313,44 @@
                                error:error]; 
 }
 
+- (NSNumber *)getRecordState:(NSNumber *)recordDBID
+                       error:(NSError **)error {
+    
+    return [connection numberFromQuery:@"SELECT state FROM Records WHERE dbid = ?;"
+                             arguments:[NSArray arrayWithObjects:recordDBID, nil] 
+                          errorMessage:@"Cannot get Record state"
+                                 error:error];
+}
+
+- (NSDate *)getRecordCreateDate:(NSNumber *)recordDBID
+                          error:(NSError **)error {
+    
+    return [connection dateFromQuery:@"SELECT create_date FROM Records WHERE dbid = ?;"
+                           arguments:[NSArray arrayWithObjects:recordDBID, nil] 
+                        errorMessage:@"Cannot get Record create_date"
+                               error:error];
+}
+
+- (NSDate *)getRecordCompleteDate:(NSNumber *)recordDBID
+                            error:(NSError **)error {
+    
+    return [connection dateFromQuery:@"SELECT complete_date FROM Records WHERE dbid = ?;"
+                           arguments:[NSArray arrayWithObjects:recordDBID, nil] 
+                        errorMessage:@"Cannot get Record complete_date"
+                               error:error];
+}
+
+- (NSDate *)getRecordSubmitDate:(NSNumber *)recordDBID
+                          error:(NSError **)error {
+    
+    return [connection dateFromQuery:@"SELECT submit_date FROM Records WHERE dbid = ?;"
+                           arguments:[NSArray arrayWithObjects:recordDBID, nil] 
+                        errorMessage:@"Cannot get Record submit_date"
+                               error:error];
+}
+
+
+
 #pragma mark Bind Parsing
 
 - (NSNumber *)createBindingInModel:(NSNumber *)modelDBID

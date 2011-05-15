@@ -43,6 +43,17 @@ extern NSInteger const kRecordState_Submitted;
 @property (nonatomic, copy) NSString *constraintMessage;
 @property (nonatomic) NSInteger controlIndex;
 
+@property (nonatomic, readonly) NSInteger state;
+@property (nonatomic, readonly) NSDate *createDate;
+@property (nonatomic, readonly) NSDate *completeDate;
+@property (nonatomic, readonly) NSDate *submitDate;
+
+//  State:                      Returns:
+//  kRecordState_InProgress     createDate
+//  kRecordState_Completed      completeDate
+//  kRecordState_Submitted      submitDate
+@property (nonatomic, readonly) NSDate *date;
+
 // Return YES if the current control is relevant.
 // Relevance is determined by evaluating the Binding
 // xPath expression 'relevant' against the current result

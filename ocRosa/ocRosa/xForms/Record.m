@@ -60,6 +60,37 @@ NSInteger const kRecordState_Submitted  = 1;
     return controls;
 }
 
+- (NSInteger)state {
+    return [[operations getRecordState:self.dbid error:&error] integerValue];
+}
+
+- (NSDate *)createDate {
+    return [operations getRecordCreateDate:self.dbid error:&error];
+}
+
+- (NSDate *)completeDate {
+    return [operations getRecordCompleteDate:self.dbid error:&error];
+}
+
+- (NSDate *)submitDate {
+    return [operations getRecordSubmitDate:self.dbid error:&error];
+}
+
+- (NSDate *)date {
+    switch (self.state) {
+        case kRecordState_InProgress:
+            return self.createDate;
+            break;
+        case kRecordState_Completed:
+            return self.completeDate;
+            break;
+        case kRecordState_Submitted:
+            return self.submitDate;
+            break;
+    }
+    return self.createDate;;
+}
+
 - (void)complete {
     [operations setRecordComplete:(NSNumber *)dbid error:&error]; 
 }

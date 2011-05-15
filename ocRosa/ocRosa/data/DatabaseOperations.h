@@ -108,6 +108,18 @@
 - (BOOL)setRecordComplete:(NSNumber *)recordDBID
                     error:(NSError **)error;
 
+- (NSNumber *)getRecordState:(NSNumber *)recordDBID
+                       error:(NSError **)error;
+
+- (NSDate *)getRecordCreateDate:(NSNumber *)recordDBID
+                          error:(NSError **)error;
+
+- (NSDate *)getRecordCompleteDate:(NSNumber *)recordDBID
+                            error:(NSError **)error;
+
+- (NSDate *)getRecordSubmitDate:(NSNumber *)recordDBID
+                          error:(NSError **)error;
+
 #pragma mark Bind Parsing
 
 - (NSNumber *)createBindingInModel:(NSNumber *)modelDBID

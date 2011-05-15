@@ -16,6 +16,7 @@
 
 #import "FormDetailViewController.h"
 #import "QuestionsViewController.h"
+#import "RecordsViewController.h"
 #import "ocRosa.h"
 
 @implementation FormDetailViewController
@@ -170,6 +171,7 @@
     NSInteger row = [indexPath row];
     
     switch (section) {
+            
         case 0: // Details Section
             
             cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:nil] autorelease];
@@ -239,57 +241,44 @@
     return cell;
 }
 
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    }   
-    else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
 #pragma mark - Table view delegate
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Navigation logic may go here. Create and push another view controller.
-    /*
-     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     // ...
-     // Pass the selected object to the new view controller.
-     [self.navigationController pushViewController:detailViewController animated:YES];
-     [detailViewController release];
-     */
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+        
+    if (1 == [indexPath section]) {
+     
+        // Create and push a RecordsViewController onto our navigation stack. Depending on which
+        // cell was selected ('in-progress', 'completed' or 'submitted') fetch the appropriate list
+        // of Records
+        RecordsViewController *recordsController = [[RecordsViewController alloc] initWithStyle:UITableViewStylePlain];
+        
+        NSInteger row = [indexPath row];  
+            
+        switch (row) {
+                    
+            case 0:
+                recordsController.title = @"In-Progress";
+                recordsController.state = [NSNumber numberWithInt:kRecordState_InProgress];
+                break;
+                    
+            case 1:
+                recordsController.title = @"Completed";
+                recordsController.state = [NSNumber numberWithInt:kRecordState_Completed];
+                break;
+                    
+            case 2:
+                recordsController.title = @"Submitted";
+                recordsController.state = [NSNumber numberWithInt:kRecordState_Submitted];                    
+                break;
+        }
+        
+        recordsController.form = form;
+        
+        [self.navigationController pushViewController:recordsController animated:YES];
+        [recordsController release];
+        
+    }
+
 }
 
 @end
