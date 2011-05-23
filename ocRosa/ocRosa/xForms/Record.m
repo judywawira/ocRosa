@@ -214,25 +214,5 @@ NSInteger const kRecordState_Submitted  = 1;
     return YES;
 }
 
-- (BOOL)clearRecordForInvalidControl:(Control *)control {
-    
-    control.result = @"";
-    
-    // Update <instance> with our result
-    if (![xml setValue:[control.result gtm_stringBySanitizingAndEscapingForXML] forNodeset:[binding nodeset] error:&error]) {
-        ALog(@"Unable to set <instance> value '%@' for nodeset '%@'", control.result, [binding nodeset]); // Assert, because should never happen
-        return NO;
-    }
-    
-    // Commit to the Database
-    if (![operations setRecordXML:[xml xmlBuffer] record:self.dbid error:&error])
-        return NO;
-    
-    DLog(@"%@", [xml xmlString]);
-    
-    // Everything worked
-    return YES;  
-}
-
 
 @end

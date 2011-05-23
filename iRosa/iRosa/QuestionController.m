@@ -83,8 +83,6 @@
         self.control = [record getControlAtIndex];
         if (self.control.isRelevant) {
             return YES;
-        } else {
-            [record clearRecordForInvalidControl:self.control];
         }
     }
     
@@ -112,8 +110,6 @@
         self.control = [record getControlAtIndex];
         if (self.control.isRelevant) {
             return YES;
-        } else {
-            [record clearRecordForInvalidControl:self.control];
         }
     }
     

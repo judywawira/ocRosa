@@ -100,11 +100,5 @@ extern NSInteger const kRecordState_Submitted;
 // reason why the update failed.
 - (BOOL)updateRecordWithControlResult:(Control *)control;
 
-// As we skip over controls that are invalid,
-// we want to clear any existing results for those countrols
-// (i.e. suppose user accidentally answered questions about
-// subject's pregnancy... but there was a collection-error
-// and the subject isn't actually pregnant)
-- (BOOL)clearRecordForInvalidControl:(Control *)control;
 
 @end
