@@ -14,22 +14,22 @@
  * the License.
  */
 
-#import <UIKit/UIKit.h>
+#import "Answers.h"
+#import "DatabaseOperations.h"
 
-@class Form;
-@class FormManager;
+@implementation Answers
 
-@interface RecordsViewController : UITableViewController {
-        
-    Form *form;
++ (void)initializeEmptyAnswerSetForRecord:(NSNumber *)recordDBID
+                          usingOperations:(DatabaseOperations *)ops
+                                    error:(NSError **)error {
     
-    NSArray *records;   // Array of Record dbids
+    // Create an initial 'Answer' entry for each control
+    NSArray *controls = [ops getControlDBIDs:recordDBID error:error];
+    for (NSNumber *currentControlDBID in controls) {
+        [ops createAnswerForRecord:recordDBID control:currentControlDBID error:error];
+
+    }
     
-    NSNumber *state;    // One of kRecordState or nil to 
-                        // include all records
 }
-
-@property (nonatomic, retain) Form *form;
-@property (nonatomic, retain) NSNumber *state;
 
 @end

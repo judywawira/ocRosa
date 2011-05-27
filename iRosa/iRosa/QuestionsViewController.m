@@ -160,16 +160,13 @@
 #pragma mark - Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Navigation logic may go here. Create and push another view controller.
-    
-    // Let the record know which control is currently selected
-    record.controlIndex = indexPath.row;
     
     QuestionController *questionController = [[QuestionController_iPhone alloc] initWithNibName:nil bundle:nil];
     
     // Set all of the necessary properties of the questionController
     questionController.record = record;
-    questionController.control = [record getControlAtIndex];
+    questionController.control = [record getControlAtIndex:indexPath.row];
+    questionController.controlIndex = indexPath.row;
     questionController.formTitle = self.formTitle;
     questionController.formManager = formManager;
     questionController.formDetails = self.formDetails; // So we can pop back to 'FormDetails' when done

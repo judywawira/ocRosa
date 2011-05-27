@@ -29,11 +29,8 @@ extern NSInteger const kRecordState_Submitted;
     
     RecordXML *xml;         // xml <instance>
     
-    Binding *binding;       // Current Binding
     
     NSArray *controls;      // An ordered list of dbids
-    
-    NSInteger controlIndex; // Current Control in controls
 
     NSString *constraintMessage;    // Message to display if constraint evaluation fails
 }
@@ -41,37 +38,35 @@ extern NSInteger const kRecordState_Submitted;
 @property (nonatomic, readonly) RecordXML *xml;
 @property (nonatomic, readonly) NSArray *controls;
 @property (nonatomic, copy) NSString *constraintMessage;
-@property (nonatomic) NSInteger controlIndex;
 
 @property (nonatomic, readonly) NSInteger state;
 @property (nonatomic, readonly) NSDate *createDate;
 @property (nonatomic, readonly) NSDate *completeDate;
 @property (nonatomic, readonly) NSDate *submitDate;
 
+// Return a 'context sensitive' date.
+//
 //  State:                      Returns:
 //  kRecordState_InProgress     createDate
 //  kRecordState_Completed      completeDate
 //  kRecordState_Submitted      submitDate
 @property (nonatomic, readonly) NSDate *date;
 
-// Return YES if the current control is relevant.
-// Relevance is determined by evaluating the Binding
-// xPath expression 'relevant' against the current result
-// XML. If that expression returns FALSE then this
-// returns NO.
-- (BOOL)isRelevant:(NSNumber *)controlDBID;
-
-// Similar to 'isRelevant'. Constraints are evaluated
-// after the XML is updated.
-- (BOOL)areConstraintsSatisfied:(NSNumber *)controlDBID;
+// The 'Answer Set' is a set of entries in the database
+// that indicates if a given question is relevant and/or 
+// has been answered. The Answer Set provides a quick way
+// to see the summary state of the form, without having to
+// incur to cost of evaluating XML XPath expressions
+// for each Control.
+- (void)initializeAnswerSet;
 
 // Get the progress (% complete) from 0.0 to 1.0
 - (float)getProgress;
 
 // Get the control at the current controlIndex. Will return nil
-// if index is out-of-range or if binding constraint is not
+// if index is out-of-range or if binding 'relevant' is not
 // satisfied
-- (Control *)getControlAtIndex;
+- (Control *)getControlAtIndex:(NSInteger)index;
 
 // Get just the 'label' of the Control at the specified index.
 // Useful if we want to show a summary list of all Controls
@@ -79,15 +74,21 @@ extern NSInteger const kRecordState_Submitted;
 // return nil if index is out of Range
 - (NSString *)getLabelOfControlAtIndex:(NSInteger)index;
 
+- (BOOL)isControlAtIndexAnswered:(NSInteger)index;
+
+- (NSString *)getAnswerOfControlAtIndex:(NSInteger)index;
+
+- (BOOL)isControlAtIndexRelevant:(NSInteger)index;
+
 // Return YES if the current control has a 'previous' control
 // or NO if the current control is the first. Note: Bindings
 // are not considered - just the raw list of controls.
-- (BOOL)hasPreviousControl;
+- (BOOL)hasPreviousControl:(NSInteger)index;
 
 // Return YES if the current control has a 'next' control
 // or NO if the current control is the last. Note: Bindings
 // are not considered - just the raw list of controls.
-- (BOOL)hasNextControl;
+- (BOOL)hasNextControl:(NSInteger)index;
 
 // This record is complete
 - (void)complete;

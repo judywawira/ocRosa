@@ -32,6 +32,8 @@
     Record *record;             // Passed-in from FormDetailController
     
     NSArray *questions;         // List of this record's questions
+    
+    NSInteger currentQuestion; // Current/Active Question 
 }
 
 @property (nonatomic, copy) NSString *formTitle;

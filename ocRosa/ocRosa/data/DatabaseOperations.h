@@ -120,6 +120,12 @@
 - (NSDate *)getRecordSubmitDate:(NSNumber *)recordDBID
                           error:(NSError **)error;
 
+#pragma mark Answer Usage
+
+- (NSNumber *)createAnswerForRecord:(NSNumber *)recordDBID
+                            control:(NSNumber *)controlDBID
+                              error:(NSError **)error;
+
 #pragma mark Bind Parsing
 
 - (NSNumber *)createBindingInModel:(NSNumber *)modelDBID

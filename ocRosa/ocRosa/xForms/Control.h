@@ -44,8 +44,6 @@ extern NSInteger const kControlType_SelectOne;
                         // might be "Female", and the value "f")
     
     NSString *result;   // Encoded result. Inserted into the <instance>.
-        
-    BOOL isRelevant;    // Defaults to NO
 }
 
 @property (nonatomic, readonly) Binding *binding;
@@ -55,7 +53,6 @@ extern NSInteger const kControlType_SelectOne;
 @property (nonatomic, readonly) NSArray *items;
 @property (nonatomic, readonly) NSArray *values;
 @property (nonatomic, copy) NSString *result;
-@property (nonatomic) BOOL isRelevant;
 
 - (id)initWithDBID:(NSNumber *)controlDBID
            binding:(Binding *)controlBinding
@@ -74,7 +71,5 @@ extern NSInteger const kControlType_SelectOne;
 
 - (void)encodeResultFromDate:(NSDate *)date;
 - (NSDate *)decodeResultToDate;
-
-- (void)rebuildSelectedIndicies;
 
 @end

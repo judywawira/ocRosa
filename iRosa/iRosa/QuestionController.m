@@ -19,7 +19,7 @@
 
 @implementation QuestionController
 
-@synthesize record, control, formTitle, formManager, formDetails;
+@synthesize record, control, controlIndex, formTitle, formManager, formDetails;
 
 - (void)dealloc {
     self.record = nil;
@@ -41,11 +41,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    /*
-    Control *controlAtIndex = [record getControlAtIndex];
-    self.control = controlAtIndex;
-    [controlAtIndex release];
-     */
 }
 
 - (void)viewDidUnload {
@@ -78,10 +73,10 @@
         return NO;
     }
     
-    while ([record hasNextControl]) {
-        record.controlIndex++;
-        self.control = [record getControlAtIndex];
-        if (self.control.isRelevant) {
+    while ([record hasNextControl:self.controlIndex]) {
+        self.controlIndex++;
+        self.control = [record getControlAtIndex:self.controlIndex];
+        if ([record isControlAtIndexRelevant:self.controlIndex]) {
             return YES;
         }
     }
@@ -104,11 +99,11 @@
         return NO;
     }
     
-    while ([record hasPreviousControl]) {
+    while ([record hasPreviousControl:self.controlIndex]) {
         
-        record.controlIndex--;
-        self.control = [record getControlAtIndex];
-        if (self.control.isRelevant) {
+        self.controlIndex--;
+        self.control = [record getControlAtIndex:self.controlIndex];
+        if ([record isControlAtIndexRelevant:self.controlIndex]) {
             return YES;
         }
     }

@@ -350,6 +350,23 @@
 }
 
 
+#pragma mark Answer Usage
+
+- (NSNumber *)createAnswerForRecord:(NSNumber *)recordDBID
+                            control:(NSNumber *)controlDBID
+                              error:(NSError **)error {
+    
+    return [connection executeInsert:@"INSERT INTO Answers (record_dbid, control_dbid, relevant, answered) VALUES (?, ?, ?, ?);"
+                           arguments:[NSArray arrayWithObjects:
+                                        recordDBID, 
+                                        controlDBID, 
+                                        [NSNumber numberWithInt:0],
+                                        [NSNumber numberWithInt:0],
+                                        nil]
+                        errorMessage:@"Cannot create Answer"
+                               error:error]; 
+}
+
 
 #pragma mark Bind Parsing
 

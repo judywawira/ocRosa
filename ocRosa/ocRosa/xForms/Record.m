@@ -27,16 +27,14 @@ NSInteger const kRecordState_Submitted  = 1;
 
 @implementation Record
 
-@synthesize constraintMessage, controlIndex;
+@synthesize constraintMessage;
 
 - (id)initWithDBID:(NSNumber *)recordDBID
           database:(DatabaseConnection *)db; {
     
     if (!(self = [super initWithDBID:recordDBID database:db]))
         return nil;
-    
-    controlIndex = 0;
-    
+        
     return self;
 }
 
@@ -78,7 +76,7 @@ NSInteger const kRecordState_Submitted  = 1;
 
 - (NSDate *)date {
     switch (self.state) {
-        case kRecordState_InProgress:
+        case kRecordState_InProgress:   
             return self.createDate;
             break;
         case kRecordState_Completed:
@@ -91,44 +89,53 @@ NSInteger const kRecordState_Submitted  = 1;
     return self.createDate;;
 }
 
-- (void)complete {
-    [operations setRecordComplete:(NSNumber *)dbid error:&error]; 
-}
 
 - (float)getProgress {
-    return (float)controlIndex / ([controls count] - 1);
+    //return (float)controlIndex / ([controls count] - 1);
+    return 1.0;
 }
 
-- (Control *)getControlAtIndex {
+- (Control *)getControlAtIndex:(NSInteger)index {
     
-    if ([self.controls count] == 0 || controlIndex < 0 || controlIndex >= [self.controls count] ) {
+    if ([self.controls count] == 0 || index < 0 || index >= [self.controls count] ) {
         ALog(@"Control index out-of-range"); // Assert, because should never happen
         return nil;
     }
     
-    NSNumber *currentControlDBID = [controls objectAtIndex:controlIndex];
+    NSNumber *currentControlDBID = [self.controls objectAtIndex:index];
     
     // Get the Binding that corresponds to this Control
-    [binding release];
-    binding = [[Binding alloc] initWithDBID:[operations getBindingForControl:currentControlDBID error:&error]
-                                   database:connection
-                                        xml:[self xml]];
+    Binding *binding = [[Binding alloc] initWithDBID:[operations getBindingForControl:currentControlDBID error:&error]
+                                            database:connection
+                                                 xml:[self xml]];
+    
+    // Evaluate the 'relevant' XPath expression against the current <instance> document.
+    // If YES then return the current control dbid, if NO then try the next one.
+    // If relevant is nil (no restrictions) then return the current control.
+    if ([binding relevant] && ![xml evaluateXPathExpression:[binding relevant] error:&error]) {
 
-    Control *control = [[Control alloc] initWithDBID:currentControlDBID
+        [binding release];
+        return nil;
+    }
+    
+    // Create the Control. We pass 'binding' to the Control because the
+    // specific sub-type information is stored in the binding (i.e. the 
+    // Control may be an <input/>, but the binding type may be a string
+    // vs. date, which affects the UI)
+    Control *control = [[[Control alloc] initWithDBID:currentControlDBID
                                              binding:binding
-                                            database:connection];
+                                            database:connection] autorelease];
     
     control.result = [xml getValueFromNodeset:[binding nodeset] error:&error];
     
-    // Evaluate the 'relevent' XPath expression against the current <instance> document.
-    // If YES then return the current control dbid, if NO then try the next one.
-    // If relevant is nil (no restrictions) then return the current control.
-    if (![binding relevant] || [xml evaluateXPathExpression:[binding relevant] error:&error])
-        control.isRelevant = YES;
+
+    
+    [binding release];
     
     return control;
 }
 
+/*
 - (NSString *)getLabelOfControlAtIndex:(NSInteger)index {
    
     if ([self.controls count] == 0 || index < 0 || index >= [self.controls count] ) {
@@ -138,38 +145,51 @@ NSInteger const kRecordState_Submitted  = 1;
     
     return [operations getControlLabel:[controls objectAtIndex:index] error:&error];    
 }
+ */
 
-- (BOOL)hasPreviousControl {
-    if ([self.controls count] == 0 || (controlIndex - 1) < 0 || (controlIndex - 1) >= [self.controls count]) {
+- (BOOL)hasPreviousControl:(NSInteger)index {
+    if ([self.controls count] == 0 || (index - 1) < 0 || (index - 1) >= [self.controls count]) {
         // Out of range / no more controls
         return NO;
     }
     return YES;
 }
 
-- (BOOL)hasNextControl {
-    if ([self.controls count] == 0 || (controlIndex + 1) < 0 || (controlIndex + 1) >= [self.controls count]) {
+- (BOOL)hasNextControl:(NSInteger)index {
+    if ([self.controls count] == 0 || (index + 1) < 0 || (index + 1) >= [self.controls count]) {
         // Out of range / no more controls
         return NO;
     }
     return YES;
+}
+
+- (void)complete {
+    [operations setRecordComplete:(NSNumber *)dbid error:&error]; 
 }
 
 - (BOOL)updateRecordWithControlResult:(Control *)control {
+    
+    // Get the Binding that corresponds to this Control
+    Binding *binding = [[Binding alloc] initWithDBID:[operations getBindingForControl:control.dbid error:&error]
+                                            database:connection
+                                                 xml:[self xml]];
     
     // If an answer is required but none was provided, return NO
     if ([binding required] && 
         [xml evalXPath:[binding required] error:&error] &&
         ![control result]) {
             self.constraintMessage = @"Answer required";
+            [binding release];
             return NO;
     }
     
     // If the control has no result.. and a result is not
     // required return immediatley
-    if (![control result])
+    if (![control result]) {
+        [binding release];
         return YES;
-    
+    }
+        
     // We need to get a duplicate copy of the <instance>,
     // update that copy with the control.result, and then
     // evaluate the binding constraint. If the constraint
@@ -184,6 +204,7 @@ NSInteger const kRecordState_Submitted  = 1;
         if (![duplicateXML setValue:control.result forNodeset:[binding nodeset] error:&error]) {
             ALog(@"Unable to set <instance> value '%@' for nodeset '%@'", control.result, [binding nodeset]); // Assert, because should never happen
             [duplicateXML release];
+            [binding release];
             return NO;
         }
         
@@ -191,6 +212,7 @@ NSInteger const kRecordState_Submitted  = 1;
         if (![duplicateXML evaluateXPathExpression:[binding constraint] error:&error]) {
             self.constraintMessage = [binding constraintMsg];
             [duplicateXML release];
+            [binding release];
             return NO;
         }
          
@@ -201,18 +223,24 @@ NSInteger const kRecordState_Submitted  = 1;
     // Update <instance> with our result
     if (![xml setValue:[control.result gtm_stringBySanitizingAndEscapingForXML] forNodeset:[binding nodeset] error:&error]) {
         ALog(@"Unable to set <instance> value '%@' for nodeset '%@'", control.result, [binding nodeset]); // Assert, because should never happen
+        [binding release];
         return NO;
     }
  
     // Commit to the Database
-    if (![operations setRecordXML:[xml xmlBuffer] record:self.dbid error:&error])
+    if (![operations setRecordXML:[xml xmlBuffer] record:self.dbid error:&error]) {
+        [binding release];
         return NO;
+    }
  
     DLog(@"%@", [xml xmlString]);
     
     // Everything worked
+    [binding release];
     return YES;
 }
+
+
 
 
 @end

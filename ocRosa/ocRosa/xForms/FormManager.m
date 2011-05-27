@@ -16,9 +16,10 @@
 
 #import "DatabaseConnection.h"
 #import "DatabaseOperations.h"
-#import "FormManager.h"
 #import "FormDownloader.h"
 #import "FormParser.h"
+#import "Answers.h"
+#import "FormManager.h"
 
 @implementation FormManager
 
@@ -81,7 +82,15 @@
 #pragma mark Records
 
 - (NSNumber *)createRecordForForm:(NSNumber *)dbid {
-    return [operations createRecordForForm:(NSNumber *)dbid error:&error]; 
+    
+    NSNumber *recordDBID = [operations createRecordForForm:(NSNumber *)dbid error:&error]; 
+    
+    // Initialize the set of (empty) Answer place-holders    
+    [Answers initializeEmptyAnswersForRecord:recordDBID
+                             usingOperations:self.operations
+                                       error:&error];
+    
+    return recordDBID;
 }
 
 @end

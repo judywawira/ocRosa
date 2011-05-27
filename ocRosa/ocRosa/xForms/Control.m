@@ -27,7 +27,6 @@ NSInteger const kControlType_SelectOne  = 3;
 
 @synthesize binding;
 @synthesize result;
-@synthesize isRelevant;
 
 - (id)initWithDBID:(NSNumber *)controlDBID
            binding:(Binding *)controlBinding
@@ -41,9 +40,7 @@ NSInteger const kControlType_SelectOne  = 3;
     binding = [controlBinding retain];
     
     type = -1;  // Initialize to invalid control type
-    
-    isRelevant = NO; 
-    
+        
     return self;
 }
 

@@ -35,7 +35,6 @@
     self.form = nil;
     self.state = nil;
     [records release];
-    [formManager release];
     [super dealloc];
     
 }
@@ -59,10 +58,7 @@
  
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     self.navigationItem.rightBarButtonItem = self.editButtonItem;
-    
-    // Get the xForms FormManager
-    FormManager *formManager = [UIAppDelegate.formManager retain];
-    
+        
     // Get the list of Forms (id's only)
     [records release];
     records = [[form getRecordDBIDsWithState:self.state] retain];
