@@ -86,7 +86,7 @@ NSInteger const kRecordState_Submitted  = 1;
             return self.submitDate;
             break;
     }
-    return self.createDate;;
+    return self.createDate;
 }
 
 

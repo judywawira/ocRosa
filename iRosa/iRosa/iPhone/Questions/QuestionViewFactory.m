@@ -17,51 +17,32 @@
 #import "QuestionViewFactory.h"
 #import "QuestionView.h"
 #import "SelectOneView.h"
-
 #import "ocRosa.h"
 
 @implementation QuestionViewFactory
 
 + (NSInteger)getViewTagForControl:(Control *)control {
     
-    if (control.type == kControlType_Input) {
-        
-        if ([control.binding.type isEqualToString:kBindType_String])        return kQuestionViewType_Input_Text; 
-        else if ([control.binding.type isEqualToString:kBindType_Integer])  return kQuestionViewType_Input_Number; 
-        else if ([control.binding.type isEqualToString:kBindType_Date])     return kQuestionViewType_Input_Date;
-        else if ([control.binding.type isEqualToString:kBindType_Geopoint]) return kQuestionViewType_Input_LatLong;
-
-    } else if (control.type == kControlType_Output) {
-        return kQuestionViewType_Output;
-
-    } else if (control.type == kControlType_Select) {
-        return kQuestionViewType_Select;
-        
-    } else if (control.type == kControlType_SelectOne) {
-        return kQuestionViewType_SelectOne;
-    }
+    if (control.type == kControlType_Input_Text)            return kQuestionViewType_Input_Text; 
+    else if (control.type == kControlType_Input_Number)     return kQuestionViewType_Input_Number; 
+    else if (control.type == kControlType_Input_Date)       return kQuestionViewType_Input_Date;
+    else if (control.type == kControlType_Input_LatLong)    return kQuestionViewType_Input_LatLong;
+    else if (control.type == kControlType_Output)           return kQuestionViewType_Output;
+    else if (control.type == kControlType_Select)           return kQuestionViewType_Select;
+    else if (control.type == kControlType_SelectOne)        return kQuestionViewType_SelectOne;
     
     return kQuestionViewType_Input_Text;
 }
 
 + (NSString *)getViewTypeForControl:(Control *)control {
     
-    if (control.type == kControlType_Input) {
-        
-        if ([control.binding.type isEqualToString:kBindType_String])        return @"TextView"; 
-        else if ([control.binding.type isEqualToString:kBindType_Integer])  return @"NumberView"; 
-        else if ([control.binding.type isEqualToString:kBindType_Date])     return @"DateView";
-        else if ([control.binding.type isEqualToString:kBindType_Geopoint]) return @"QuestionView";
-        
-    } else if (control.type == kControlType_Output) {
-        return @"QuestionView";
-        
-    } else if (control.type == kControlType_Select) {
-        return @"SelectView";
-        
-    } else if (control.type == kControlType_SelectOne) {
-        return @"SelectOneView";
-    }
+    if (control.type == kControlType_Input_Text)            return @"TextView"; 
+    else if (control.type == kControlType_Input_Number)     return @"NumberView"; 
+    else if (control.type == kControlType_Input_Date)       return @"DateView";
+    else if (control.type == kControlType_Input_LatLong)    return @"QuestionView";
+    else if (control.type == kControlType_Output)           return @"QuestionView";
+    else if (control.type == kControlType_Select)           return @"SelectView";
+    else if (control.type == kControlType_SelectOne)        return @"SelectOneView";
     
     return @"QuestionView";
 }

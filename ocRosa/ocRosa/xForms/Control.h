@@ -17,11 +17,17 @@
 #import <Foundation/Foundation.h>
 #import "DatabaseRecord.h"
 
-// Control Types
+// XForm Control Types
 extern NSInteger const kControlType_Output;
 extern NSInteger const kControlType_Input;
 extern NSInteger const kControlType_Select;
 extern NSInteger const kControlType_SelectOne;
+
+// Specific Input Types
+extern NSInteger const kControlType_Input_Text;
+extern NSInteger const kControlType_Input_Number;
+extern NSInteger const kControlType_Input_Date;
+extern NSInteger const kControlType_Input_LatLong;
 
 @class Binding;
 
@@ -44,15 +50,17 @@ extern NSInteger const kControlType_SelectOne;
                         // might be "Female", and the value "f")
     
     NSString *result;   // Encoded result. Inserted into the <instance>.
+    
+    NSInteger index;    // Index of this Control in the Record
 }
 
-@property (nonatomic, readonly) Binding *binding;
 @property (nonatomic, readonly) NSInteger type;
 @property (nonatomic, readonly) NSString *label;
 @property (nonatomic, readonly) NSString *hint;
 @property (nonatomic, readonly) NSArray *items;
 @property (nonatomic, readonly) NSArray *values;
 @property (nonatomic, copy) NSString *result;
+@property (nonatomic) NSInteger index;
 
 - (id)initWithDBID:(NSNumber *)controlDBID
            binding:(Binding *)controlBinding

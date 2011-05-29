@@ -52,14 +52,6 @@ extern NSInteger const kRecordState_Submitted;
 //  kRecordState_Submitted      submitDate
 @property (nonatomic, readonly) NSDate *date;
 
-// The 'Answer Set' is a set of entries in the database
-// that indicates if a given question is relevant and/or 
-// has been answered. The Answer Set provides a quick way
-// to see the summary state of the form, without having to
-// incur to cost of evaluating XML XPath expressions
-// for each Control.
-- (void)initializeAnswerSet;
-
 // Get the progress (% complete) from 0.0 to 1.0
 - (float)getProgress;
 

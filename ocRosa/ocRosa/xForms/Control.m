@@ -15,6 +15,7 @@
  */
 
 #import "Control.h"
+#import "Binding.h"
 #import "GTMNSString+XML.h"
 #import "DatabaseOperations.h"
 
@@ -23,10 +24,15 @@ NSInteger const kControlType_Input      = 1;
 NSInteger const kControlType_Select     = 2;
 NSInteger const kControlType_SelectOne  = 3;
 
+NSInteger const kControlType_Input_Text     = 100;
+NSInteger const kControlType_Input_Number   = 101;
+NSInteger const kControlType_Input_Date     = 102;
+NSInteger const kControlType_Input_LatLong  = 103;
+
 @implementation Control
 
-@synthesize binding;
 @synthesize result;
+@synthesize index;
 
 - (id)initWithDBID:(NSNumber *)controlDBID
            binding:(Binding *)controlBinding
@@ -55,8 +61,17 @@ NSInteger const kControlType_SelectOne  = 3;
 }
 
 - (NSInteger)type {
-    if (type < 0) 
+    if (type < 0)  {
+    
         type = [operations getControlType:self.dbid error:&error];
+    
+        if (type == kControlType_Input) {
+            if ([binding.type isEqualToString:kBindType_String])        type = kControlType_Input_Text; 
+            else if ([binding.type isEqualToString:kBindType_Integer])  type = kControlType_Input_Number; 
+            else if ([binding.type isEqualToString:kBindType_Date])     type = kControlType_Input_Date;
+            else if ([binding.type isEqualToString:kBindType_Geopoint]) type = kControlType_Input_LatLong;
+        }
+    }
     
     return type;
 }
