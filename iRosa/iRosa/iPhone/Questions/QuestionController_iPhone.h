@@ -24,7 +24,6 @@
     
     QuestionViewFactory *viewFactory;
     QuestionView *activeView;
-    
 }
 
 // Build the buttons on the top-right of the Navigation Controller

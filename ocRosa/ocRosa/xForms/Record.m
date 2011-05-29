@@ -19,6 +19,7 @@
 #import "Binding.h"
 #import "DatabaseOperations.h"
 #import "Control.h"
+#import "Question.h"
 #import "GTMNSString+XML.h"
 
 NSInteger const kRecordState_InProgress = -1;
@@ -40,7 +41,7 @@ NSInteger const kRecordState_Submitted  = 1;
 
 - (void)dealloc {
     [xml release];
-    [controls release];
+    [questions release];
     [super dealloc];
 }
 
@@ -51,11 +52,11 @@ NSInteger const kRecordState_Submitted  = 1;
     return xml;
 }
 
-- (NSArray *)controls {
-    if (!controls)
-        controls = [[operations getControlDBIDs:self.dbid error:&error] copy];
+- (NSArray *)questions {
+    if (!questions)
+        questions = [[operations getRecordQuestionDBIDs:self.dbid error:&error] copy];
     
-    return controls;
+    return questions;
 }
 
 - (NSInteger)state {
@@ -89,23 +90,32 @@ NSInteger const kRecordState_Submitted  = 1;
     return self.createDate;
 }
 
-
-- (float)getProgress {
-    //return (float)controlIndex / ([controls count] - 1);
-    return 1.0;
+- (float)progress {
+    return [[operations getRecordProgress:self.dbid error:&error] floatValue];
 }
 
-- (Control *)getControlAtIndex:(NSInteger)index {
+- (void)recalculateGlobalQuestionState {
+    // 'getControl' does all the heavy-lifting,
+    // all we need to do is attempt to get each
+    // Control in order
+    for (int i = 0; i < [self.questions count]; i++)
+        [self getControl:i];
+}
+
+- (Control *)getControl:(NSInteger)index {
     
-    if ([self.controls count] == 0 || index < 0 || index >= [self.controls count] ) {
-        ALog(@"Control index out-of-range"); // Assert, because should never happen
+    if ([self.questions count] == 0 || index < 0 || index >= [self.questions count] ) {
+        ALog(@"Question index out-of-range"); // Assert, because should never happen
         return nil;
     }
     
-    NSNumber *currentControlDBID = [self.controls objectAtIndex:index];
+    Question *question = [[Question alloc] initWithDBID:[self.questions objectAtIndex:index] 
+                                               database:connection]; 
     
+    NSNumber *controlDBID = [question controlDBID];
+                                    
     // Get the Binding that corresponds to this Control
-    Binding *binding = [[Binding alloc] initWithDBID:[operations getBindingForControl:currentControlDBID error:&error]
+    Binding *binding = [[Binding alloc] initWithDBID:[operations getBindingForControl:controlDBID error:&error]
                                             database:connection
                                                  xml:[self xml]];
     
@@ -113,50 +123,98 @@ NSInteger const kRecordState_Submitted  = 1;
     // If YES then return the current control dbid, if NO then try the next one.
     // If relevant is nil (no restrictions) then return the current control.
     if ([binding relevant] && ![xml evaluateXPathExpression:[binding relevant] error:&error]) {
-
+        question.isRelevant = NO;
         [binding release];
+        [question release];
         return nil;
     }
+    
+    question.isRelevant = YES;
+    
+    // Evaluate the 'required' XPath expression against the current <instance> document.
+    if ([binding required] && [xml evaluateXPathExpression:[binding required] error:&error]) {
+        question.isRequired = YES;
+    }
+    
+    question.isRequired = NO;
     
     // Create the Control. We pass 'binding' to the Control because the
     // specific sub-type information is stored in the binding (i.e. the 
     // Control may be an <input/>, but the binding type may be a string
     // vs. date, which affects the UI)
-    Control *control = [[[Control alloc] initWithDBID:currentControlDBID
+    Control *control = [[[Control alloc] initWithDBID:controlDBID
                                              binding:binding
                                             database:connection] autorelease];
     
     control.result = [xml getValueFromNodeset:[binding nodeset] error:&error];
-    
-
+    control.question = question.dbid;
     
     [binding release];
+    [question release];
     
     return control;
 }
 
-/*
-- (NSString *)getLabelOfControlAtIndex:(NSInteger)index {
+- (NSString *)getLabel:(NSInteger)index {
    
-    if ([self.controls count] == 0 || index < 0 || index >= [self.controls count] ) {
-        ALog(@"Control index out-of-range"); // Assert, because should never happen
+    if ([self.questions count] == 0 || index < 0 || index >= [self.questions count] ) {
+        ALog(@"Question index out-of-range"); // Assert, because should never happen
         return nil;
     }
     
-    return [operations getControlLabel:[controls objectAtIndex:index] error:&error];    
+    return [operations getQuestionLabel:[self.questions objectAtIndex:index] error:&error];    
 }
- */
 
-- (BOOL)hasPreviousControl:(NSInteger)index {
-    if ([self.controls count] == 0 || (index - 1) < 0 || (index - 1) >= [self.controls count]) {
+- (BOOL)isAnswered:(NSInteger)index {
+    
+    if ([self.questions count] == 0 || index < 0 || index >= [self.questions count] ) {
+        ALog(@"Question index out-of-range"); // Assert, because should never happen
+        return NO;
+    }
+    
+    return [operations getQuestionAnswered:[self.questions objectAtIndex:index] error:&error]; 
+}
+
+- (NSString *)getAnswer:(NSInteger)index {
+    
+    if ([self.questions count] == 0 || index < 0 || index >= [self.questions count] ) {
+        ALog(@"Question index out-of-range"); // Assert, because should never happen
+        return nil;
+    }
+    
+    return [operations getQuestionAnswer:[self.questions objectAtIndex:index] error:&error]; 
+}
+
+- (BOOL)isRelevant:(NSInteger)index {
+    
+    if ([self.questions count] == 0 || index < 0 || index >= [self.questions count] ) {
+        ALog(@"Question index out-of-range"); // Assert, because should never happen
+        return NO;
+    }
+    
+    return [operations getQuestionRelevant:[self.questions objectAtIndex:index] error:&error]; 
+}
+
+- (BOOL)isRequired:(NSInteger)index {
+    
+    if ([self.questions count] == 0 || index < 0 || index >= [self.questions count] ) {
+        ALog(@"Question index out-of-range"); // Assert, because should never happen
+        return NO;
+    }
+    
+    return [operations getQuestionRequired:[self.questions objectAtIndex:index] error:&error]; 
+}
+
+- (BOOL)hasPrevious:(NSInteger)index {
+    if ([self.questions count] == 0 || (index - 1) < 0 || (index - 1) >= [self.questions count]) {
         // Out of range / no more controls
         return NO;
     }
     return YES;
 }
 
-- (BOOL)hasNextControl:(NSInteger)index {
-    if ([self.controls count] == 0 || (index + 1) < 0 || (index + 1) >= [self.controls count]) {
+- (BOOL)hasNext:(NSInteger)index {
+    if ([self.questions count] == 0 || (index + 1) < 0 || (index + 1) >= [self.questions count]) {
         // Out of range / no more controls
         return NO;
     }
@@ -176,7 +234,7 @@ NSInteger const kRecordState_Submitted  = 1;
     
     // If an answer is required but none was provided, return NO
     if ([binding required] && 
-        [xml evalXPath:[binding required] error:&error] &&
+        [xml evaluateXPathExpression:[binding required] error:&error] &&
         ![control result]) {
             self.constraintMessage = @"Answer required";
             [binding release];
@@ -184,7 +242,7 @@ NSInteger const kRecordState_Submitted  = 1;
     }
     
     // If the control has no result.. and a result is not
-    // required return immediatley
+    // required we can safely return here
     if (![control result]) {
         [binding release];
         return YES;
@@ -232,6 +290,10 @@ NSInteger const kRecordState_Submitted  = 1;
         [binding release];
         return NO;
     }
+    
+    // Update the corresponding Question entry
+    [operations setQuestionAnswered:YES forQuestion:control.question error:&error];
+    [operations setQuestionAnswer:control.result forQuestion:control.question error:&error];
  
     DLog(@"%@", [xml xmlString]);
     

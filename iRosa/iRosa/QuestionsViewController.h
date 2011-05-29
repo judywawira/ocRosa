@@ -23,7 +23,7 @@
 
 @interface QuestionsViewController : UITableViewController {
     
-    FormDetailViewController *formDetails;
+    FormDetailViewController *formDetails;  // Parent Controller
     
     NSString *formTitle;        // Passed-in from FormDetailController
     
@@ -32,8 +32,6 @@
     Record *record;             // Passed-in from FormDetailController
     
     NSArray *questions;         // List of this record's questions
-    
-    NSInteger currentQuestion; // Current/Active Question 
 }
 
 @property (nonatomic, copy) NSString *formTitle;

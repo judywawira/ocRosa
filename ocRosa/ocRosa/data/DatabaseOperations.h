@@ -120,11 +120,67 @@
 - (NSDate *)getRecordSubmitDate:(NSNumber *)recordDBID
                           error:(NSError **)error;
 
-#pragma mark Answer Usage
+- (NSArray *)getRecordControlDBIDs:(NSNumber *)recordDBID
+                             error:(NSError **)error;
 
-- (NSNumber *)createAnswerForRecord:(NSNumber *)recordDBID
-                            control:(NSNumber *)controlDBID
+- (NSArray *)getRecordQuestionDBIDs:(NSNumber *)recordDBID
                               error:(NSError **)error;
+
+- (NSNumber *)getRecordProgress:(NSNumber *)recordDBID
+                          error:(NSError **)error;
+
+#pragma mark Questions Usage
+
+- (NSNumber *)createQuestionForRecord:(NSNumber *)recordDBID
+                              control:(NSNumber *)controlDBID
+                                error:(NSError **)error;
+
+- (NSNumber *)getQuestionRecord:(NSNumber *)questionDBID
+                           error:(NSError **)error;
+
+- (NSNumber *)getQuestionControl:(NSNumber *)questionDBID
+                           error:(NSError **)error;
+
+- (NSString *)getQuestionLabel:(NSNumber *)questionDBID
+                         error:(NSError **)error;
+
+- (NSNumber *)getNextQuestion:(NSNumber *)questionDBID
+                        error:(NSError **)error;
+
+- (BOOL)setNextQuestion:(NSNumber *)nextQuestionDBID
+            forQuestion:(NSNumber *)thisQuestionDBID
+                  error:(NSError **)error;
+
+
+- (BOOL)getQuestionRelevant:(NSNumber *)questionDBID
+                      error:(NSError **)error;
+
+- (BOOL)setQuestionRelevant:(BOOL)isRelevant
+                forQuestion:(NSNumber *)questionDBID
+                      error:(NSError **)error;
+
+
+- (BOOL)getQuestionRequired:(NSNumber *)questionDBID
+                      error:(NSError **)error;
+
+- (BOOL)setQuestionRequired:(BOOL)isRequired
+                forQuestion:(NSNumber *)questionDBID
+                      error:(NSError **)error;
+
+
+- (BOOL)getQuestionAnswered:(NSNumber *)questionDBID
+                      error:(NSError **)error;
+
+- (BOOL)setQuestionAnswered:(BOOL)isAnswered
+                forQuestion:(NSNumber *)questionDBID
+                      error:(NSError **)error;
+
+- (NSString *)getQuestionAnswer:(NSNumber *)questionDBID
+                          error:(NSError **)error;
+
+- (BOOL)setQuestionAnswer:(NSString *)answer
+              forQuestion:(NSNumber *)questionDBID
+                    error:(NSError **)error;
 
 #pragma mark Bind Parsing
 
@@ -175,11 +231,6 @@
                  error:(NSError **)error;
 
 #pragma mark Control Usage
-
-// Get an ordered list of Control (question) dbids
-// for the specified record.
-- (NSArray *)getControlDBIDs:(NSNumber *)recordDBID
-                       error:(NSError **)error;
 
 - (NSNumber *)getBindingForControl:(NSNumber *)controlDBID
                              error:(NSError **)error;

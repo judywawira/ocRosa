@@ -53,8 +53,8 @@
 
 - (void)buildNavigationButtons {
     
-    BOOL hasPrevious = [record hasPreviousControl:self.controlIndex];
-    BOOL hasNext = [record hasNextControl:self.controlIndex];
+    BOOL hasPrevious = [record hasPrevious:self.controlIndex];
+    BOOL hasNext = [record hasNext:self.controlIndex];
     
     // Create a custom toolbar to navigate forwards and backwards through the questions.
     // This custom toolbar will be embedded into the right-side of the navigation bar.
@@ -153,9 +153,9 @@
     activeView = view;
     
     view.title.text = self.formTitle;
-    view.progress.progress = record.getProgress;
     view.question.text = control.label;
     view.hint.text = control.hint;
+    view.progress.progress = (float)self.controlIndex / [record.questions count];
     
     [view adjustSubviews];
 }

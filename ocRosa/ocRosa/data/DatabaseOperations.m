@@ -349,22 +349,119 @@
                                error:error];
 }
 
+- (NSArray *)getRecordControlDBIDs:(NSNumber *)recordDBID
+                             error:(NSError **)error {
+    
+    NSNumber *formDBID = [connection numberFromQuery:@"SELECT Forms.dbid FROM Records, Instances, Models, Forms " 
+                          "WHERE Records.instance_dbid = Instances.dbid AND "
+                          "Instances.model_dbid = Models.dbid AND "
+                          "Models.form_dbid = Forms.dbid AND "
+                          "Records.dbid = ?;"
+                                           arguments:[NSArray arrayWithObjects:recordDBID, nil] 
+                                        errorMessage:@"Cannot get first Control for Form"
+                                               error:error];   
+    
+    return [connection numberArrayFromQuery:@"SELECT dbid FROM Controls WHERE Controls.form_dbid = ? ORDER BY dbid;"
+                                  arguments:[NSArray arrayWithObjects:formDBID, nil] 
+                               errorMessage:@"Cannot get list of Control IDs"
+                                      error:error];
+}
 
-#pragma mark Answer Usage
-
-- (NSNumber *)createAnswerForRecord:(NSNumber *)recordDBID
-                            control:(NSNumber *)controlDBID
+- (NSArray *)getRecordQuestionDBIDs:(NSNumber *)recordDBID
                               error:(NSError **)error {
     
-    return [connection executeInsert:@"INSERT INTO Answers (record_dbid, control_dbid, relevant, answered) VALUES (?, ?, ?, ?);"
+}
+
+- (NSNumber *)getRecordProgress:(NSNumber *)recordDBID
+                          error:(NSError **)error {
+    
+}
+
+#pragma mark Question Usage
+
+- (NSNumber *)createQuestionForRecord:(NSNumber *)recordDBID
+                              control:(NSNumber *)controlDBID
+                                error:(NSError **)error {
+    
+    return [connection executeInsert:@"INSERT INTO Questions (record_dbid, control_dbid, relevant, required, answered) VALUES (?, ?, ?, ?, ?);"
                            arguments:[NSArray arrayWithObjects:
                                         recordDBID, 
-                                        controlDBID, 
+                                        controlDBID,
+                                        [NSNumber numberWithInt:0],
                                         [NSNumber numberWithInt:0],
                                         [NSNumber numberWithInt:0],
                                         nil]
-                        errorMessage:@"Cannot create Answer"
+                        errorMessage:@"Cannot create Question"
                                error:error]; 
+}
+
+- (NSNumber *)getQuestionRecord:(NSNumber *)questionDBID
+                          error:(NSError **)error {
+    
+}
+
+- (NSNumber *)getQuestionControl:(NSNumber *)questionDBID
+                           error:(NSError **)error {
+}
+
+- (NSString *)getQuestionLabel:(NSNumber *)questionDBID
+                         error:(NSError **)error {
+    
+}
+
+- (NSNumber *)getNextQuestion:(NSNumber *)questionDBID
+                        error:(NSError **)error {
+    
+}
+
+- (BOOL)setNextQuestion:(NSNumber *)nextQuestionDBID
+            forQuestion:(NSNumber *)thisQuestionDBID
+                  error:(NSError **)error {
+    
+}
+
+- (BOOL)getQuestionRelevant:(NSNumber *)questionDBID
+                      error:(NSError **)error {
+    
+}
+
+- (BOOL)setQuestionRelevant:(BOOL)isRelevant
+                forQuestion:(NSNumber *)questionDBID
+                      error:(NSError **)error {
+    
+}
+
+- (BOOL)getQuestionRequired:(NSNumber *)questionDBID
+                      error:(NSError **)error {
+    
+}
+
+- (BOOL)setQuestionRequired:(BOOL)isRequired
+                forQuestion:(NSNumber *)questionDBID
+                      error:(NSError **)error {
+    
+}
+
+- (BOOL)getQuestionAnswered:(NSNumber *)questionDBID
+                      error:(NSError **)error {
+    
+}
+
+- (BOOL)setQuestionAnswered:(BOOL)isAnswered
+                forQuestion:(NSNumber *)questionDBID
+                      error:(NSError **)error {
+    
+}
+
+- (NSString *)getQuestionAnswer:(NSNumber *)questionDBID
+                          error:(NSError **)error {
+    
+}
+
+- (BOOL)setQuestionAnswer:(NSString *)answer
+              forQuestion:(NSNumber *)questionDBID
+                    error:(NSError **)error {
+    
 }
 
 
@@ -478,24 +575,6 @@
 }
 
 #pragma mark Control Usage
-
-- (NSArray *)getControlDBIDs:(NSNumber *)recordDBID
-                       error:(NSError **)error {
-    
-    NSNumber *formDBID = [connection numberFromQuery:@"SELECT Forms.dbid FROM Records, Instances, Models, Forms " 
-                                                      "WHERE Records.instance_dbid = Instances.dbid AND "
-                                                      "Instances.model_dbid = Models.dbid AND "
-                                                      "Models.form_dbid = Forms.dbid AND "
-                                                      "Records.dbid = ?;"
-                                          arguments:[NSArray arrayWithObjects:recordDBID, nil] 
-                                       errorMessage:@"Cannot get first Control for Form"
-                                              error:error];   
-    
-    return [connection numberArrayFromQuery:@"SELECT dbid FROM Controls WHERE Controls.form_dbid = ? ORDER BY dbid;"
-                                  arguments:[NSArray arrayWithObjects:formDBID, nil] 
-                               errorMessage:@"Cannot get list of Control IDs"
-                                      error:error];
-}
 
 - (NSNumber *)getBindingForControl:(NSNumber *)controlDBID
                              error:(NSError **)error {

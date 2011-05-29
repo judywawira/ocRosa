@@ -31,8 +31,7 @@ NSInteger const kControlType_Input_LatLong  = 103;
 
 @implementation Control
 
-@synthesize result;
-@synthesize index;
+@synthesize question, result;
 
 - (id)initWithDBID:(NSNumber *)controlDBID
            binding:(Binding *)controlBinding

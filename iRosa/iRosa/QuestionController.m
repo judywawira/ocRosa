@@ -73,10 +73,10 @@
         return NO;
     }
     
-    while ([record hasNextControl:self.controlIndex]) {
+    while ([record hasNext:self.controlIndex]) {
         self.controlIndex++;
-        self.control = [record getControlAtIndex:self.controlIndex];
-        if ([record isControlAtIndexRelevant:self.controlIndex]) {
+        self.control = [record getControl:self.controlIndex];
+        if ([record isRelevant:self.controlIndex]) {
             return YES;
         }
     }
@@ -99,11 +99,11 @@
         return NO;
     }
     
-    while ([record hasPreviousControl:self.controlIndex]) {
+    while ([record hasPrevious:self.controlIndex]) {
         
         self.controlIndex--;
-        self.control = [record getControlAtIndex:self.controlIndex];
-        if ([record isControlAtIndexRelevant:self.controlIndex]) {
+        self.control = [record getControl:self.controlIndex];
+        if ([record isRelevant:self.controlIndex]) {
             return YES;
         }
     }

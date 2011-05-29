@@ -167,6 +167,25 @@ CREATE TABLE Records (
 	FOREIGN KEY (control_dbid) REFERENCES Controls (dbid)
 );
 
+/*
+
+*/
+CREATE TABLE Questions (
+	dbid INTEGER PRIMARY KEY,
+	record_dbid INTEGER NOT NULL,
+	control_dbid INTEGER NOT NULL,
+	next_question INTEGER,
+	relevant INTEGER NOT NULL,
+	required INTEGER NOT NULL,
+	answered INTEGER NOT NULL,
+	answer TEXT,
+	FOREIGN KEY (record_dbid) REFERENCES Records (dbid),
+	FOREIGN KEY (control_dbid) REFERENCES Controls (dbid)
+);
+CREATE INDEX Questions_Record_Index ON Questions (record_dbid);
+CREATE INDEX Questions_Control_Index ON Questions (control_dbid);
+CREATE INDEX Questions_Relevant_Index ON Questions (relevant);
+CREATE INDEX Questions_Answered_Index ON Questions (answered);
 
 /*
 	Bindings are used to add constraints or additional logic to a portion of the instance.

@@ -18,7 +18,7 @@
 #import "DatabaseOperations.h"
 #import "FormDownloader.h"
 #import "FormParser.h"
-#import "Answers.h"
+#import "Question.h"
 #import "FormManager.h"
 
 @implementation FormManager
@@ -86,9 +86,9 @@
     NSNumber *recordDBID = [operations createRecordForForm:(NSNumber *)dbid error:&error]; 
     
     // Initialize the set of (empty) Answer place-holders    
-    [Answers initializeEmptyAnswersForRecord:recordDBID
-                             usingOperations:self.operations
-                                       error:&error];
+    [Question initializeEmptyAnswersForRecord:recordDBID
+                              usingOperations:self.operations
+                                        error:&error];
     
     return recordDBID;
 }

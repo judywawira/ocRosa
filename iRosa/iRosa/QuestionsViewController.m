@@ -55,7 +55,7 @@
     
     // Get the list of Questions (id's only)
     [questions release];
-    questions = [record.controls retain];
+    questions = [record.questions retain];
 
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -74,6 +74,8 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     self.title = [NSString stringWithFormat:@"Record %@", record.dbid];
+    
+    [self.record recalculateGlobalQuestionState];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -113,7 +115,7 @@
     }
     
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-    cell.textLabel.text = [record getLabelOfControlAtIndex:indexPath.row];
+    cell.textLabel.text = [record getLabel:indexPath.row];
     
     return cell;
 }
@@ -165,7 +167,7 @@
     
     // Set all of the necessary properties of the questionController
     questionController.record = record;
-    questionController.control = [record getControlAtIndex:indexPath.row];
+    questionController.control = [record getControl:indexPath.row];
     questionController.controlIndex = indexPath.row;
     questionController.formTitle = self.formTitle;
     questionController.formManager = formManager;

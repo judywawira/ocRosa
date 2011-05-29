@@ -35,6 +35,8 @@ extern NSInteger const kControlType_Input_LatLong;
     
     Binding *binding;   // Binding that corresponds to this Control
     
+    NSNumber *question; // Question that corresponds to this Control
+    
     NSInteger type;     // One of the kControlTypes. Query
                         // binding.type to get specific data type
              
@@ -50,17 +52,15 @@ extern NSInteger const kControlType_Input_LatLong;
                         // might be "Female", and the value "f")
     
     NSString *result;   // Encoded result. Inserted into the <instance>.
-    
-    NSInteger index;    // Index of this Control in the Record
 }
 
+@property (nonatomic, retain) NSNumber *question;
 @property (nonatomic, readonly) NSInteger type;
 @property (nonatomic, readonly) NSString *label;
 @property (nonatomic, readonly) NSString *hint;
 @property (nonatomic, readonly) NSArray *items;
 @property (nonatomic, readonly) NSArray *values;
 @property (nonatomic, copy) NSString *result;
-@property (nonatomic) NSInteger index;
 
 - (id)initWithDBID:(NSNumber *)controlDBID
            binding:(Binding *)controlBinding
@@ -75,7 +75,6 @@ extern NSInteger const kControlType_Input_LatLong;
 // Reverse. Decode 'result' to generate an array of
 // integers that correspond to selected Items/Values
 - (NSArray *)decodeResultToSelection;
-
 
 - (void)encodeResultFromDate:(NSDate *)date;
 - (NSDate *)decodeResultToDate;

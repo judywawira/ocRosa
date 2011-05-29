@@ -21,27 +21,28 @@
  */
 
 #import <Foundation/Foundation.h>
-
-extern NSInteger const kRelevant;       // 'revelant' binding not satisfied
-                                        // Question cannot be answered (yet)
-
-extern NSInteger const kIrrelevant;     // 'relevant' binding satisfied or nonexistant 
+#import "DatabaseRecord.h"
 
 @class DatabaseOperations;
 
-@interface Answers : NSObject {}
+@interface Question : DatabaseRecord {
+    
+    NSNumber *recordDBID;
+    
+    NSNumber *controlDBID;
+    
+}
 
-// Create the empty answer placeholders in the database
+@property (nonatomic, readonly) NSNumber *recordDBID;
+@property (nonatomic, readonly) NSNumber *controlDBID;
+@property (nonatomic) BOOL isRelevant;
+@property (nonatomic) BOOL isRequired;
+@property (nonatomic) BOOL isAnswered;
+@property (nonatomic, assign) NSString *answer;
+
+// Create the empty unasnwered Question placeholders in the database
 + (void)initializeEmptyAnswersForRecord:(NSNumber *)recordDBID
                         usingOperations:(DatabaseOperations *)ops
                                   error:(NSError **)error;
-
-
-+ (void)updateRelevanceForControls:(NSArray *)controlDBIDs
-                          ofRecord:(NSNumber *)recordDBID
-                        startIndex:(NSInteger)index
-                   usingOperations:(DatabaseOperations *)ops
-                             error:(NSError **)error;
-
 
 @end
