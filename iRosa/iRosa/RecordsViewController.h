@@ -18,10 +18,15 @@
 
 @class Form;
 @class FormManager;
+@class FormDetailViewController;
 
 @interface RecordsViewController : UITableViewController {
         
     Form *form;
+    
+    FormDetailViewController *formDetails;  // Parent Controller
+    
+    FormManager *formManager;
     
     NSArray *records;   // Array of Record dbids
     
@@ -31,5 +36,7 @@
 
 @property (nonatomic, retain) Form *form;
 @property (nonatomic, retain) NSNumber *state;
+@property (nonatomic, retain) FormManager *formManager;
+@property (nonatomic, retain) FormDetailViewController *formDetails;
 
 @end

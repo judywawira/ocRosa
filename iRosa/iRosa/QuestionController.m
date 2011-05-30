@@ -49,6 +49,12 @@
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
+    
+    // When popping back-up the navigation stack, we'll
+    // update the results if we can, but if any of the
+    // constraints aren't satisfied - we'll ignore it
+    if (self.control)
+        [record updateRecordWithControlResult:self.control];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -93,18 +99,10 @@
 
 - (BOOL)previousQuestion {
     
-    if (![record updateRecordWithControlResult:self.control]) {
-        // Answer is invalid
-        UIAlertView *alert = [[UIAlertView alloc]
-                              initWithTitle: @"Invalid Answer"
-                              message: record.constraintMessage
-                              delegate: nil
-                              cancelButtonTitle:@"OK"
-                              otherButtonTitles:nil];
-        [alert show];
-        [alert release];
-        return NO;
-    }
+    // When navigating to the previous question, we'll
+    // update the results if we can, but if any of the
+    // constraints aren't satisfied - we'll ignore it
+    [record updateRecordWithControlResult:self.control];
     
     Control *previousControl = nil;
     

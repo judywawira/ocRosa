@@ -273,6 +273,8 @@
         }
         
         recordsController.form = form;
+        recordsController.formManager = formManager;
+        recordsController.formDetails = self;
         
         [self.navigationController pushViewController:recordsController animated:YES];
         [recordsController release];

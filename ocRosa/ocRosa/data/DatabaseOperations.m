@@ -379,7 +379,21 @@
 
 - (NSNumber *)getRecordProgress:(NSNumber *)recordDBID
                           error:(NSError **)error {
-    return [NSNumber numberWithFloat:1.0];
+    
+    NSNumber *relevantQuestions = 
+                [connection numberFromQuery:@"SELECT count(*) FROM Questions WHERE record_dbid = ? AND relevant = 1;" 
+                                  arguments:[NSArray arrayWithObjects:recordDBID, nil] 
+                               errorMessage:@"Cannot count Questions"
+                                      error:error];
+    
+    NSNumber *answeredRelevantQuestions = 
+                [connection numberFromQuery:@"SELECT count(*) FROM Questions WHERE record_dbid = ? AND relevant = 1 AND answered = 1;" 
+                                  arguments:[NSArray arrayWithObjects:recordDBID, nil] 
+                               errorMessage:@"Cannot count Questions"
+                                      error:error];
+    
+    float progress = [answeredRelevantQuestions floatValue] / [relevantQuestions floatValue];
+    return [NSNumber numberWithFloat:progress];
 }
 
 #pragma mark Question Usage

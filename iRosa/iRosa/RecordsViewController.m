@@ -16,11 +16,12 @@
 
 #import "RecordsViewController.h"
 #import "iRosaAppDelegate.h"
+#import "QuestionsViewController.h"
 #import "ocRosa.h"
 
 @implementation RecordsViewController
 
-@synthesize state, form;
+@synthesize formManager, formDetails, state, form;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -74,6 +75,8 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    
+    [self.tableView reloadData];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -103,8 +106,7 @@
     return [records count];
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *CellIdentifier = @"Cell";
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
@@ -121,12 +123,12 @@
     // Primary cell label is the title of the form
     cell.textLabel.text = [NSString stringWithFormat:@"%@", self.form.title];
     
-    // Detail Text will be the date the form was Created/Completed/Submitted
+    // Detail Text will be the Percent Complete and date the form was Created/Completed/Submitted    
 	NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
 	[dateFormatter setDateStyle:NSDateFormatterMediumStyle];
 	[dateFormatter setTimeStyle:NSDateFormatterShortStyle];
-	cell.detailTextLabel.text = [NSString stringWithFormat:@"#%@ : %@",
-                                    recordDBID,
+	cell.detailTextLabel.text = [NSString stringWithFormat:@"%3.0f%% : %@",
+                                    record.progress * 100.0,
                                     [dateFormatter stringFromDate:record.date]];
     [dateFormatter release];
     
@@ -157,16 +159,21 @@
 
 #pragma mark - Table view delegate
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Navigation logic may go here. Create and push another view controller.
-    /*
-     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     // ...
-     // Pass the selected object to the new view controller.
-     [self.navigationController pushViewController:detailViewController animated:YES];
-     [detailViewController release];
-     */
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    NSNumber *recordDBID = [records objectAtIndex:indexPath.row];
+    
+    QuestionsViewController *questionsController = [[QuestionsViewController alloc] initWithStyle:UITableViewStylePlain];
+    questionsController.formTitle = form.title;
+    questionsController.formManager = formManager;
+    questionsController.formDetails = formDetails;
+    
+    Record *record= [[Record alloc] initWithDBID:recordDBID database:formManager.connection];
+    questionsController.record = record;
+    [record release];
+    
+    [self.navigationController pushViewController:questionsController animated:YES];
+    [questionsController release];
 }
 
 @end

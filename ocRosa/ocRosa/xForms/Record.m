@@ -129,16 +129,16 @@ NSInteger const kRecordState_Submitted  = 1;
         [binding release];
         [question release];
         return nil;
+    } else {
+        question.isRelevant = YES;
     }
-    
-    question.isRelevant = YES;
     
     // Evaluate the 'required' XPath expression against the current <instance> document.
     if ([binding required] && [xml evaluateXPathExpression:[binding required] error:&error]) {
         question.isRequired = YES;
+    } else {
+        question.isRequired = NO;
     }
-    
-    question.isRequired = NO;
     
     // Create the Control. We pass 'binding' to the Control because the
     // specific sub-type information is stored in the binding (i.e. the 

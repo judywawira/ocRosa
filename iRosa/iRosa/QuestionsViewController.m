@@ -126,11 +126,19 @@
         // If the question has an answer
         if ([record isAnswered:indexPath.row]) {
             cell.detailTextLabel.text = [record getAnswer:indexPath.row];
+        } else {
+            
+            if ([record isRequired:indexPath.row]) {
+                // Required but not answered
+                cell.detailTextLabel.text = @"- Required -";
+            } else {
+                cell.detailTextLabel.text = @"";
+            }
         }
         
     } else {
         // Question is not relevant (will be skipped)
-        cell.detailTextLabel.text = @"";
+        cell.detailTextLabel.text = @"- Skipped -";
         cell.accessoryType = UITableViewCellAccessoryNone;
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.textLabel.backgroundColor          = [UIColor lightGrayColor];
@@ -184,18 +192,21 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    QuestionController *questionController = [[QuestionController_iPhone alloc] initWithNibName:nil bundle:nil];
+    if ([record isRelevant:indexPath.row]) {
+       
+        QuestionController *questionController = [[QuestionController_iPhone alloc] initWithNibName:nil bundle:nil];
     
-    // Set all of the necessary properties of the questionController
-    questionController.record = record;
-    questionController.control = [record getControl:indexPath.row];
-    questionController.controlIndex = indexPath.row;
-    questionController.formTitle = self.formTitle;
-    questionController.formManager = formManager;
-    questionController.formDetails = self.formDetails; // So we can pop back to 'FormDetails' when done
+        // Set all of the necessary properties of the questionController
+        questionController.record = record;
+        questionController.control = [record getControl:indexPath.row];
+        questionController.controlIndex = indexPath.row;
+        questionController.formTitle = self.formTitle;
+        questionController.formManager = formManager;
+        questionController.formDetails = self.formDetails; // So we can pop back to 'FormDetails' when done
     
-    [self.navigationController pushViewController:questionController animated:YES];
-    [questionController release];
+        [self.navigationController pushViewController:questionController animated:YES];
+        [questionController release];
+    }
 }
 
 @end
