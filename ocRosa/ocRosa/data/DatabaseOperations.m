@@ -370,11 +370,16 @@
 - (NSArray *)getRecordQuestionDBIDs:(NSNumber *)recordDBID
                               error:(NSError **)error {
     
+    return [connection numberArrayFromQuery:@"SELECT dbid FROM Questions WHERE record_dbid = ? ORDER BY dbid;"
+                                  arguments:[NSArray arrayWithObjects:recordDBID, nil] 
+                               errorMessage:@"Cannot get list of Question IDs"
+                                      error:error];
+    
 }
 
 - (NSNumber *)getRecordProgress:(NSNumber *)recordDBID
                           error:(NSError **)error {
-    
+    return [NSNumber numberWithFloat:1.0];
 }
 
 #pragma mark Question Usage
@@ -398,15 +403,30 @@
 - (NSNumber *)getQuestionRecord:(NSNumber *)questionDBID
                           error:(NSError **)error {
     
+    return [connection numberFromQuery:@"SELECT record_dbid FROM Questions WHERE dbid = ?;" 
+                             arguments:[NSArray arrayWithObjects:questionDBID, nil] 
+                          errorMessage:@"Cannot get Question control_dbid"
+                                 error:error];
 }
 
 - (NSNumber *)getQuestionControl:(NSNumber *)questionDBID
                            error:(NSError **)error {
+    
+    return [connection numberFromQuery:@"SELECT control_dbid FROM Questions WHERE dbid = ?;" 
+                             arguments:[NSArray arrayWithObjects:questionDBID, nil] 
+                          errorMessage:@"Cannot get Question control_dbid"
+                                 error:error];
 }
 
 - (NSString *)getQuestionLabel:(NSNumber *)questionDBID
                          error:(NSError **)error {
     
+    return [connection stringFromQuery:@"SELECT Controls.label FROM Questions, Controls "
+                                        "WHERE Questions.control_dbid = Controls.dbid AND "
+                                        "Questions.dbid = ?;"
+                             arguments:[NSArray arrayWithObjects:questionDBID, nil] 
+                          errorMessage:@"Cannot get Question label"
+                                 error:error];
 }
 
 - (NSNumber *)getNextQuestion:(NSNumber *)questionDBID
@@ -423,45 +443,78 @@
 - (BOOL)getQuestionRelevant:(NSNumber *)questionDBID
                       error:(NSError **)error {
     
+    return [[connection numberFromQuery:@"SELECT relevant FROM Questions WHERE dbid = ?;" 
+                              arguments:[NSArray arrayWithObjects:questionDBID, nil] 
+                           errorMessage:@"Cannot get Question is-relevant"
+                                  error:error] boolValue];
 }
 
 - (BOOL)setQuestionRelevant:(BOOL)isRelevant
                 forQuestion:(NSNumber *)questionDBID
                       error:(NSError **)error {
     
+    return [connection executeScalar:@"UPDATE Questions SET relevant = ? WHERE dbid = ?;"
+                           arguments:[NSArray arrayWithObjects:[NSNumber numberWithBool:isRelevant], questionDBID, nil]
+                        errorMessage:@"Cannot set Question is-relevant"
+                               error:error];
 }
 
 - (BOOL)getQuestionRequired:(NSNumber *)questionDBID
                       error:(NSError **)error {
     
+    return [[connection numberFromQuery:@"SELECT required FROM Questions WHERE dbid = ?;" 
+                              arguments:[NSArray arrayWithObjects:questionDBID, nil] 
+                           errorMessage:@"Cannot get Question is-required"
+                                  error:error] boolValue];
 }
 
 - (BOOL)setQuestionRequired:(BOOL)isRequired
                 forQuestion:(NSNumber *)questionDBID
                       error:(NSError **)error {
     
+    return [connection executeScalar:@"UPDATE Questions SET required = ? WHERE dbid = ?;"
+                           arguments:[NSArray arrayWithObjects:[NSNumber numberWithBool:isRequired], questionDBID, nil]
+                        errorMessage:@"Cannot set Question is-required"
+                               error:error];
 }
 
 - (BOOL)getQuestionAnswered:(NSNumber *)questionDBID
                       error:(NSError **)error {
     
+    return [[connection numberFromQuery:@"SELECT answered FROM Questions WHERE dbid = ?;" 
+                             arguments:[NSArray arrayWithObjects:questionDBID, nil] 
+                          errorMessage:@"Cannot get Question is-answered"
+                                  error:error] boolValue];
 }
 
 - (BOOL)setQuestionAnswered:(BOOL)isAnswered
                 forQuestion:(NSNumber *)questionDBID
                       error:(NSError **)error {
     
+    return [connection executeScalar:@"UPDATE Questions SET answered = ? WHERE dbid = ?;"
+                           arguments:[NSArray arrayWithObjects:[NSNumber numberWithBool:isAnswered], questionDBID, nil]
+                        errorMessage:@"Cannot set Question is-answered"
+                               error:error];    
 }
 
 - (NSString *)getQuestionAnswer:(NSNumber *)questionDBID
                           error:(NSError **)error {
+    
+    return [connection stringFromQuery:@"SELECT answer FROM Questions WHERE dbid = ?;" 
+                             arguments:[NSArray arrayWithObjects:questionDBID, nil] 
+                          errorMessage:@"Cannot get Question answer"
+                                 error:error];
     
 }
 
 - (BOOL)setQuestionAnswer:(NSString *)answer
               forQuestion:(NSNumber *)questionDBID
                     error:(NSError **)error {
-    
+   
+    return [connection executeScalar:@"UPDATE Questions SET answer = ? WHERE dbid = ?;"
+                           arguments:[NSArray arrayWithObjects:answer, questionDBID, nil]
+                        errorMessage:@"Cannot set Question answered"
+                               error:error]; 
 }
 
 

@@ -72,29 +72,28 @@
 }
 
 - (void)viewWillAppear:(BOOL)animated {
+    
     [super viewWillAppear:animated];
     self.title = [NSString stringWithFormat:@"Record %@", record.dbid];
+    
+    [self.tableView reloadData];
     
     [self.record recalculateGlobalQuestionState];
 }
 
-- (void)viewDidAppear:(BOOL)animated
-{
+- (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
 }
 
-- (void)viewWillDisappear:(BOOL)animated
-{
+- (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
 }
 
-- (void)viewDidDisappear:(BOOL)animated
-{
+- (void)viewDidDisappear:(BOOL)animated {
     [super viewDidDisappear:animated];
 }
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
     // Return YES for supported orientations
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
@@ -105,17 +104,39 @@
     return [questions count];
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *CellIdentifier = @"Cell";
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier] autorelease];
     }
     
-    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    // The main text is the Question
     cell.textLabel.text = [record getLabel:indexPath.row];
+    
+    
+    if ([record isRelevant:indexPath.row]) {
+        // Questions is relevant
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        cell.textLabel.backgroundColor          = [UIColor whiteColor];
+        cell.detailTextLabel.backgroundColor    = [UIColor whiteColor];
+        cell.contentView.backgroundColor        = [UIColor whiteColor];
+    
+        // If the question has an answer
+        if ([record isAnswered:indexPath.row]) {
+            cell.detailTextLabel.text = [record getAnswer:indexPath.row];
+        }
+        
+    } else {
+        // Question is not relevant (will be skipped)
+        cell.detailTextLabel.text = @"";
+        cell.accessoryType = UITableViewCellAccessoryNone;
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        cell.textLabel.backgroundColor          = [UIColor lightGrayColor];
+        cell.detailTextLabel.backgroundColor    = [UIColor lightGrayColor];
+        cell.contentView.backgroundColor        = [UIColor lightGrayColor];   
+    }
     
     return cell;
 }

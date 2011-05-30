@@ -47,6 +47,10 @@
     [super viewDidUnload];
 }
 
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+}
+
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];    
 }
@@ -73,10 +77,13 @@
         return NO;
     }
     
+    Control *nextControl = nil;
+    
     while ([record hasNext:self.controlIndex]) {
         self.controlIndex++;
-        self.control = [record getControl:self.controlIndex];
-        if ([record isRelevant:self.controlIndex]) {
+        nextControl = [record getControl:self.controlIndex];
+        if (nextControl) {
+            self.control = nextControl;
             return YES;
         }
     }
@@ -99,11 +106,13 @@
         return NO;
     }
     
+    Control *previousControl = nil;
+    
     while ([record hasPrevious:self.controlIndex]) {
-        
         self.controlIndex--;
-        self.control = [record getControl:self.controlIndex];
-        if ([record isRelevant:self.controlIndex]) {
+        previousControl = [record getControl:self.controlIndex];
+        if (previousControl) {
+            self.control = previousControl;
             return YES;
         }
     }
@@ -202,7 +211,7 @@
     [self.control encodeResultFromSelection:selectedItems];
 }
 
-#pragma mark NumberView
+#pragma mark Input
 
 - (void)updateResultUsingContentsOfTextField:(id)sender {
     self.control.result = ((UITextField *)sender).text;

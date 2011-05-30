@@ -98,8 +98,10 @@ NSInteger const kRecordState_Submitted  = 1;
     // 'getControl' does all the heavy-lifting,
     // all we need to do is attempt to get each
     // Control in order
-    for (int i = 0; i < [self.questions count]; i++)
-        [self getControl:i];
+    for (int i = 0; i < [self.questions count]; i++) {
+        Control *control = [self getControl:i];
+        [control release];
+    }
 }
 
 - (Control *)getControl:(NSInteger)index {
@@ -142,9 +144,9 @@ NSInteger const kRecordState_Submitted  = 1;
     // specific sub-type information is stored in the binding (i.e. the 
     // Control may be an <input/>, but the binding type may be a string
     // vs. date, which affects the UI)
-    Control *control = [[[Control alloc] initWithDBID:controlDBID
+    Control *control = [[Control alloc] initWithDBID:controlDBID
                                              binding:binding
-                                            database:connection] autorelease];
+                                            database:connection];
     
     control.result = [xml getValueFromNodeset:[binding nodeset] error:&error];
     control.question = question.dbid;
