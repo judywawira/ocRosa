@@ -127,8 +127,7 @@
 	NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
 	[dateFormatter setDateStyle:NSDateFormatterMediumStyle];
 	[dateFormatter setTimeStyle:NSDateFormatterShortStyle];
-	cell.detailTextLabel.text = [NSString stringWithFormat:@"%3.0f%% : %@",
-                                    record.progress * 100.0,
+	cell.detailTextLabel.text = [NSString stringWithFormat:@"%@",
                                     [dateFormatter stringFromDate:record.date]];
     [dateFormatter release];
     
