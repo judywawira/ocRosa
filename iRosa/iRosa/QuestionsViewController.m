@@ -113,80 +113,37 @@
     }
     
     // The main text is the Question
-    cell.textLabel.text = [record getLabel:indexPath.row];
-    
-    
+    cell.textLabel.textColor = [UIColor blackColor];
+    if ([record isRequired:indexPath.row]) {
+        // Add a "*" if the question is required
+        cell.textLabel.text = [NSString stringWithFormat:@"* %@", [record getLabel:indexPath.row]];
+    } else {
+        cell.textLabel.text = [record getLabel:indexPath.row];
+    }
+
+    // Skip or not?
     if ([record isRelevant:indexPath.row]) {
         // Questions is relevant
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-        cell.textLabel.backgroundColor          = [UIColor whiteColor];
-        cell.detailTextLabel.backgroundColor    = [UIColor whiteColor];
-        cell.contentView.backgroundColor        = [UIColor whiteColor];
     
         // If the question has an answer
         if ([record isAnswered:indexPath.row]) {
             cell.detailTextLabel.text = [record getAnswer:indexPath.row];
         } else {
-            
-            if ([record isRequired:indexPath.row]) {
-                // Required but not answered
-                cell.detailTextLabel.text = @"- Required -";
-            } else {
-                cell.detailTextLabel.text = @"";
-            }
+            cell.detailTextLabel.text = @"";
         }
         
     } else {
         // Question is not relevant (will be skipped)
-        cell.detailTextLabel.text = @"- Skipped -";
-        cell.accessoryType = UITableViewCellAccessoryNone;
+        cell.detailTextLabel.text = @""; // If there's an answer - clear it
+        cell.accessoryType  = UITableViewCellAccessoryNone;
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        cell.textLabel.backgroundColor          = [UIColor lightGrayColor];
-        cell.detailTextLabel.backgroundColor    = [UIColor lightGrayColor];
-        cell.contentView.backgroundColor        = [UIColor lightGrayColor];   
+
+        cell.textLabel.textColor                = [UIColor grayColor];
     }
     
     return cell;
 }
-
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    }   
-    else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
 
 #pragma mark - Table view delegate
 
