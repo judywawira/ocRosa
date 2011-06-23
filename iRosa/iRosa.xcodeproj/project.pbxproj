@@ -39,6 +39,8 @@
 		27776C381341593300473F80 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 27776C371341593300473F80 /* libxml2.dylib */; };
 		27834CFF13522099004ABC26 /* QuestionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 27834CFE13522099004ABC26 /* QuestionsViewController.m */; };
 		27834D2813526C1E004ABC26 /* QuestionController_iPhone.m in Sources */ = {isa = PBXBuildFile; fileRef = 27834D2713526C1E004ABC26 /* QuestionController_iPhone.m */; };
+		278594F413B2D3AD00EC6E28 /* RecordSubmitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 278594F213B2D3AD00EC6E28 /* RecordSubmitViewController.m */; };
+		278594F513B2D3AD00EC6E28 /* RecordSubmitViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 278594F313B2D3AD00EC6E28 /* RecordSubmitViewController.xib */; };
 		278717BF13528122007BA879 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 278717BE13528122007BA879 /* QuartzCore.framework */; };
 		27AE69141353BE2700C0A0DD /* QuestionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 27AE69131353BE2700C0A0DD /* QuestionView.m */; };
 		27AE69171353C56A00C0A0DD /* QuestionViewFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 27AE69161353C56A00C0A0DD /* QuestionViewFactory.m */; };
@@ -99,6 +101,9 @@
 		27834CFE13522099004ABC26 /* QuestionsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuestionsViewController.m; sourceTree = "<group>"; };
 		27834D2613526C1E004ABC26 /* QuestionController_iPhone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QuestionController_iPhone.h; sourceTree = "<group>"; };
 		27834D2713526C1E004ABC26 /* QuestionController_iPhone.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuestionController_iPhone.m; sourceTree = "<group>"; };
+		278594F113B2D3AC00EC6E28 /* RecordSubmitViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecordSubmitViewController.h; sourceTree = "<group>"; };
+		278594F213B2D3AD00EC6E28 /* RecordSubmitViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecordSubmitViewController.m; sourceTree = "<group>"; };
+		278594F313B2D3AD00EC6E28 /* RecordSubmitViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RecordSubmitViewController.xib; sourceTree = "<group>"; };
 		278717BE13528122007BA879 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		27AE69121353BE2700C0A0DD /* QuestionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QuestionView.h; sourceTree = "<group>"; };
 		27AE69131353BE2700C0A0DD /* QuestionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuestionView.m; sourceTree = "<group>"; };
@@ -217,10 +222,13 @@
 				27834D2413526BD2004ABC26 /* Questions */,
 				2724F831132C2B04009CECAF /* iRosaAppDelegate_iPhone.h */,
 				2724F832132C2B04009CECAF /* iRosaAppDelegate_iPhone.m */,
-				2724F834132C2B04009CECAF /* MainWindow_iPhone.xib */,
 				27BE7C781350E0710005698B /* FormsView.xib */,
 				27BE7CD81351050E0005698B /* FormDetailsView.xib */,
 				27BE7CE413512F450005698B /* QuestionsView.xib */,
+				2724F834132C2B04009CECAF /* MainWindow_iPhone.xib */,
+				278594F113B2D3AC00EC6E28 /* RecordSubmitViewController.h */,
+				278594F213B2D3AD00EC6E28 /* RecordSubmitViewController.m */,
+				278594F313B2D3AD00EC6E28 /* RecordSubmitViewController.xib */,
 			);
 			name = iPhone;
 			sourceTree = "<group>";
@@ -346,6 +354,7 @@
 				27428A41135B85920003E419 /* SelectView.xib in Resources */,
 				2765D74B135BB2AE00E4E184 /* FormDownloadViewController.xib in Resources */,
 				272666DA1375E6DB00FD28A3 /* RecordsViewController.xib in Resources */,
+				278594F513B2D3AD00EC6E28 /* RecordSubmitViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -374,6 +383,7 @@
 				27428A3F135B85390003E419 /* SelectView.m in Sources */,
 				2765D74A135BB2AE00E4E184 /* FormDownloadViewController.m in Sources */,
 				272666D91375E6DB00FD28A3 /* RecordsViewController.m in Sources */,
+				278594F413B2D3AD00EC6E28 /* RecordSubmitViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
