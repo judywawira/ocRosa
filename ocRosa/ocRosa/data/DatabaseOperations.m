@@ -313,6 +313,19 @@
                                error:error]; 
 }
 
+- (BOOL)setRecordSubmitted:(NSNumber *)recordDBID
+                     error:(NSError **)error {
+    
+    return [connection executeScalar:@"UPDATE Records SET state = ?, submit_date = ? WHERE dbid = ?;"
+                           arguments:[NSArray arrayWithObjects:
+                                      [NSNumber numberWithInt:kRecordState_Submitted],
+                                      [NSDate date],
+                                      recordDBID,
+                                      nil]
+                        errorMessage:@"Cannot set Record to 'submitted'"
+                               error:error]; 
+}
+
 - (NSNumber *)getRecordState:(NSNumber *)recordDBID
                        error:(NSError **)error {
     

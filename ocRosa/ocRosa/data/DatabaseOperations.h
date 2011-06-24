@@ -108,6 +108,9 @@
 - (BOOL)setRecordComplete:(NSNumber *)recordDBID
                     error:(NSError **)error;
 
+- (BOOL)setRecordSubmitted:(NSNumber *)recordDBID
+                     error:(NSError **)error;
+
 - (NSNumber *)getRecordState:(NSNumber *)recordDBID
                        error:(NSError **)error;
 

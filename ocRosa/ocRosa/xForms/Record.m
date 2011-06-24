@@ -227,6 +227,10 @@ NSInteger const kRecordState_Submitted  = 1;
     [operations setRecordComplete:(NSNumber *)dbid error:&error]; 
 }
 
+- (void)submitted {
+    [operations setRecordSubmitted:(NSNumber *)dbid error:&error]; 
+}
+
 - (BOOL)updateRecordWithControlResult:(Control *)control {
     
     // Get the Binding that corresponds to this Control

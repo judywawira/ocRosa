@@ -16,11 +16,19 @@
 
 #import <UIKit/UIKit.h>
 
+@class FormManager;
 
 @interface RecordSubmitViewController : UIViewController {
  
-    NSArray *records;   // Array of Record dbids
+    NSMutableDictionary *records;
+    NSArray *forms;
+ 
+    FormManager *formManager;
+    
+    IBOutlet UITableView *tableView;
     
 }
+
+@property (nonatomic, readonly) UITableView *tableView;
 
 @end

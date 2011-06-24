@@ -88,8 +88,11 @@ extern NSInteger const kRecordState_Submitted;
 // are not considered - just the raw list of Questions
 - (BOOL)hasNext:(NSInteger)index;
 
-// This record is complete
+// Set record state to 'Complete'
 - (void)complete;
+
+// Set record state to 'Submitted'
+- (void)submitted;
 
 // Update this Record with the results of the Control. Returns YES if
 // the record was successfully updated, or NO otherwise. If NO,
