@@ -17,11 +17,13 @@
 #import "LoginViewController.h"
 #import "KeychainItemWrapper.h"
 #import "iRosaAppDelegate.h"
+#import "FormsViewController.h"
 #import "ocRosa.h"
 
 @implementation LoginViewController
 
 @synthesize title, username, password, remeberSwitch;
+@synthesize mainViewController;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -32,8 +34,8 @@
     return self;
 }
 
-- (void)dealloc
-{
+- (void)dealloc {
+    mainViewController = nil;
     [super dealloc];
 }
 
@@ -58,12 +60,13 @@
     [keychain release];
     
     [self dismissModalViewControllerAnimated:YES];
+    [mainViewController.view setNeedsDisplay];
     
     NSError *error = nil;
     UIAppDelegate.formManager = [FormManager createEncryptedFormManager:self.username.text
                                                              passphrase:self.password.text
                                                                   error:&error];
-
+    
     [server release];
 }
 

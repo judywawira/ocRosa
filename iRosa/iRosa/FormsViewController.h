@@ -20,7 +20,6 @@
 @class FormDetailViewController;
 
 @interface FormsViewController : UITableViewController {
-    FormManager *formManager;
     NSArray *forms;
     FormDetailViewController *detailController;
 }

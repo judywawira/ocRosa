@@ -17,11 +17,12 @@
 #import "FormDetailViewController.h"
 #import "QuestionsViewController.h"
 #import "RecordsViewController.h"
+#import "iRosaAppDelegate.h"
 #import "ocRosa.h"
 
 @implementation FormDetailViewController
 
-@synthesize formManager, formDBID;
+@synthesize formDBID;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -33,7 +34,6 @@
 }
 
 - (void)dealloc {
-    self.formManager = nil;
     self.formDBID = nil;
     [form release];
     
@@ -57,7 +57,7 @@
     // in FormViewController
     [form release];
     form = [[Form alloc] initWithDBID:formDBID
-                             database:formManager.connection];
+                             database:UIAppDelegate.formManager.connection];
     
     // "+" button to create a new Record
     UIBarButtonItem *button = [[UIBarButtonItem alloc] 
@@ -116,14 +116,13 @@
 
 - (void) addRecord  {
     // Create a new, empty record
-    NSNumber *recordDBID = [formManager createRecordForForm:formDBID];
+    NSNumber *recordDBID = [UIAppDelegate.formManager createRecordForForm:formDBID];
     
     self.questionsController.formTitle = form.title;
-    self.questionsController.formManager = formManager;
     self.questionsController.formDetails = self;
 
     Record *record= [[Record alloc] initWithDBID:recordDBID
-                                        database:formManager.connection];
+                                        database:UIAppDelegate.formManager.connection];
     self.questionsController.record = record;
     [record release];
     
@@ -273,7 +272,6 @@
         }
         
         recordsController.form = form;
-        recordsController.formManager = formManager;
         recordsController.formDetails = self;
         
         [self.navigationController pushViewController:recordsController animated:YES];

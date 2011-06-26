@@ -21,13 +21,11 @@
 @class QuestionsViewController;
 
 @interface FormDetailViewController : UITableViewController {
-    FormManager *formManager;
     NSNumber *formDBID;
     Form *form;
     QuestionsViewController *questionsController;
 }
 
-@property (nonatomic, retain) FormManager *formManager;
 @property (nonatomic, retain) NSNumber *formDBID;
 @property (nonatomic, readonly) QuestionsViewController *questionsController;
 

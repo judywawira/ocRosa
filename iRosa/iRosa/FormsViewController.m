@@ -23,7 +23,6 @@
 @implementation FormsViewController
 
 - (void)dealloc {
-    [formManager release];
     [forms release];
     [detailController release];
     [super dealloc];
@@ -48,14 +47,6 @@
                                
     self.navigationItem.rightBarButtonItem = button;
     [button release];
-    
-    // Get the xForms FormManager
-    [formManager release];
-    formManager = [UIAppDelegate.formManager retain];
-    
-    // Get the list of Forms (id's only)
-    [forms release];
-    forms = [[formManager getFormDBIDs] retain];
 }
 
 
@@ -80,8 +71,9 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     
+    // Get the list of Forms (id's only)
     [forms release];
-    forms = [[formManager getFormDBIDs] retain];
+    forms = [[UIAppDelegate.formManager getFormDBIDs] retain];
     
     [self.tableView reloadData];
     
@@ -95,7 +87,7 @@
 #pragma mark - Actions
 
 - (void) addForm  {    
-    FormDownloadViewController *download = [[FormDownloadViewController alloc] initWithFormManager:formManager];
+    FormDownloadViewController *download = [[FormDownloadViewController alloc] initWithFormManager:UIAppDelegate.formManager];
     [self.navigationController pushViewController:download animated:YES];
     [download release];
 }
@@ -118,7 +110,7 @@
     }
     
     Form *form = [[Form alloc] initWithDBID:[forms objectAtIndex:indexPath.row]
-                                   database:formManager.connection];
+                                   database:UIAppDelegate.formManager.connection];
     
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     cell.textLabel.text = form.title;
@@ -129,7 +121,7 @@
 }
 
 - (void)tableView:(UITableView *)table didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-c    self.detailController.formDBID = [forms objectAtIndex:indexPath.row];
+    self.detailController.formDBID = [forms objectAtIndex:indexPath.row];
     self.detailController.hidesBottomBarWhenPushed = YES;
     
     [self.navigationController pushViewController:self.detailController animated:YES];

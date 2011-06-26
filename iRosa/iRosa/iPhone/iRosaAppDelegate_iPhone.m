@@ -38,16 +38,18 @@
         LoginViewController* loginController 
                 = [[[LoginViewController alloc] initWithNibName:@"LoginViewController" bundle:nil] autorelease];
         
+        // Event though it's presented modally - logging-in will change the underlying
+        // form data (which is done in viewDidLoad) so the loginController needs to be
+        // able to force a redraw to the primary tab-bar controller
+        loginController.mainViewController = self.tabBarController;
+        
         [self.tabBarController presentModalViewController:loginController animated:YES];
     
     } else {
         
-        // Login using the username and password from the keychain 
-        id<OpenRosaServer> server = [[EpiSurveyor alloc] init];
-        server.delegate = self;
-        server.username = username;
-        server.password = password;
-        [server login];
+        // Already authenticated, start using the app right away!
+        NSError *error = nil;
+        self.formManager = [FormManager createEncryptedFormManager:username passphrase:password error:&error];
     }
     
     return YES;
@@ -56,23 +58,6 @@
 - (void)dealloc {
     [tabBarController release];
 	[super dealloc];
-}
-
-- (void)requestSuccessful:(id<OpenRosaServer>)server {
-    // Login succeeded
-    KeychainItemWrapper *keychain = [[KeychainItemWrapper alloc] initWithIdentifier:@"OPENROSA" accessGroup:nil];
-    NSString *username = [keychain objectForKey:(id)kSecAttrAccount];
-    NSString *password = [keychain objectForKey:(id)kSecValueData];
-    [keychain release];
-
-    NSError *error = nil;
-    self.formManager = [FormManager createEncryptedFormManager:username passphrase:password error:&error];
-    
-    [server release];
-}
-
-- (void)requestFailed:(id<OpenRosaServer>)server withMessage:(NSString *)message {
-    // Login failed
 }
 
 @end
