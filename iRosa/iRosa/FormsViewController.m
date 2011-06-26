@@ -46,7 +46,6 @@
                                                             target:self
                                                             action:@selector(addForm)];
                                
-    
     self.navigationItem.rightBarButtonItem = button;
     [button release];
     
@@ -130,8 +129,7 @@
 }
 
 - (void)tableView:(UITableView *)table didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    self.detailController.formManager = formManager;
-    self.detailController.formDBID = [forms objectAtIndex:indexPath.row];
+c    self.detailController.formDBID = [forms objectAtIndex:indexPath.row];
     self.detailController.hidesBottomBarWhenPushed = YES;
     
     [self.navigationController pushViewController:self.detailController animated:YES];

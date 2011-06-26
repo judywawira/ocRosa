@@ -14,14 +14,21 @@
  * the License.
  */
 
-#import "FormManager.h"
-#import "Form.h"
-#import "Record.h"
-#import "Control.h"
-#import "Binding.h"
-#import "log.h"
-#import "OpenRosaServer.h"
-#import "EpiSurveyor.h"
+#import <UIKit/UIKit.h>
 
+@interface LoginViewController : UIViewController {
+    IBOutlet UILabel *title;
+    IBOutlet UITextField *username;
+    IBOutlet UITextField *password;
+    IBOutlet UISwitch *rememberSwitch;
+    
+}
 
+@property (nonatomic, retain) UILabel *title;
+@property (nonatomic, retain) UITextField *username;
+@property (nonatomic, retain) UITextField *password;
+@property (nonatomic, retain) UISwitch *remeberSwitch;
 
+- (IBAction)login:(id)sender;
+
+@end

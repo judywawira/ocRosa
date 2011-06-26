@@ -37,6 +37,10 @@
 		2765D74B135BB2AE00E4E184 /* FormDownloadViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2765D749135BB2AE00E4E184 /* FormDownloadViewController.xib */; };
 		27686CB2135948BE00C07594 /* SelectOneView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 27686CB1135948BE00C07594 /* SelectOneView.xib */; };
 		27776C381341593300473F80 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 27776C371341593300473F80 /* libxml2.dylib */; };
+		277E258013B64BA600909F66 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 277E257E13B64BA600909F66 /* LoginViewController.m */; };
+		277E258113B64BA600909F66 /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 277E257F13B64BA600909F66 /* LoginViewController.xib */; };
+		277E25D413B6A8B200909F66 /* KeychainItemWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 277E25D313B6A8B200909F66 /* KeychainItemWrapper.m */; };
+		277E25D613B6A8DC00909F66 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 277E25D513B6A8DB00909F66 /* Security.framework */; };
 		27834CFF13522099004ABC26 /* QuestionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 27834CFE13522099004ABC26 /* QuestionsViewController.m */; };
 		27834D2813526C1E004ABC26 /* QuestionController_iPhone.m in Sources */ = {isa = PBXBuildFile; fileRef = 27834D2713526C1E004ABC26 /* QuestionController_iPhone.m */; };
 		278594F413B2D3AD00EC6E28 /* RecordSubmitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 278594F213B2D3AD00EC6E28 /* RecordSubmitViewController.m */; };
@@ -97,6 +101,12 @@
 		2765D749135BB2AE00E4E184 /* FormDownloadViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FormDownloadViewController.xib; sourceTree = "<group>"; };
 		27686CB1135948BE00C07594 /* SelectOneView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SelectOneView.xib; sourceTree = "<group>"; };
 		27776C371341593300473F80 /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
+		277E257D13B64BA600909F66 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
+		277E257E13B64BA600909F66 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
+		277E257F13B64BA600909F66 /* LoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
+		277E25D213B6A8B200909F66 /* KeychainItemWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeychainItemWrapper.h; sourceTree = "<group>"; };
+		277E25D313B6A8B200909F66 /* KeychainItemWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeychainItemWrapper.m; sourceTree = "<group>"; };
+		277E25D513B6A8DB00909F66 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		27834CFD13522099004ABC26 /* QuestionsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QuestionsViewController.h; sourceTree = "<group>"; };
 		27834CFE13522099004ABC26 /* QuestionsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuestionsViewController.m; sourceTree = "<group>"; };
 		27834D2613526C1E004ABC26 /* QuestionController_iPhone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QuestionController_iPhone.h; sourceTree = "<group>"; };
@@ -128,6 +138,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				277E25D613B6A8DC00909F66 /* Security.framework in Frameworks */,
 				278717BF13528122007BA879 /* QuartzCore.framework in Frameworks */,
 				27776C381341593300473F80 /* libxml2.dylib in Frameworks */,
 				2724F848132C2C3B009CECAF /* libCHDataStructures.a in Frameworks */,
@@ -147,6 +158,7 @@
 		2724F80F132C2B04009CECAF = {
 			isa = PBXGroup;
 			children = (
+				277E25D513B6A8DB00909F66 /* Security.framework */,
 				2724F855132C2E35009CECAF /* Resources */,
 				2724F824132C2B04009CECAF /* iRosa */,
 				2724F81D132C2B04009CECAF /* Frameworks */,
@@ -182,6 +194,7 @@
 		2724F824132C2B04009CECAF /* iRosa */ = {
 			isa = PBXGroup;
 			children = (
+				277E25D113B6A86D00909F66 /* Keychain */,
 				2724F82D132C2B04009CECAF /* iRosaAppDelegate.h */,
 				2724F82E132C2B04009CECAF /* iRosaAppDelegate.m */,
 				2724F830132C2B04009CECAF /* iPhone */,
@@ -201,6 +214,9 @@
 				272666D61375E6DB00FD28A3 /* RecordsViewController.h */,
 				272666D71375E6DB00FD28A3 /* RecordsViewController.m */,
 				272666D81375E6DB00FD28A3 /* RecordsViewController.xib */,
+				277E257D13B64BA600909F66 /* LoginViewController.h */,
+				277E257E13B64BA600909F66 /* LoginViewController.m */,
+				277E257F13B64BA600909F66 /* LoginViewController.xib */,
 			);
 			path = iRosa;
 			sourceTree = "<group>";
@@ -249,6 +265,15 @@
 				2724F856132C2E45009CECAF /* ocRosa.sqlite */,
 			);
 			name = Resources;
+			sourceTree = "<group>";
+		};
+		277E25D113B6A86D00909F66 /* Keychain */ = {
+			isa = PBXGroup;
+			children = (
+				277E25D213B6A8B200909F66 /* KeychainItemWrapper.h */,
+				277E25D313B6A8B200909F66 /* KeychainItemWrapper.m */,
+			);
+			path = Keychain;
 			sourceTree = "<group>";
 		};
 		27834D2413526BD2004ABC26 /* Questions */ = {
@@ -355,6 +380,7 @@
 				2765D74B135BB2AE00E4E184 /* FormDownloadViewController.xib in Resources */,
 				272666DA1375E6DB00FD28A3 /* RecordsViewController.xib in Resources */,
 				278594F513B2D3AD00EC6E28 /* RecordSubmitViewController.xib in Resources */,
+				277E258113B64BA600909F66 /* LoginViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -384,6 +410,8 @@
 				2765D74A135BB2AE00E4E184 /* FormDownloadViewController.m in Sources */,
 				272666D91375E6DB00FD28A3 /* RecordsViewController.m in Sources */,
 				278594F413B2D3AD00EC6E28 /* RecordSubmitViewController.m in Sources */,
+				277E258013B64BA600909F66 /* LoginViewController.m in Sources */,
+				277E25D413B6A8B200909F66 /* KeychainItemWrapper.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

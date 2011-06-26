@@ -26,16 +26,9 @@
 {
     // Override point for customization after application launch.
     [self.window makeKeyAndVisible];
-    
-    NSError *error = nil;
-    self.formManager = [FormManager createTemporaryFormManager:&error];
-    if (!formManager) {
-        DLog(@"%@",[error localizedDescription]);
-        return NO;
-    }    
-    
     return YES;
 }
+
 
 - (void)applicationWillResignActive:(UIApplication *)application
 {

@@ -65,6 +65,9 @@
 		27737166138B28200015AE06 /* Question.h in Headers */ = {isa = PBXBuildFile; fileRef = 27737164138B28200015AE06 /* Question.h */; };
 		27737167138B28200015AE06 /* Question.m in Sources */ = {isa = PBXBuildFile; fileRef = 27737165138B28200015AE06 /* Question.m */; };
 		27776C3A13415D0400473F80 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 27776C351341591E00473F80 /* libxml2.dylib */; };
+		277E258613B6627600909F66 /* OpenRosaServer.h in Headers */ = {isa = PBXBuildFile; fileRef = 277E258513B6627600909F66 /* OpenRosaServer.h */; };
+		277E258913B676FE00909F66 /* EpiSurveyor.h in Headers */ = {isa = PBXBuildFile; fileRef = 277E258713B676FE00909F66 /* EpiSurveyor.h */; };
+		277E258A13B676FE00909F66 /* EpiSurveyor.m in Sources */ = {isa = PBXBuildFile; fileRef = 277E258813B676FE00909F66 /* EpiSurveyor.m */; };
 		27EFEDE1132BFA0500516536 /* DataTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 27EFEDDF132BFA0500516536 /* DataTestCase.m */; };
 		27EFEDE2132BFA0500516536 /* FormTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 27EFEDE0132BFA0500516536 /* FormTests.m */; };
 		27F0DA0013398ACB00F9304F /* BindParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 27F0D9FF13398ACB00F9304F /* BindParser.m */; };
@@ -159,6 +162,9 @@
 		27737164138B28200015AE06 /* Question.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Question.h; sourceTree = "<group>"; };
 		27737165138B28200015AE06 /* Question.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Question.m; sourceTree = "<group>"; };
 		27776C351341591E00473F80 /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
+		277E258513B6627600909F66 /* OpenRosaServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpenRosaServer.h; sourceTree = "<group>"; };
+		277E258713B676FE00909F66 /* EpiSurveyor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EpiSurveyor.h; sourceTree = "<group>"; };
+		277E258813B676FE00909F66 /* EpiSurveyor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EpiSurveyor.m; sourceTree = "<group>"; };
 		27EFEDDE132BFA0500516536 /* DataTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataTestCase.h; sourceTree = "<group>"; };
 		27EFEDDF132BFA0500516536 /* DataTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataTestCase.m; sourceTree = "<group>"; };
 		27EFEDE0132BFA0500516536 /* FormTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FormTests.m; sourceTree = "<group>"; };
@@ -321,6 +327,7 @@
 			isa = PBXGroup;
 			children = (
 				27053B23132C0B45003CD8EB /* ocRosa.h */,
+				277E258313B6622100909F66 /* server */,
 				27053AED132C0935003CD8EB /* data */,
 				27053AF0132C0935003CD8EB /* gtm */,
 				27053AF9132C0935003CD8EB /* xForms */,
@@ -356,6 +363,16 @@
 				2710B5A0132BE374006C8429 /* ocRosaTests-Prefix.pch */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		277E258313B6622100909F66 /* server */ = {
+			isa = PBXGroup;
+			children = (
+				277E258513B6627600909F66 /* OpenRosaServer.h */,
+				277E258713B676FE00909F66 /* EpiSurveyor.h */,
+				277E258813B676FE00909F66 /* EpiSurveyor.m */,
+			);
+			path = server;
 			sourceTree = "<group>";
 		};
 		27EFEDDD132BFA0500516536 /* tests */ = {
@@ -397,6 +414,8 @@
 				27032A28134550A3004A74AC /* log.h in Headers */,
 				273468441346B17900E4DA5C /* Binding.h in Headers */,
 				27737166138B28200015AE06 /* Question.h in Headers */,
+				277E258613B6627600909F66 /* OpenRosaServer.h in Headers */,
+				277E258913B676FE00909F66 /* EpiSurveyor.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -529,6 +548,7 @@
 				270DA86D133ECE6900F08F92 /* DatabaseRecord.m in Sources */,
 				273468451346B17900E4DA5C /* Binding.m in Sources */,
 				27737167138B28200015AE06 /* Question.m in Sources */,
+				277E258A13B676FE00909F66 /* EpiSurveyor.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

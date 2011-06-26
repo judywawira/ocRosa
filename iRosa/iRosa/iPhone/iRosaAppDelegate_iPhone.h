@@ -17,6 +17,7 @@
 #import <UIKit/UIKit.h>
 #import <Foundation/Foundation.h>
 #import "iRosaAppDelegate.h"
+#import "LoginViewController.h"
 
 @interface iRosaAppDelegate_iPhone : iRosaAppDelegate {
     UITabBarController *tabBarController;
