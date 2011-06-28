@@ -20,8 +20,6 @@
 		27053B13132C0935003CD8EB /* GTMNSString+XML.m in Sources */ = {isa = PBXBuildFile; fileRef = 27053AF8132C0935003CD8EB /* GTMNSString+XML.m */; };
 		27053B14132C0935003CD8EB /* Elements.h in Headers */ = {isa = PBXBuildFile; fileRef = 27053AFA132C0935003CD8EB /* Elements.h */; };
 		27053B15132C0935003CD8EB /* Elements.m in Sources */ = {isa = PBXBuildFile; fileRef = 27053AFB132C0935003CD8EB /* Elements.m */; };
-		27053B16132C0935003CD8EB /* FormDownloader.h in Headers */ = {isa = PBXBuildFile; fileRef = 27053AFC132C0935003CD8EB /* FormDownloader.h */; };
-		27053B17132C0935003CD8EB /* FormDownloader.m in Sources */ = {isa = PBXBuildFile; fileRef = 27053AFD132C0935003CD8EB /* FormDownloader.m */; };
 		27053B18132C0935003CD8EB /* FormManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 27053AFE132C0935003CD8EB /* FormManager.h */; };
 		27053B19132C0935003CD8EB /* FormManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 27053AFF132C0935003CD8EB /* FormManager.m */; };
 		27053B1A132C0935003CD8EB /* ElementParser.h in Headers */ = {isa = PBXBuildFile; fileRef = 27053B01132C0935003CD8EB /* ElementParser.h */; };
@@ -112,8 +110,6 @@
 		27053AF8132C0935003CD8EB /* GTMNSString+XML.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "GTMNSString+XML.m"; sourceTree = "<group>"; };
 		27053AFA132C0935003CD8EB /* Elements.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Elements.h; sourceTree = "<group>"; };
 		27053AFB132C0935003CD8EB /* Elements.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Elements.m; sourceTree = "<group>"; };
-		27053AFC132C0935003CD8EB /* FormDownloader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FormDownloader.h; sourceTree = "<group>"; };
-		27053AFD132C0935003CD8EB /* FormDownloader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FormDownloader.m; sourceTree = "<group>"; };
 		27053AFE132C0935003CD8EB /* FormManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FormManager.h; sourceTree = "<group>"; };
 		27053AFF132C0935003CD8EB /* FormManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FormManager.m; sourceTree = "<group>"; };
 		27053B01132C0935003CD8EB /* ElementParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ElementParser.h; sourceTree = "<group>"; };
@@ -235,8 +231,6 @@
 		27053AF9132C0935003CD8EB /* xForms */ = {
 			isa = PBXGroup;
 			children = (
-				27053AFC132C0935003CD8EB /* FormDownloader.h */,
-				27053AFD132C0935003CD8EB /* FormDownloader.m */,
 				27053AFE132C0935003CD8EB /* FormManager.h */,
 				27053AFF132C0935003CD8EB /* FormManager.m */,
 				27053B00132C0935003CD8EB /* parser */,
@@ -399,7 +393,6 @@
 				27053B10132C0935003CD8EB /* GTMNSString+URLArguments.h in Headers */,
 				27053B12132C0935003CD8EB /* GTMNSString+XML.h in Headers */,
 				27053B14132C0935003CD8EB /* Elements.h in Headers */,
-				27053B16132C0935003CD8EB /* FormDownloader.h in Headers */,
 				27053B18132C0935003CD8EB /* FormManager.h in Headers */,
 				27053B1A132C0935003CD8EB /* ElementParser.h in Headers */,
 				27053B1C132C0935003CD8EB /* FormParser.h in Headers */,
@@ -526,7 +519,6 @@
 				27053B11132C0935003CD8EB /* GTMNSString+URLArguments.m in Sources */,
 				27053B13132C0935003CD8EB /* GTMNSString+XML.m in Sources */,
 				27053B15132C0935003CD8EB /* Elements.m in Sources */,
-				27053B17132C0935003CD8EB /* FormDownloader.m in Sources */,
 				27053B19132C0935003CD8EB /* FormManager.m in Sources */,
 				27053B1B132C0935003CD8EB /* ElementParser.m in Sources */,
 				27053B1D132C0935003CD8EB /* FormParser.m in Sources */,

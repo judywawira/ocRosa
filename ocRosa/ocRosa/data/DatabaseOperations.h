@@ -147,14 +147,6 @@
 - (NSString *)getQuestionLabel:(NSNumber *)questionDBID
                          error:(NSError **)error;
 
-- (NSNumber *)getNextQuestion:(NSNumber *)questionDBID
-                        error:(NSError **)error;
-
-- (BOOL)setNextQuestion:(NSNumber *)nextQuestionDBID
-            forQuestion:(NSNumber *)thisQuestionDBID
-                  error:(NSError **)error;
-
-
 - (BOOL)getQuestionRelevant:(NSNumber *)questionDBID
                       error:(NSError **)error;
 

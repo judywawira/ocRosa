@@ -23,21 +23,13 @@
                         usingOperations:(DatabaseOperations *)ops
                                   error:(NSError **)error {
     
-    NSNumber *currentQuestion = nil;
-    NSNumber *previousQuestion = nil;
-    
     NSArray *controls = [ops getRecordControlDBIDs:recordDBID error:error];
     
     // Create an initial unanswered Question entry for each Control
     for (NSNumber *currentControlDBID in controls) {
-        currentQuestion = [ops createQuestionForRecord:recordDBID 
-                                               control:currentControlDBID 
-                                                 error:error];
-        
-        if (previousQuestion)
-            [ops setNextQuestion:currentQuestion forQuestion:previousQuestion error:error];
-        
-        previousQuestion = currentQuestion;
+        [ops createQuestionForRecord:recordDBID 
+                             control:currentControlDBID 
+                               error:error];
     }
 }
 

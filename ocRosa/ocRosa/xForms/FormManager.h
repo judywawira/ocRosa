@@ -33,15 +33,6 @@
 
 - (id)initWithDatabase:(DatabaseConnection *)db;
 
-#pragma mark Load and Parse
-
-- (BOOL)downloadAndParseFromURL:(NSURL *)url;
-
-- (BOOL)loadAndParseFromTile:(NSString *)path;
-
-- (BOOL)readAndParseFromBuffer:(NSData *)data
-                originalSource:(NSString *)source;
-
 #pragma mark Forms
 
 // Count number of downloaded and parsed forms

@@ -16,7 +16,6 @@
 
 #import "DatabaseConnection.h"
 #import "DatabaseOperations.h"
-#import "FormDownloader.h"
 #import "FormParser.h"
 #import "Question.h"
 #import "FormManager.h"
@@ -60,13 +59,6 @@
 
 - (void)dealloc {
     [super dealloc];
-}
-
-- (BOOL)downloadAndParseFromURL:(NSURL *)url {
-    
-    return [FormDownloader downloadAndParseFromURL:url 
-                                        toDatabase:connection
-                                             error:&error];
 }
 
 #pragma mark Forms
