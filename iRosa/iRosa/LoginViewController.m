@@ -22,8 +22,41 @@
 
 @implementation LoginViewController
 
-@synthesize title, username, password, remeberSwitch;
+@synthesize title, username, password, rememberSwitch;
 @synthesize mainViewController;
+
++ (BOOL)authenticateFromKeychainUsername:(NSString**)username andPassword:(NSString**)password {
+    
+    // Attempt to get the username (usually an email address) and password from the keychain
+    KeychainItemWrapper *keychain = [[KeychainItemWrapper alloc] initWithIdentifier:@"OPENROSA" accessGroup:nil];
+    NSString *keychainUsername = [keychain objectForKey:(id)kSecAttrAccount];
+    NSString *keychainPassword = [keychain objectForKey:(id)kSecValueData];
+    [keychain release];
+    
+    if ([keychainUsername length] == 0 || [keychainPassword length] == 0) {
+        *username = nil;
+        *password = nil;
+        return NO;
+    }
+
+    *username = [NSString stringWithString:keychainUsername];
+    *password = [NSString stringWithString:keychainPassword];
+    return YES;
+}
+
++ (void)showLoginModallyOverView:(UIViewController *)viewRequiringLogin {
+    
+    LoginViewController* loginController 
+        = [[[LoginViewController alloc] initWithNibName:@"LoginViewController" bundle:nil] autorelease];
+
+    [viewRequiringLogin presentModalViewController:loginController animated:YES];
+}
+
++ (void)authenticateLocalDatabaseWithUsername:(NSString *)username andPassword:(NSString *)password {
+    NSError *error = nil;
+    UIAppDelegate.formManager = [FormManager createTemporaryFormManager:&error];
+}
+
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -39,33 +72,34 @@
     [super dealloc];
 }
 
-
 - (IBAction)login:(id)sender {
 
-    id<OpenRosaServer> server = [[EpiSurveyor alloc] init];
+    id<OpenRosaServer> server = [[OPENROSA_SERVER alloc] init];
     server.delegate = self;
     server.username = self.username.text;
     server.password = self.password.text;
     [server login];
-    
 }
 
 - (void)requestSuccessful:(id<OpenRosaServer>)server {
     // Login succeeded
     
-    // Add username (usually an email address) and password to the keychain
-    KeychainItemWrapper *keychain = [[KeychainItemWrapper alloc] initWithIdentifier:@"OPENROSA" accessGroup:nil];
-    [keychain setObject:self.username.text forKey:(id)kSecAttrAccount];
-    [keychain setObject:self.password.text forKey:(id)kSecValueData];
-    [keychain release];
+    if (self.rememberSwitch.on) {    
+        // Add username (usually an email address) and password to the keychain
+        KeychainItemWrapper *keychain = [[KeychainItemWrapper alloc] initWithIdentifier:@"OPENROSA" accessGroup:nil];
+        [keychain setObject:self.username.text forKey:(id)kSecAttrAccount];
+        [keychain setObject:self.password.text forKey:(id)kSecValueData];
+        [keychain release];
+    }
     
     [self dismissModalViewControllerAnimated:YES];
     [mainViewController.view setNeedsDisplay];
     
-    NSError *error = nil;
-    UIAppDelegate.formManager = [FormManager createEncryptedFormManager:self.username.text
-                                                             passphrase:self.password.text
-                                                                  error:&error];
+    UIAppDelegate.username = self.username.text;
+    UIAppDelegate.password = self.password.text;
+    
+    [LoginViewController authenticateLocalDatabaseWithUsername:UIAppDelegate.username
+                                                   andPassword:UIAppDelegate.password];
     
     [server release];
 }
@@ -87,7 +121,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [[UIScreen mainScreen] applicationFrame];
     // Do any additional setup after loading the view from its nib.
 }
 

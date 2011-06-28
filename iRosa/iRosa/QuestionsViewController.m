@@ -52,13 +52,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    // Get the list of Questions (id's only)
-    [questions release];
-    questions = [record.questions retain];
 
     // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
+    self.clearsSelectionOnViewWillAppear = YES;
  
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
@@ -76,7 +72,14 @@
     [super viewWillAppear:animated];
     self.title = [NSString stringWithFormat:@"Record %@", record.dbid];
     
+    // Get the list of Questions (id's only)
+    [questions release];
+    questions = [record.questions retain];
+    
     [self.tableView reloadData];
+
+    // Reset scroll position to top 
+    [self.tableView scrollRectToVisible:CGRectMake(0, 0, 1, 1) animated:NO];
     
     [self.record recalculateGlobalQuestionState];
 }
@@ -111,6 +114,7 @@
     if (cell == nil) {
         cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier] autorelease];
     }
+
     
     // The main text is the Question
     cell.textLabel.textColor = [UIColor blackColor];

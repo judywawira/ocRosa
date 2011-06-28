@@ -20,7 +20,7 @@
 @implementation iRosaAppDelegate
 
 @synthesize window=_window;
-@synthesize formManager;
+@synthesize formManager, username, password;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
@@ -71,6 +71,9 @@
 
 - (void)dealloc
 {
+    formManager = nil;
+    username = nil;
+    password = nil;
     [_window release];
     [super dealloc];
 }

@@ -52,12 +52,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    // formDBID and formManager are assigned when a cell is selected
-    // in FormViewController
-    [form release];
-    form = [[Form alloc] initWithDBID:formDBID
-                             database:UIAppDelegate.formManager.connection];
+
     
     // "+" button to create a new Record
     UIBarButtonItem *button = [[UIBarButtonItem alloc] 
@@ -78,7 +73,12 @@
 
 - (void)viewWillAppear:(BOOL)animated {
 
-   // self.title = form.title;
+    // formDBID and formManager are assigned when a cell is selected
+    // in FormViewController
+    [form release];
+    form = [[Form alloc] initWithDBID:formDBID
+                             database:UIAppDelegate.formManager.connection];
+    
     [self.tableView reloadData];
     
     [super viewWillAppear:animated];

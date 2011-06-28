@@ -18,6 +18,7 @@
 #import "FormDetailViewController.h"
 #import "FormDownloadViewController.h"
 #import "iRosaAppDelegate.h"
+#import "LoginViewController.h"
 #import "ocRosa.h"
 
 @implementation FormsViewController
@@ -47,8 +48,18 @@
                                
     self.navigationItem.rightBarButtonItem = button;
     [button release];
+    
+    NSString *username;
+    NSString *password;
+    
+    if ([LoginViewController authenticateFromKeychainUsername:&username andPassword:&password]) {
+        
+        [LoginViewController authenticateLocalDatabaseWithUsername:username
+                                                       andPassword:password];
+    } else {
+        [LoginViewController showLoginModallyOverView:self];
+    }
 }
-
 
 - (void)viewDidUnload {
     [super viewDidUnload];
@@ -84,12 +95,38 @@
 }
 
 
-#pragma mark - Actions
+#pragma mark - Download Forms
 
 - (void) addForm  {    
-    FormDownloadViewController *download = [[FormDownloadViewController alloc] initWithFormManager:UIAppDelegate.formManager];
+    
+    NSString *username;
+    NSString *password;
+    
+    if (![LoginViewController authenticateFromKeychainUsername:&username andPassword:&password]) {
+        [LoginViewController showLoginModallyOverView:self];
+    }
+    
+    id<OpenRosaServer> server = [[OPENROSA_SERVER alloc] init];
+    server.delegate = self;
+    server.username = username;
+    server.password = password;
+    [server requestFormList];
+}
+
+- (void)requestSuccessful:(id<OpenRosaServer>)server {
+
+    FormDownloadViewController *download = [[FormDownloadViewController alloc] init];    
+    download.xFormIDs = [NSArray arrayWithArray:server.xFormIDs];
+    download.xFormNames = [NSArray arrayWithArray:server.xFormNames];
+
     [self.navigationController pushViewController:download animated:YES];
     [download release];
+
+    [server release];
+}
+
+- (void)requestFailed:(id<OpenRosaServer>)server withMessage:(NSString *)message {
+    // Login failed
 }
 
 
@@ -123,7 +160,6 @@
 - (void)tableView:(UITableView *)table didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     self.detailController.formDBID = [forms objectAtIndex:indexPath.row];
     self.detailController.hidesBottomBarWhenPushed = YES;
-    
     [self.navigationController pushViewController:self.detailController animated:YES];
 }
 

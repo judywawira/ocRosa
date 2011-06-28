@@ -15,40 +15,28 @@
  */
 
 #import "FormDownloadViewController.h"
+#import "LoginViewController.h"
+#import "iRosaAppDelegate.h"
+#import "FormDetailViewController.h"
+#import "DSActivityView.h"
 #import "ocRosa.h"
-
-@implementation RemoteForm
-
-@synthesize surveyID, surveyName, surveyOwner;
-
-- (void)dealloc {
-    surveyID = nil;
-    surveyName = nil;
-    surveyOwner = nil;
-    [super dealloc];
-}
-
-@end
 
 @implementation FormDownloadViewController
 
-@synthesize currentXMLString, currentRemoteForm;
+@synthesize xFormIDs, xFormNames;
 
-- (id)initWithFormManager:(FormManager *)manager {
-    
-    if (!(self = [super initWithStyle:UITableViewStylePlain]))
-        return nil;
-    
-    formManager = [manager retain];
-    
-    remoteForms = [[NSMutableArray alloc] initWithCapacity:12];
-    
-    return self;  
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+{
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    if (self) {
+        // Custom initialization
+    }
+    return self;
 }
 
 - (void)dealloc {
-    [formManager release];
-    [remoteForms release];
+    [xFormIDs release];
+    [xFormNames release];
     [super dealloc];
 }
 
@@ -59,69 +47,11 @@
     // Release any cached data, images, etc that aren't in use.
 }
 
-#pragma mark - Download Form List
-
-- (void)downloadRemoteFormList {
-    NSURL *downloadURL = [NSURL URLWithString:@"https://www.episurveyor.org/api/surveys"];
-    
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:downloadURL];
-    [request setHTTPMethod:@"POST"];
-    NSString *postString = @"username=mikewillekes@gmail.com&accesstoken=Dqf2XspqOJhT9M8khj3o";
-    [request setHTTPBody:[postString dataUsingEncoding:NSUTF8StringEncoding]];
-    
-    NSURLResponse *response;
-    
-    NSError *error = nil;
-    NSData *data = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
-    
-    self.currentXMLString = [NSMutableString string];
-    
-    NSXMLParser *parser = [[NSXMLParser alloc] initWithData:data];
-    parser.delegate = self;
-    [parser parse];
-    [parser release];
-}
-
-- (void)parser:(NSXMLParser *)parser didStartElement:(NSString *)elementName
-                                        namespaceURI:(NSString *)namespaceURI
-                                       qualifiedName:(NSString *) qualifiedName 
-                                          attributes:(NSDictionary *)attributeDict {
-    
-    if ([elementName isEqualToString:@"Survey"]) {
-        self.currentRemoteForm = [[RemoteForm alloc] init];
-    } else {
-        [currentXMLString setString:@""];
-    }
-}
-
-- (void)parser:(NSXMLParser *)parser didEndElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName {
-    if ([elementName isEqualToString:@"SurveyId"]) {
-        currentRemoteForm.surveyID = currentXMLString;
-        
-    } else if ([elementName isEqualToString:@"SurveyName"]) {
-        currentRemoteForm.surveyName = currentXMLString;
-    
-    } else if ([elementName isEqualToString:@"Owner"]) {
-        currentRemoteForm.surveyOwner= currentXMLString;
-    
-    } else if ([elementName isEqualToString:@"Survey"]) {
-        [remoteForms addObject:currentRemoteForm];
-        self.currentRemoteForm = nil;        
-    }
-}
-
-- (void)parser:(NSXMLParser *)parser foundCharacters:(NSString *)string {
-    [currentXMLString appendString:string];
-}
-
-
 #pragma mark - View lifecycle
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
     self.title = @"Download Forms";
-    [self downloadRemoteFormList];
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -169,7 +99,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [remoteForms count];
+    return [self.xFormIDs count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -181,8 +111,7 @@
     }
     
     // Configure the cell...
-    RemoteForm *form = [remoteForms objectAtIndex:indexPath.row];
-    cell.textLabel.text = form.surveyName;
+    cell.textLabel.text = [self.xFormNames objectAtIndex:indexPath.row];
     
     return cell;
 }
@@ -191,23 +120,44 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 
-    RemoteForm *form = [remoteForms objectAtIndex:indexPath.row];
+    NSString *username;
+    NSString *password;
     
-    // TODO: Obviously hard-coding to download a single form from Dropbox is not the correct solution :-)
-    NSString *url = 
-        [NSString stringWithFormat:@"http://dl.dropbox.com/u/7669704/DisabilitySurvey2_SurveySpec_2011_04_05.xhtml",
-            form.surveyID];
-    
-    NSError *error = nil;
-    if (![formManager downloadAndParseFromURL:[NSURL URLWithString:url]]) {
-        
-        error = [formManager error];
-        DLog(@"%@",[error localizedDescription]);
+    if (![LoginViewController authenticateFromKeychainUsername:&username andPassword:&password]) {
+        [self.navigationController popToRootViewControllerAnimated:YES];
+        [LoginViewController showLoginModallyOverView:
+            [self.navigationController.viewControllers objectAtIndex:0]];
     }
     
     
-    // We download one form at a time... pop back to the root
+    [DSActivityView activityViewForView:self.view withLabel:@"Downloading..." width:140];
+
+    
+    id<OpenRosaServer> server = [[OPENROSA_SERVER alloc] init];
+    server.delegate = self;
+    server.username = username;
+    server.password = password;
+    [server requestForm:[xFormIDs objectAtIndex:indexPath.row]];
+}
+
+- (void)requestSuccessful:(id<OpenRosaServer>)server {
+    NSError *error = nil;
+    NSNumber *formDBID = [FormParser parseData:server.receivedData
+                                    toDatabase:UIAppDelegate.formManager.connection 
+                                         error:(NSError **)error];
+
+    if (!formDBID) {
+        DLog(@"%@",[error localizedDescription]);
+    }
+    
+    [DSActivityView removeView];
+    
     [self.navigationController popToRootViewControllerAnimated:YES];
+    [server release];
+}
+
+- (void)requestFailed:(id<OpenRosaServer>)server withMessage:(NSString *)message {
+    // Login failed
 }
 
 @end

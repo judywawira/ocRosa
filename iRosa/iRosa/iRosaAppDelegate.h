@@ -22,9 +22,13 @@
 
 @interface iRosaAppDelegate : NSObject <UIApplicationDelegate> {
     FormManager *formManager;
+    NSString *username;
+    NSString *password;
 }
 
 @property (nonatomic, retain) IBOutlet UIWindow *window;
 @property (nonatomic, retain) FormManager *formManager;
+@property (nonatomic, copy) NSString *username;
+@property (nonatomic, copy) NSString *password;
 
 @end

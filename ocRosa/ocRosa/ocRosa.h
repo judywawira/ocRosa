@@ -16,6 +16,7 @@
 
 #import "FormManager.h"
 #import "Form.h"
+#import "FormParser.h"
 #import "Record.h"
 #import "Control.h"
 #import "Binding.h"

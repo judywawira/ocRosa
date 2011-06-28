@@ -8,14 +8,39 @@
 
 #import "EpiSurveyor.h"
 
+NSInteger const kOpenRosaServer_Request_Login       = 1;
+NSInteger const kOpenRosaServer_Request_FormList    = 2;
+NSInteger const kOpenRosaServer_Request_Form        = 3;
+NSInteger const kOpenRosaServer_Request_Submit      = 4;
+
+// Constants from http://www.datadyne.org/episurveyor/api
+static NSString * const kMOBILE_RESPONSE_ERROR_IN_DOWNLOAD                  = @"400";
+static NSString * const kMOBILE_RESPONSE_SURVEYNOTEXIST                     = @"401";
+static NSString * const kMOBILE_RESPONSE_NODOWNLOAD_PERMISSION              = @"402";
+
+static NSString * const kMOBILE_RESPONSE_SUCCESS_CODE                       = @"600";
+static NSString * const kMOBILE_RESPONSE_TYPE_INVALIDUSER                   = @"601";
+static NSString * const kMOBILE_RESPONSE_TYPE_DBERROR                       = @"602";
+static NSString * const kMOBILE_RESPONSE_TYPE_SURVEYNOTEXIST                = @"603";
+static NSString * const kMOBILE_RESPONSE_TYPE_USER_NEW                      = @"604";
+static NSString * const kMOBILE_RESPONSE_TYPE_NO_DOWNLOAD_PERMISSION        = @"605";
+static NSString * const kMOBILE_RESPONSE_TYPE_INVALID_FIELDS                = @"606";
+
+static NSString * const kMOBILE_RESPONSE_TYPE_USER_VALID                    = @"700";
+static NSString * const kMOBILE_RESPONSE_TYPE_INVALIDUSER_FOR_FORMLIST      = @"701";
+static NSString * const kMOBILE_RESPONSE_TYPE_DBERROR_FOR_FORMLIST          = @"702";
+static NSString * const kMOBILE_RESPONSE_TYPE_SURVEYNOTEXIST_FOR_FORMLIST   = @"703";
+
 @implementation EpiSurveyor
 
 @synthesize delegate;
-@synthesize username, password, receivedData;
+@synthesize requestType, username, password, receivedData, xFormIDs, xFormNames;
 
 - (void)dealloc {
     self.username = nil;
     self.password = nil;
+    self.xFormIDs = nil;
+    self.xFormNames = nil;
     self.receivedData = nil;
     [super dealloc];
 }
@@ -26,6 +51,7 @@
             self.username,
             self.password];
     
+    self.requestType = kOpenRosaServer_Request_Login;
     [self requestWithURL:url];
 }
      
@@ -35,15 +61,18 @@
             self.username,
             self.password];
     
+    self.requestType = kOpenRosaServer_Request_FormList;
     [self requestWithURL:url]; 
 }
 
 - (void)requestForm:(NSString *)xFormID {
     NSString *url = 
-        [NSString stringWithFormat:@"http://episurveyor.org/GetSurveyForm?userId=%@&pwd=%@&version=2.3&formtype=private",
+        [NSString stringWithFormat:@"http://episurveyor.org/GetSurveyForm?userId=%@&pwd=%@&version=2.3&formId=%@",
             self.username,
-            self.password];
+            self.password,
+            xFormID];
     
+    self.requestType = kOpenRosaServer_Request_Form;
     [self requestWithURL:url];    
 }
 
@@ -71,10 +100,46 @@
     }  
 }
 
+#pragma mark NSXMLParser Delegates
+
+- (void)parser:(NSXMLParser *)parser didStartElement:(NSString *)elementName
+  namespaceURI:(NSString *)namespaceURI
+ qualifiedName:(NSString *) qualifiedName 
+    attributes:(NSDictionary *)attributeDict {
+    
+    if ([elementName isEqualToString:@"formlist"]) {
+        
+        [xFormIDs release];
+        xFormIDs = [[NSMutableArray alloc] init];
+        
+        [xFormNames release];
+        xFormNames = [[NSMutableArray alloc] init];
+        
+    } else if ([elementName isEqualToString:@"form"]) {
+    
+        [currentXMLString setString:@""];
+        [xFormIDs addObject:[attributeDict objectForKey:@"formid"]];
+        
+    }
+}
+
+- (void)parser:(NSXMLParser *)parser didEndElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName {
+    
+    if ([elementName isEqualToString:@"form"]) {
+        [xFormNames addObject:[NSString stringWithString:currentXMLString]];
+        
+    } else if ([elementName isEqualToString:@"formlist"]) {
+        [self requestSuccessful];
+    }
+}
+
+- (void)parser:(NSXMLParser *)parser foundCharacters:(NSString *)string {
+    [currentXMLString appendString:string];
+}
+
 #pragma mark NSURLConnection Delegates
 
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {
-
 
     NSInteger statusCode = [(NSHTTPURLResponse *)response statusCode];
     
@@ -102,18 +167,24 @@
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection {
     
-    NSString *result = [NSString stringWithFormat:@"%.*s", [self.receivedData length], [self.receivedData bytes]];
+    if ([self.receivedData length] == 3) {
+        NSString *result = [NSString stringWithFormat:@"%.*s", [receivedData length], [receivedData bytes]];
+        if ([result isEqualToString:@"600"]) {
+            [self requestSuccessful];
+        } else {
+            // TODO: Better failure messages!
+            [self requestFailedWithMessage:@"Failed!"];
+        }
+    }
     
-    // From http://www.datadyne.org/episurveyor/api :
-    // 600 = MOBILE_RESPONSE_SUCCESS_CODE. This is the most welcome code that signifies the
-    // success of any action or request to the server for which do data response is expected
-    // from the server. This code is returned for successful login, successful form data upload
-    // and many more other successful operations.
-    if ([result isEqualToString:@"600"]) {
-        [self requestSuccessful];
+    if (self.requestType == kOpenRosaServer_Request_FormList) {
+        currentXMLString = [NSMutableString string];
+        NSXMLParser *parser = [[NSXMLParser alloc] initWithData:self.receivedData];
+        parser.delegate = self;
+        [parser parse];
+        [parser release];
     } else {
-        // TODO: Better failure messages!
-        [self requestFailedWithMessage:@"Failed!"];
+        [self requestSuccessful];
     }
 }
 

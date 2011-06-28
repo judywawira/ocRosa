@@ -16,31 +16,12 @@
 
 #import <UIKit/UIKit.h>
 
-@class FormManager;
-
-@interface RemoteForm : NSObject {
-    NSString *surveyID;
-    NSString *surveyName;
-    NSString *surveyOwner;
-}
-@property (nonatomic, copy) NSString *surveyID;
-@property (nonatomic, copy) NSString *surveyName;
-@property (nonatomic, copy) NSString *surveyOwner;
-@end
-
-
 @interface FormDownloadViewController : UITableViewController  <NSXMLParserDelegate, UITableViewDataSource, UITableViewDelegate> {
-    FormManager *formManager;
-    NSMutableString *currentXMLString;
-    NSMutableArray *remoteForms;
-    RemoteForm *currentRemoteForm;
+    NSArray *xFormIDs;
+    NSArray *xFormNames;
 }
 
-@property (nonatomic, retain) NSMutableString *currentXMLString;
-@property (nonatomic, retain) RemoteForm *currentRemoteForm;
-
-- (id)initWithFormManager:(FormManager *)manager;
-
-- (void)downloadRemoteFormList;
+@property (nonatomic, retain) NSArray *xFormIDs;
+@property (nonatomic, retain) NSArray *xFormNames;
 
 @end

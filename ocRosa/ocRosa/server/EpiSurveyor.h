@@ -9,15 +9,21 @@
 #import <Foundation/Foundation.h>
 #import "OpenRosaServer.h"
 
-@interface EpiSurveyor : NSObject <OpenRosaServer> {
+@interface EpiSurveyor : NSObject <OpenRosaServer, NSXMLParserDelegate> {
 
     id <OpenRosaServerDelegate> delegate;
 
-    NSMutableData *receivedData;
+    NSInteger requestType;
     
     NSString *username;
     
     NSString *password;
+    
+    NSMutableData *receivedData;
+
+    NSMutableArray *xFormIDs;
+    NSMutableArray *xFormNames;
+    NSMutableString *currentXMLString;
 }
 
 - (void)requestWithURL:(NSString *)url;

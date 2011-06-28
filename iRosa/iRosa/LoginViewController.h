@@ -25,10 +25,16 @@
 
 @property (nonatomic, retain) UITextField *username;
 @property (nonatomic, retain) UITextField *password;
-@property (nonatomic, retain) UISwitch *remeberSwitch;
+@property (nonatomic, retain) UISwitch *rememberSwitch;
 @property (nonatomic, retain) UITabBarController *mainViewController;
 
-
+// Login button
 - (IBAction)login:(id)sender;
+
++ (BOOL)authenticateFromKeychainUsername:(NSString**)username andPassword:(NSString**)password; 
+
++ (void)showLoginModallyOverView:(UIViewController *)viewRequiringLogin;
+
++ (void)authenticateLocalDatabaseWithUsername:(NSString *)username andPassword:(NSString *)password;
 
 @end

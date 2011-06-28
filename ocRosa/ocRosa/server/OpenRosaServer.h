@@ -14,7 +14,14 @@
  * the License.
  */
 
+#define OPENROSA_SERVER EpiSurveyor
+
 #import <Foundation/Foundation.h>
+
+extern NSInteger const kOpenRosaServer_Request_Login;
+extern NSInteger const kOpenRosaServer_Request_FormList;
+extern NSInteger const kOpenRosaServer_Request_Form;
+extern NSInteger const kOpenRosaServer_Request_Submit;
 
 @protocol OpenRosaServer <NSObject>
 
@@ -29,13 +36,24 @@
            forFormID:(NSString *)xFormID
         withContents:(NSString *)xFormXMLTree;
 
+@property (nonatomic) NSInteger requestType;
+
 @property (nonatomic, copy) NSString *username;
 @property (nonatomic, copy) NSString *password;
+
 @property (nonatomic, retain) NSMutableData *receivedData;
+
+// After requesting the FormList, this is an array of remote xForm IDs
+// Order matches xFormsNames
+@property (nonatomic, retain) NSMutableArray *xFormIDs;
+
+// After requesting the FormList, this is an array of remote xForm names
+// Order matches xFormIDs
+@property (nonatomic, retain) NSMutableArray *xFormNames;
+
 @property (nonatomic, assign) id delegate;
 
 @end
-
 
 // Implemented by client to respond to events
 @protocol OpenRosaServerDelegate <NSObject>

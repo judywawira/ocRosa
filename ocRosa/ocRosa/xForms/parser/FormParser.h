@@ -26,6 +26,9 @@
     CHListStack *parsers;
 }
 
+// Parse the specified data buffer
++ (NSNumber *)parseData:(NSData *)data toDatabase:(DatabaseConnection *)database error:(NSError **)error;
+
 - (id)initWithDatabase:(DatabaseConnection *)db;
 
 - (NSNumber *)parse:(NSData *)data;
