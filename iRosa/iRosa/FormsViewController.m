@@ -19,6 +19,7 @@
 #import "FormDownloadViewController.h"
 #import "iRosaAppDelegate.h"
 #import "LoginViewController.h"
+#import "DSActivityView.h"
 #import "ocRosa.h"
 
 @implementation FormsViewController
@@ -26,6 +27,7 @@
 - (void)dealloc {
     [forms release];
     [detailController release];
+    [addButton release];
     [super dealloc];
 }
 
@@ -41,13 +43,13 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    UIBarButtonItem *button = [[UIBarButtonItem alloc] 
-                                       initWithBarButtonSystemItem:UIBarButtonSystemItemAdd
-                                                            target:self
-                                                            action:@selector(addForm)];
+    [addButton release];
+    addButton = [[UIBarButtonItem alloc] 
+                        initWithBarButtonSystemItem:UIBarButtonSystemItemAdd
+                                                target:self
+                                                action:@selector(addForm)];
                                
-    self.navigationItem.rightBarButtonItem = button;
-    [button release];
+    self.navigationItem.rightBarButtonItem = addButton;
     
     NSString *username;
     NSString *password;
@@ -99,12 +101,16 @@
 
 - (void) addForm  {    
     
+    [addButton setEnabled:NO];
+    
     NSString *username;
     NSString *password;
     
     if (![LoginViewController authenticateFromKeychainUsername:&username andPassword:&password]) {
         [LoginViewController showLoginModallyOverView:self];
     }
+    
+    [DSActivityView activityViewForView:self.view withLabel:@"Downloading" width:140];
     
     id<OpenRosaServer> server = [[OPENROSA_SERVER alloc] init];
     server.delegate = self;
@@ -121,8 +127,11 @@
 
     [self.navigationController pushViewController:download animated:YES];
     [download release];
-
     [server release];
+    
+    [DSActivityView removeView];
+    [addButton setEnabled:YES];
+
 }
 
 - (void)requestFailed:(id<OpenRosaServer>)server withMessage:(NSString *)message {

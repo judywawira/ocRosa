@@ -129,9 +129,7 @@
             [self.navigationController.viewControllers objectAtIndex:0]];
     }
     
-    
-    [DSActivityView activityViewForView:self.view withLabel:@"Downloading..." width:140];
-
+    [DSActivityView activityViewForView:self.view withLabel:@"Downloading" width:140];
     
     id<OpenRosaServer> server = [[OPENROSA_SERVER alloc] init];
     server.delegate = self;

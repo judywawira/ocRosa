@@ -22,6 +22,7 @@
 @interface FormsViewController : UITableViewController {
     NSArray *forms;
     FormDetailViewController *detailController;
+    UIBarButtonItem *addButton;
 }
 
 @property (nonatomic, readonly) FormDetailViewController *detailController;
