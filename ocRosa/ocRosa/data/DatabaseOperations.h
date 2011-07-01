@@ -54,6 +54,9 @@
 - (NSString *)getFormTitle:(NSNumber *)dbid
                      error:(NSError **)error;
 
+- (NSString *)getFormServerID:(NSNumber *)dbid
+                        error:(NSError **)error;
+
 - (NSString *)getFormDownloadURL:(NSNumber *)dbid
                            error:(NSError **)error;
 

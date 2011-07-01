@@ -113,6 +113,16 @@
                                  error:error];
 }
 
+- (NSString *)getFormServerID:(NSNumber *)dbid
+                        error:(NSError **)error {
+    
+    return [connection stringFromQuery:@"SELECT server_id FROM Models WHERE Models.form_dbid= ?;" 
+                             arguments:[NSArray arrayWithObjects:dbid, nil] 
+                          errorMessage:@"Cannot get server_id for Form"
+                                 error:error];
+    
+}
+
 - (NSString *)getFormDownloadURL:(NSNumber *)dbid 
                            error:(NSError**)error {
     

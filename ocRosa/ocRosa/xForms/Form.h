@@ -19,12 +19,14 @@
 
 @interface Form : DatabaseRecord {
     NSString    *title;
+    NSString    *serverID;
     NSURL       *downloadURL;
     NSDate      *downloadDate;
     NSNumber    *questionCount;
 }
 
 @property (nonatomic, readonly) NSString  *title;
+@property (nonatomic, readonly) NSString  *serverID;
 @property (nonatomic, readonly) NSURL     *downloadURL;
 @property (nonatomic, readonly) NSDate    *downloadDate;
 @property (nonatomic, readonly) NSNumber  *questionCount;

@@ -32,4 +32,8 @@
 
 - (void)requestFailedWithMessage:(NSString *)message;
 
+// Replicate Java's DataOutputStream methods
+- (void)writeUTF:(NSString *)value toBuffer:(NSMutableData *)buffer;
+- (void)writeUTFDate:(NSDate *)date toBuffer:(NSMutableData *)buffer;
+
 @end

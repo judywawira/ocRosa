@@ -7,6 +7,9 @@
 //
 
 #import "EpiSurveyor.h"
+#import "Record.h"
+#import "RecordXML.h"
+#import "Form.h"
 
 NSInteger const kOpenRosaServer_Request_Login       = 1;
 NSInteger const kOpenRosaServer_Request_FormList    = 2;
@@ -45,6 +48,8 @@ static NSString * const kMOBILE_RESPONSE_TYPE_SURVEYNOTEXIST_FOR_FORMLIST   = @"
     [super dealloc];
 }
 
+#pragma mark OpenRosaServer Methods
+
 - (void) login {
     NSString *url = 
         [NSString stringWithFormat:@"http://episurveyor.org/AuthenticateLogin?id=%@&pwd=%@&version=2.3",
@@ -76,7 +81,78 @@ static NSString * const kMOBILE_RESPONSE_TYPE_SURVEYNOTEXIST_FOR_FORMLIST   = @"
     [self requestWithURL:url];    
 }
 
-- (void) requestWithURL:(NSString *)url {
+- (void)submitRecord:(Record *)record
+             forForm:(Form *)form {
+    
+    NSString *url = 
+        [NSString stringWithFormat:@"http://episurveyor.org/UploadRecordsNew?version=2.3"];  
+    
+    self.requestType = kOpenRosaServer_Request_Submit;
+    
+    // Note: we're creating a mutable request so we can change the HTTPBody buffer
+    NSMutableURLRequest *theRequest = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:url]
+                                                              cachePolicy:NSURLRequestReloadIgnoringLocalCacheData
+                                                          timeoutInterval:60];
+    /*
+     The EpiSurveyor API docs: http://www.datadyne.org/episurveyor/api
+        
+        "The client uses the DataOutputStream to write the records to the server."
+     
+     */
+    
+    NSMutableData *data = [NSMutableData data];    
+
+    [self writeUTF:self.username toBuffer:data];    
+    [self writeUTF:self.password toBuffer:data];
+    [self writeUTF:form.serverID toBuffer:data];
+    [self writeUTFDate:record.completeDate toBuffer:data];
+    [self writeUTF:@"0" toBuffer:data];
+    [self writeUTF:[record.xml xmlString] toBuffer:data];
+    
+    //long long tempy = 0x7FF8000000000000L;
+    long long tempy = 0x0000000000000000L;
+    [data appendBytes:&tempy length:sizeof(long long)];
+    [data appendBytes:&tempy length:sizeof(long long)];
+
+    [self writeUTF:@"2.6" toBuffer:data];
+    [self writeUTF:@"a6393b90-6694-42a3-9ff8-c2d91ea9e66c" toBuffer:data];
+     
+    [theRequest setHTTPMethod:@"POST"];
+    [theRequest setHTTPBody:data];
+    [theRequest setValue:@"application/octet-stream" forHTTPHeaderField:@"Content-Type"];
+    
+    if ([NSURLConnection connectionWithRequest:theRequest delegate:self] == nil) {
+        [self requestFailedWithMessage:@"Unable to initiate request"];
+    }
+}
+
+// Simulate Java DataOutputStream.writeUTF()
+- (void)writeUTF:(NSString *)value toBuffer:(NSMutableData *)buffer {
+
+    // Convert 'value' to a UTF8 buffer
+    NSData *utfData = [value dataUsingEncoding:NSUTF8StringEncoding];
+    uint16_t utfDataSize = (uint16_t)[utfData length];
+    
+    // Write 2 bytes which number of bytes in string to follow
+    uint16_t size = htons(utfDataSize);
+    [buffer appendBytes:&size length:sizeof(uint16_t)];
+    
+    // Write Buffer
+    [buffer appendData:utfData];
+}
+
+- (void)writeUTFDate:(NSDate *)date toBuffer:(NSMutableData *)buffer {
+    
+    // Date Format Expected: 2011-07-01 13:35:53
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+    [self writeUTF:[dateFormatter stringFromDate:date] toBuffer:buffer];
+    [dateFormatter release];
+}
+
+#pragma mark ---
+
+- (void)requestWithURL:(NSString *)url {
 
     NSURLRequest *theRequest = [NSURLRequest requestWithURL:[NSURL URLWithString:url]
                                                 cachePolicy:NSURLRequestReloadIgnoringLocalCacheData
@@ -86,6 +162,8 @@ static NSString * const kMOBILE_RESPONSE_TYPE_SURVEYNOTEXIST_FOR_FORMLIST   = @"
         [self requestFailedWithMessage:@"Unable to initiate request"];
     }
 }
+
+#pragma mark OpenRosaServerDelegate Responders
 
 - (void)requestSuccessful {
     if([[self delegate] respondsToSelector:@selector(requestSuccessful:)]) {
@@ -171,9 +249,11 @@ static NSString * const kMOBILE_RESPONSE_TYPE_SURVEYNOTEXIST_FOR_FORMLIST   = @"
         NSString *result = [NSString stringWithFormat:@"%.*s", [receivedData length], [receivedData bytes]];
         if ([result isEqualToString:@"600"]) {
             [self requestSuccessful];
+            return;
         } else {
             // TODO: Better failure messages!
             [self requestFailedWithMessage:@"Failed!"];
+            return;
         }
     }
     
@@ -192,4 +272,22 @@ static NSString * const kMOBILE_RESPONSE_TYPE_SURVEYNOTEXIST_FOR_FORMLIST   = @"
     [self requestFailedWithMessage:[error localizedDescription]];
 }
 
+/*
+- (BOOL)connection:(NSURLConnection *)connection canAuthenticateAgainstProtectionSpace:(NSURLProtectionSpace *)protectionSpace {
+    NSString *foo = protectionSpace.authenticationMethod;
+    
+    return [protectionSpace.authenticationMethod isEqualToString:NSURLAuthenticationMethodServerTrust];
+}
+
+- (void)connection:(NSURLConnection *)connection didReceiveAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge {
+    NSArray *trustedHosts = [NSArray arrayWithObjects:@"episurveyor.org", nil];
+
+    if ([challenge.protectionSpace.authenticationMethod isEqualToString:NSURLAuthenticationMethodServerTrust])
+        if ([trustedHosts containsObject:challenge.protectionSpace.host])
+            [challenge.sender useCredential:[NSURLCredential credentialForTrust:challenge.protectionSpace.serverTrust] forAuthenticationChallenge:challenge];
+    
+    [challenge.sender continueWithoutCredentialForAuthenticationChallenge:challenge];
+}
+ 
+ */
 @end

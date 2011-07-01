@@ -23,6 +23,9 @@ extern NSInteger const kOpenRosaServer_Request_FormList;
 extern NSInteger const kOpenRosaServer_Request_Form;
 extern NSInteger const kOpenRosaServer_Request_Submit;
 
+@class Record;
+@class Form;
+
 @protocol OpenRosaServer <NSObject>
 
 - (void)login;
@@ -31,10 +34,8 @@ extern NSInteger const kOpenRosaServer_Request_Submit;
 
 - (void)requestForm:(NSString *)xFormID;
 
-- (void)submitRecord:(NSNumber *)recordDBD
-         forFormName:(NSString *)formName
-           forFormID:(NSString *)xFormID
-        withContents:(NSString *)xFormXMLTree;
+- (void)submitRecord:(Record *)record
+             forForm:(Form *)form;
 
 @property (nonatomic) NSInteger requestType;
 

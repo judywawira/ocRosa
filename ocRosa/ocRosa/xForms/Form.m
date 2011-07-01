@@ -22,6 +22,7 @@
 
 - (void)dealloc {
     [title release];
+    [serverID release];
     [downloadDate release];
     [downloadURL release];
     [questionCount release];
@@ -33,6 +34,13 @@
         title = [[operations getFormTitle:dbid error:&error] copy];
     
     return title;
+}
+
+- (NSString *)serverID {
+    if (!serverID)
+        serverID = [[operations getFormServerID:dbid error:&error] copy];
+    
+    return serverID;
 }
 
 - (NSURL *)downloadURL {

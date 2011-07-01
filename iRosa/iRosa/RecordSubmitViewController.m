@@ -16,6 +16,7 @@
 
 #import "RecordSubmitViewController.h"
 #import "iRosaAppDelegate.h"
+#import "LoginViewController.h"
 #import "ocRosa.h"
 
 @implementation RecordSubmitViewController
@@ -174,6 +175,15 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
+    NSString *username;
+    NSString *password;
+    
+    if (![LoginViewController authenticateFromKeychainUsername:&username andPassword:&password]) {
+        [self.navigationController popToRootViewControllerAnimated:YES];
+        [LoginViewController showLoginModallyOverView:
+         [self.navigationController.viewControllers objectAtIndex:0]];
+    }
+    
     UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
     
     if (cell.accessoryType != UITableViewCellAccessoryCheckmark) {
@@ -181,6 +191,9 @@
         // Cell is not checked - which means that record is not submitted
         NSNumber *formDBID = [forms objectAtIndex:indexPath.section];
         NSNumber *recordDBID = [[records objectForKey:formDBID] objectAtIndex:indexPath.row];
+        
+        Form *form = [[Form alloc] initWithDBID:formDBID
+                                       database:formManager.connection];
         
         Record *record = [[Record alloc] initWithDBID:recordDBID
                                              database:formManager.connection];
@@ -195,12 +208,18 @@
 
         cell.detailTextLabel.text = @"Submitting";
         
-        // Submit the record
-        // ...
-        [NSThread sleepForTimeInterval:.5];
-    
-        [record submitted];
+        // Submit the Record
+        id<OpenRosaServer> server = [[OPENROSA_SERVER alloc] init];
+        server.delegate = self;
+        server.username = username;
+        server.password = password;
+        
+        [server submitRecord:record
+                     forForm:form];
+        
+        //[record submitted];
         [record release];
+        [form release];
 
         // Make text grey and add a check-mark
         cell.detailTextLabel.text = @"Submitted";
@@ -208,7 +227,15 @@
         cell.accessoryType = UITableViewCellAccessoryCheckmark;
         cell.textLabel.textColor = [UIColor grayColor];
     }
-
 }
+
+- (void)requestSuccessful:(id<OpenRosaServer>)server {
+    [server release];
+}
+
+- (void)requestFailed:(id<OpenRosaServer>)server withMessage:(NSString *)message {
+    // Login failed
+}
+
 
 @end
