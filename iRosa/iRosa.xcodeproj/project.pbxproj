@@ -25,6 +25,9 @@
 		2724F857132C2E45009CECAF /* ocRosa.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 2724F856132C2E45009CECAF /* ocRosa.sqlite */; };
 		272666D91375E6DB00FD28A3 /* RecordsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 272666D71375E6DB00FD28A3 /* RecordsViewController.m */; };
 		272666DA1375E6DB00FD28A3 /* RecordsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 272666D81375E6DB00FD28A3 /* RecordsViewController.xib */; };
+		2736707713BED1FE0030D83A /* 19-gear.png in Resources */ = {isa = PBXBuildFile; fileRef = 2736707613BED1FE0030D83A /* 19-gear.png */; };
+		2736707913BED2420030D83A /* 56-cloud.png in Resources */ = {isa = PBXBuildFile; fileRef = 2736707813BED2420030D83A /* 56-cloud.png */; };
+		2736707B13BED3070030D83A /* 44-shoebox.png in Resources */ = {isa = PBXBuildFile; fileRef = 2736707A13BED3070030D83A /* 44-shoebox.png */; };
 		27428A2E135B55240003E419 /* NumberView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 27428A2D135B55230003E419 /* NumberView.xib */; };
 		27428A32135B55460003E419 /* NumberView.m in Sources */ = {isa = PBXBuildFile; fileRef = 27428A31135B55450003E419 /* NumberView.m */; };
 		27428A35135B68FE0003E419 /* TextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 27428A34135B68FD0003E419 /* TextView.m */; };
@@ -85,6 +88,9 @@
 		272666D61375E6DB00FD28A3 /* RecordsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecordsViewController.h; sourceTree = "<group>"; };
 		272666D71375E6DB00FD28A3 /* RecordsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecordsViewController.m; sourceTree = "<group>"; };
 		272666D81375E6DB00FD28A3 /* RecordsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RecordsViewController.xib; sourceTree = "<group>"; };
+		2736707613BED1FE0030D83A /* 19-gear.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "19-gear.png"; sourceTree = "<group>"; };
+		2736707813BED2420030D83A /* 56-cloud.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "56-cloud.png"; sourceTree = "<group>"; };
+		2736707A13BED3070030D83A /* 44-shoebox.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "44-shoebox.png"; sourceTree = "<group>"; };
 		27428A2D135B55230003E419 /* NumberView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NumberView.xib; sourceTree = "<group>"; };
 		27428A30135B55450003E419 /* NumberView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NumberView.h; sourceTree = "<group>"; };
 		27428A31135B55450003E419 /* NumberView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NumberView.m; sourceTree = "<group>"; };
@@ -161,6 +167,7 @@
 		2724F80F132C2B04009CECAF = {
 			isa = PBXGroup;
 			children = (
+				2794B27D13BED47A0091755A /* icons */,
 				277E25D513B6A8DB00909F66 /* Security.framework */,
 				2724F855132C2E35009CECAF /* Resources */,
 				2724F824132C2B04009CECAF /* iRosa */,
@@ -300,6 +307,17 @@
 			path = DSActivityView;
 			sourceTree = "<group>";
 		};
+		2794B27D13BED47A0091755A /* icons */ = {
+			isa = PBXGroup;
+			children = (
+				2736707A13BED3070030D83A /* 44-shoebox.png */,
+				2736707813BED2420030D83A /* 56-cloud.png */,
+				2736707613BED1FE0030D83A /* 19-gear.png */,
+			);
+			name = icons;
+			path = iRosa/icons;
+			sourceTree = "<group>";
+		};
 		27AE69101353BDD500C0A0DD /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -394,6 +412,9 @@
 				272666DA1375E6DB00FD28A3 /* RecordsViewController.xib in Resources */,
 				278594F513B2D3AD00EC6E28 /* RecordSubmitViewController.xib in Resources */,
 				277E258113B64BA600909F66 /* LoginViewController.xib in Resources */,
+				2736707713BED1FE0030D83A /* 19-gear.png in Resources */,
+				2736707913BED2420030D83A /* 56-cloud.png in Resources */,
+				2736707B13BED3070030D83A /* 44-shoebox.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
