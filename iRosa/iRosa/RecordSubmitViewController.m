@@ -221,15 +221,25 @@
         [record release];
         [form release];
 
-        // Make text grey and add a check-mark
-        cell.detailTextLabel.text = @"Submitted";
-        cell.accessoryView = nil;
-        cell.accessoryType = UITableViewCellAccessoryCheckmark;
-        cell.textLabel.textColor = [UIColor grayColor];
     }
 }
 
 - (void)requestSuccessful:(id<OpenRosaServer>)server {
+
+    NSUInteger section = [forms indexOfObject:server.submittedForm.dbid];
+    NSUInteger row = [[records objectForKey:server.submittedForm.dbid] 
+                        indexOfObject:server.submittedRecord.dbid];
+    
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:row inSection:section];
+    UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
+    
+    // Make text grey and add a check-mark
+    cell.detailTextLabel.text = @"Submitted";
+    cell.accessoryView = nil;
+    cell.accessoryType = UITableViewCellAccessoryCheckmark;
+    cell.textLabel.textColor = [UIColor grayColor];
+    
+    [server.submittedRecord submitted];
     [server release];
 }
 

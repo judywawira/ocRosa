@@ -38,6 +38,7 @@ static NSString * const kMOBILE_RESPONSE_TYPE_SURVEYNOTEXIST_FOR_FORMLIST   = @"
 
 @synthesize delegate;
 @synthesize requestType, username, password, receivedData, xFormIDs, xFormNames;
+@synthesize submittedRecord, submittedForm;
 
 - (void)dealloc {
     self.username = nil;
@@ -45,6 +46,8 @@ static NSString * const kMOBILE_RESPONSE_TYPE_SURVEYNOTEXIST_FOR_FORMLIST   = @"
     self.xFormIDs = nil;
     self.xFormNames = nil;
     self.receivedData = nil;
+    self.submittedRecord = nil;
+    self.submittedForm = nil;
     [super dealloc];
 }
 
@@ -84,10 +87,15 @@ static NSString * const kMOBILE_RESPONSE_TYPE_SURVEYNOTEXIST_FOR_FORMLIST   = @"
 - (void)submitRecord:(Record *)record
              forForm:(Form *)form {
     
+    self.submittedRecord = record;
+    self.submittedForm = form;
+    
+    self.requestType = kOpenRosaServer_Request_Submit;
+    
+    
     NSString *url = 
         [NSString stringWithFormat:@"http://episurveyor.org/UploadRecordsNew?version=2.3"];  
     
-    self.requestType = kOpenRosaServer_Request_Submit;
     
     // Note: we're creating a mutable request so we can change the HTTPBody buffer
     NSMutableURLRequest *theRequest = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:url]

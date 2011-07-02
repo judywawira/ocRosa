@@ -54,6 +54,12 @@ extern NSInteger const kOpenRosaServer_Request_Submit;
 
 @property (nonatomic, assign) id delegate;
 
+// Most-recently submitted Record
+@property (nonatomic, retain) Record *submittedRecord;
+
+// Most-recently submitted Form
+@property (nonatomic, retain) Form *submittedForm;
+
 @end
 
 // Implemented by client to respond to events
