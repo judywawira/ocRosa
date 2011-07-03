@@ -48,6 +48,7 @@
     answersFrame.origin.y = hint.frame.origin.y + hint.frame.size.height;
     answers.frame = answersFrame;
     
+    [answers reloadData];
 }
 
 - (void)willEndView {
