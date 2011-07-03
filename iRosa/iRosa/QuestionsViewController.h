@@ -26,17 +26,20 @@
     FormDetailViewController *formDetails;  // Parent Controller
     
     NSString *formTitle;        // Passed-in from FormDetailController
-    
-    FormManager *formManager;   // Passed-in from FormDetailController
-        
+            
     Record *record;             // Passed-in from FormDetailController
     
     NSArray *questions;         // List of this record's questions
 }
 
 @property (nonatomic, copy) NSString *formTitle;
-@property (nonatomic, retain) FormManager *formManager;
 @property (nonatomic, retain) Record *record;
 @property (nonatomic, retain) FormDetailViewController *formDetails;
+
+// Set the current record to complete
+- (void)done;
+
+// Edit a Complete or Submitted record
+- (void)edit;
 
 @end

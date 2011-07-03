@@ -310,6 +310,18 @@
     
 }
 
+- (BOOL)setRecordInProgress:(NSNumber *)recordDBID
+                      error:(NSError **)error {
+    
+    return [connection executeScalar:@"UPDATE Records SET state = ?, complete_date = NULL, submit_date = NULL WHERE dbid = ?;"
+                           arguments:[NSArray arrayWithObjects:
+                                        [NSNumber numberWithInt:kRecordState_InProgress],
+                                        recordDBID,
+                                        nil]
+                        errorMessage:@"Cannot set Record to 'In-Progress'"
+                               error:error]; 
+}
+
 - (BOOL)setRecordComplete:(NSNumber *)recordDBID
                     error:(NSError **)error {
     

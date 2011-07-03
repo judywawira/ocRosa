@@ -21,7 +21,7 @@
 
 @implementation QuestionsViewController
 
-@synthesize formTitle, formManager, record, formDetails;
+@synthesize formTitle, record, formDetails;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -33,7 +33,6 @@
 }
 
 - (void)dealloc {
-    self.formManager = nil;
     self.formDetails = nil;
     [record release];
     [questions release];
@@ -54,6 +53,24 @@
     [super viewDidLoad];
 }
 
+- (void)done {
+    [self.record complete];    
+    [self.navigationController popToViewController:(UITableViewController*)self.formDetails
+                                          animated:YES];
+}
+
+- (void)edit {
+    [self.record inProgress];    
+    UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone
+                                                                                target:self
+                                                                                action:@selector(done)];          
+    self.navigationItem.rightBarButtonItem = doneButton;
+    [doneButton release];
+    
+    [self.tableView reloadData];
+
+}
+
 - (void)viewDidUnload
 {
     [super viewDidUnload];
@@ -65,6 +82,22 @@
     
     [super viewWillAppear:animated];
     self.title = [NSString stringWithFormat:@"Record %@", record.dbid];
+    
+    // If the Record state is "In-Progress" show a "Done" button,
+    // or if the Record state is "Complete" or "Submitted" show an "Edit" button
+    if (record.state == kRecordState_InProgress) {
+        UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone
+                                                                                    target:self
+                                                                                    action:@selector(done)];          
+        self.navigationItem.rightBarButtonItem = doneButton;
+        [doneButton release];
+    } else {
+        UIBarButtonItem *editButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemEdit
+                                                                                    target:self
+                                                                                    action:@selector(edit)];  
+        self.navigationItem.rightBarButtonItem = editButton;
+        [editButton release];
+    }
     
     // Get the list of Questions (id's only)
     [questions release];
@@ -122,8 +155,14 @@
     // Skip or not?
     if ([record isRelevant:indexPath.row]) {
         // Questions is relevant
-        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-    
+        
+        if (record.state == kRecordState_InProgress) {
+            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        } else {
+            cell.accessoryType  = UITableViewCellAccessoryNone;
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        }
+            
         // If the question has an answer
         if ([record isAnswered:indexPath.row]) {
             cell.detailTextLabel.text = [record getAnswer:indexPath.row];
@@ -156,7 +195,6 @@
         questionController.control = [record getControl:indexPath.row];
         questionController.controlIndex = indexPath.row;
         questionController.formTitle = self.formTitle;
-        questionController.formManager = formManager;
         questionController.formDetails = self.formDetails; // So we can pop back to 'FormDetails' when done
     
         [self.navigationController pushViewController:questionController animated:YES];

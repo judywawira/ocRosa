@@ -223,6 +223,10 @@ NSInteger const kRecordState_Submitted  = 1;
     return YES;
 }
 
+- (void)inProgress {
+    [operations setRecordInProgress:(NSNumber *)dbid error:&error]; 
+}
+
 - (void)complete {
     [operations setRecordComplete:(NSNumber *)dbid error:&error]; 
 }

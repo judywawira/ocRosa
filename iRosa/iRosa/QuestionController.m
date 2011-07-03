@@ -19,13 +19,12 @@
 
 @implementation QuestionController
 
-@synthesize record, control, controlIndex, formTitle, formManager, formDetails;
+@synthesize record, control, controlIndex, formTitle, formDetails;
 
 - (void)dealloc {
     self.record = nil;
     self.control = nil;
     self.formTitle = nil;
-    self.formManager = nil;
     self.formDetails = nil;
     [super dealloc];
 }

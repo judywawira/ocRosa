@@ -88,6 +88,9 @@ extern NSInteger const kRecordState_Submitted;
 // are not considered - just the raw list of Questions
 - (BOOL)hasNext:(NSInteger)index;
 
+// Reset a 'Complete' or 'Submitted' record to 'In-Progress'
+- (void)inProgress;
+
 // Set record state to 'Complete'
 - (void)complete;
 

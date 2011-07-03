@@ -25,9 +25,7 @@
     Form *form;
     
     FormDetailViewController *formDetails;  // Parent Controller
-    
-    FormManager *formManager;
-    
+        
     NSArray *records;   // Array of Record dbids
     
     NSNumber *state;    // One of kRecordState or nil to 
@@ -36,7 +34,6 @@
 
 @property (nonatomic, retain) Form *form;
 @property (nonatomic, retain) NSNumber *state;
-@property (nonatomic, retain) FormManager *formManager;
 @property (nonatomic, retain) FormDetailViewController *formDetails;
 
 @end

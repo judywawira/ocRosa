@@ -126,7 +126,7 @@
     self.questionsController.record = record;
     [record release];
     
-    self.questionsController .hidesBottomBarWhenPushed = YES;
+    self.questionsController.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:self.questionsController animated:YES];
 }
 
@@ -253,6 +253,7 @@
             case 0:
                 recordsController.title = @"In-Progress";
                 recordsController.state = [NSNumber numberWithInt:kRecordState_InProgress];
+                recordsController.hidesBottomBarWhenPushed = YES;
                 break;
                     
             case 1:
@@ -263,6 +264,7 @@
             case 2:
                 recordsController.title = @"Submitted";
                 recordsController.state = [NSNumber numberWithInt:kRecordState_Submitted];                    
+                recordsController.hidesBottomBarWhenPushed = YES;
                 break;
         }
         

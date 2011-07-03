@@ -55,6 +55,8 @@
 		27BE7CE913512F890005698B /* QuestionController.m in Sources */ = {isa = PBXBuildFile; fileRef = 27BE7CE813512F880005698B /* QuestionController.m */; };
 		27E0ADB6135529A7001A695D /* QuestionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 27E0ADB5135529A7001A695D /* QuestionView.xib */; };
 		27EFB7E21359232800B32CA3 /* SelectOneView.m in Sources */ = {isa = PBXBuildFile; fileRef = 27EFB7E11359232800B32CA3 /* SelectOneView.m */; };
+		27F6D37213C102F6003019FF /* RecordCompleteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 27F6D37013C102F4003019FF /* RecordCompleteViewController.m */; };
+		27F6D37313C102F6003019FF /* RecordCompleteViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 27F6D37113C102F6003019FF /* RecordCompleteViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -130,6 +132,9 @@
 		27E0ADB5135529A7001A695D /* QuestionView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = QuestionView.xib; sourceTree = "<group>"; };
 		27EFB7E01359232700B32CA3 /* SelectOneView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectOneView.h; sourceTree = "<group>"; };
 		27EFB7E11359232800B32CA3 /* SelectOneView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectOneView.m; sourceTree = "<group>"; };
+		27F6D36F13C102F3003019FF /* RecordCompleteViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RecordCompleteViewController.h; path = iPhone/RecordCompleteViewController.h; sourceTree = "<group>"; };
+		27F6D37013C102F4003019FF /* RecordCompleteViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RecordCompleteViewController.m; path = iPhone/RecordCompleteViewController.m; sourceTree = "<group>"; };
+		27F6D37113C102F6003019FF /* RecordCompleteViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = RecordCompleteViewController.xib; path = iPhone/RecordCompleteViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -241,6 +246,9 @@
 				278594F113B2D3AC00EC6E28 /* RecordSubmitViewController.h */,
 				278594F213B2D3AD00EC6E28 /* RecordSubmitViewController.m */,
 				278594F313B2D3AD00EC6E28 /* RecordSubmitViewController.xib */,
+				27F6D36F13C102F3003019FF /* RecordCompleteViewController.h */,
+				27F6D37013C102F4003019FF /* RecordCompleteViewController.m */,
+				27F6D37113C102F6003019FF /* RecordCompleteViewController.xib */,
 			);
 			name = iPhone;
 			sourceTree = "<group>";
@@ -395,6 +403,7 @@
 				2736707713BED1FE0030D83A /* 19-gear.png in Resources */,
 				2736707913BED2420030D83A /* 56-cloud.png in Resources */,
 				2736707B13BED3070030D83A /* 44-shoebox.png in Resources */,
+				27F6D37313C102F6003019FF /* RecordCompleteViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -427,6 +436,7 @@
 				277E258013B64BA600909F66 /* LoginViewController.m in Sources */,
 				277E25D413B6A8B200909F66 /* KeychainItemWrapper.m in Sources */,
 				278CDD7F13B985A2005839AE /* DSActivityView.m in Sources */,
+				27F6D37213C102F6003019FF /* RecordCompleteViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

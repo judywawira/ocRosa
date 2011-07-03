@@ -33,14 +33,12 @@
     Control *control;
     NSInteger controlIndex;
     NSString *formTitle;
-    FormManager *formManager;
     FormDetailViewController *formDetails;
 }
 
 @property (nonatomic, retain) Control *control;
 @property (nonatomic) NSInteger controlIndex;
 @property (nonatomic, retain) Record *record;
-@property (nonatomic, retain) FormManager *formManager;
 @property (nonatomic, retain) FormDetailViewController *formDetails;
 @property (nonatomic, copy) NSString *formTitle;
 

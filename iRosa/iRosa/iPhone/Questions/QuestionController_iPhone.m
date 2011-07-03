@@ -95,7 +95,7 @@
         
     } else {
         // No more Questions. Show 'DONE' button
-        UIBarButtonItem* doneButton = [[UIBarButtonItem alloc] initWithTitle:@"^" 
+        UIBarButtonItem* doneButton = [[UIBarButtonItem alloc] initWithTitle:@">" 
                                                                        style:UIBarButtonItemStyleBordered
                                                                       target:self
                                                                       action:@selector(done)];

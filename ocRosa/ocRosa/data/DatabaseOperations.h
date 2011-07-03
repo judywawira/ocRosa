@@ -108,6 +108,9 @@
               record:(NSNumber *)dbid
                error:(NSError **)error;
 
+- (BOOL)setRecordInProgress:(NSNumber *)recordDBID
+                      error:(NSError **)error;
+
 - (BOOL)setRecordComplete:(NSNumber *)recordDBID
                     error:(NSError **)error;
 
