@@ -186,9 +186,12 @@
     }
     
     BOOL isSelected = [[[self.control decodeResultToSelection] objectAtIndex:indexPath.row] boolValue];
-    if (isSelected)
+    if (isSelected) {
         cell.accessoryType = UITableViewCellAccessoryCheckmark;
-
+    } else {
+        cell.accessoryType = UITableViewCellAccessoryNone;
+    }
+    
     cell.textLabel.text = [self.control.items objectAtIndex:indexPath.row];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
 

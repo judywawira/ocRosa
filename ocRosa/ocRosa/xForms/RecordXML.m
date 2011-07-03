@@ -68,10 +68,11 @@ NSString *const kXML_Error_XPATH    = @"xpath";
                    forKey:kXML_Error_Message];
     }
     
-    return [NSError errorWithDomain:kXML_Error_Domain 
-                               code:err.code
-                           userInfo:details];
-    
+    NSError *error = [NSError errorWithDomain:kXML_Error_Domain 
+                                         code:err.code
+                                     userInfo:details];
+    DLog(@"%@ : XML = '%@' : XPath = '%@'", [error description], xml, xpath);
+    return error;
 }
 
 #pragma mark -
@@ -168,8 +169,12 @@ NSString *const kXML_Error_XPATH    = @"xpath";
     
     xmlXPathObjectPtr  xpathObject = [self evalXPath:xpath error:error];
     
+    
+    // If there was any sort of parsing error xpathObject will be nil.
+    // However in this situation we choose the return YES so that
+    // form navigation will not be blocked by a such an error.
     if (!xpathObject)
-        return NO;
+        return YES; 
     
     BOOL result = xpathObject->boolval;
     xmlXPathFreeObject(xpathObject);

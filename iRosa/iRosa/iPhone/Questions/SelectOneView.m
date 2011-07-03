@@ -47,6 +47,8 @@
     pickerFrame.origin.y = hint.frame.origin.y + hint.frame.size.height;
     picker.frame = pickerFrame;
     
+    [picker reloadAllComponents];
+    
     // Figure out which row should be selected    
     NSMutableArray *selection = [NSMutableArray arrayWithArray:[self.controller.control decodeResultToSelection]];
     
