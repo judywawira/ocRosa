@@ -168,7 +168,6 @@
 
 - (void)tableView:(UITableView *)table didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     self.detailController.formDBID = [forms objectAtIndex:indexPath.row];
-    self.detailController.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:self.detailController animated:YES];
 }
 

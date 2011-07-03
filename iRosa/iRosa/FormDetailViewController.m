@@ -126,6 +126,7 @@
     self.questionsController.record = record;
     [record release];
     
+    self.questionsController .hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:self.questionsController animated:YES];
 }
 
@@ -142,7 +143,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     switch (section) {
         case 0:
-            return 4;
+            return 3;
             break;
         case 1:
             return 3;
@@ -196,12 +197,6 @@
                     cell.detailTextLabel.text = [dateFormatter stringFromDate:form.downloadDate];
                     [dateFormatter release];
                     break;
-                    
-                case 3:
-                    cell.textLabel.text = @"GPS";
-                    cell.detailTextLabel.text = @"Yes";
-                    break;
-                    
             }
             break;
 

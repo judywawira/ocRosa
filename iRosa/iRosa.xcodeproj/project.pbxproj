@@ -24,7 +24,6 @@
 		2724F84C132C2C3B009CECAF /* libsqlcipher.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2724F847132C2C3B009CECAF /* libsqlcipher.a */; };
 		2724F857132C2E45009CECAF /* ocRosa.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 2724F856132C2E45009CECAF /* ocRosa.sqlite */; };
 		272666D91375E6DB00FD28A3 /* RecordsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 272666D71375E6DB00FD28A3 /* RecordsViewController.m */; };
-		272666DA1375E6DB00FD28A3 /* RecordsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 272666D81375E6DB00FD28A3 /* RecordsViewController.xib */; };
 		2736707713BED1FE0030D83A /* 19-gear.png in Resources */ = {isa = PBXBuildFile; fileRef = 2736707613BED1FE0030D83A /* 19-gear.png */; };
 		2736707913BED2420030D83A /* 56-cloud.png in Resources */ = {isa = PBXBuildFile; fileRef = 2736707813BED2420030D83A /* 56-cloud.png */; };
 		2736707B13BED3070030D83A /* 44-shoebox.png in Resources */ = {isa = PBXBuildFile; fileRef = 2736707A13BED3070030D83A /* 44-shoebox.png */; };
@@ -37,7 +36,6 @@
 		27428A3F135B85390003E419 /* SelectView.m in Sources */ = {isa = PBXBuildFile; fileRef = 27428A3E135B85380003E419 /* SelectView.m */; };
 		27428A41135B85920003E419 /* SelectView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 27428A40135B85900003E419 /* SelectView.xib */; };
 		2765D74A135BB2AE00E4E184 /* FormDownloadViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2765D748135BB2AE00E4E184 /* FormDownloadViewController.m */; };
-		2765D74B135BB2AE00E4E184 /* FormDownloadViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2765D749135BB2AE00E4E184 /* FormDownloadViewController.xib */; };
 		27686CB2135948BE00C07594 /* SelectOneView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 27686CB1135948BE00C07594 /* SelectOneView.xib */; };
 		27776C381341593300473F80 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 27776C371341593300473F80 /* libxml2.dylib */; };
 		277E258013B64BA600909F66 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 277E257E13B64BA600909F66 /* LoginViewController.m */; };
@@ -52,11 +50,8 @@
 		278CDD7F13B985A2005839AE /* DSActivityView.m in Sources */ = {isa = PBXBuildFile; fileRef = 278CDD7E13B985A2005839AE /* DSActivityView.m */; };
 		27AE69141353BE2700C0A0DD /* QuestionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 27AE69131353BE2700C0A0DD /* QuestionView.m */; };
 		27AE69171353C56A00C0A0DD /* QuestionViewFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 27AE69161353C56A00C0A0DD /* QuestionViewFactory.m */; };
-		27BE7C7A1350E0710005698B /* FormsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 27BE7C781350E0710005698B /* FormsView.xib */; };
 		27BE7CB91350E4D40005698B /* FormsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 27BE7CB71350E4D40005698B /* FormsViewController.m */; };
-		27BE7CDA1351050E0005698B /* FormDetailsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 27BE7CD81351050E0005698B /* FormDetailsView.xib */; };
 		27BE7CE3135107470005698B /* FormDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 27BE7CE2135107460005698B /* FormDetailViewController.m */; };
-		27BE7CE613512F450005698B /* QuestionsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 27BE7CE413512F450005698B /* QuestionsView.xib */; };
 		27BE7CE913512F890005698B /* QuestionController.m in Sources */ = {isa = PBXBuildFile; fileRef = 27BE7CE813512F880005698B /* QuestionController.m */; };
 		27E0ADB6135529A7001A695D /* QuestionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 27E0ADB5135529A7001A695D /* QuestionView.xib */; };
 		27EFB7E21359232800B32CA3 /* SelectOneView.m in Sources */ = {isa = PBXBuildFile; fileRef = 27EFB7E11359232800B32CA3 /* SelectOneView.m */; };
@@ -87,7 +82,6 @@
 		2724F856132C2E45009CECAF /* ocRosa.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; name = ocRosa.sqlite; path = ../ocRosa/ocRosa.sqlite; sourceTree = "<group>"; };
 		272666D61375E6DB00FD28A3 /* RecordsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecordsViewController.h; sourceTree = "<group>"; };
 		272666D71375E6DB00FD28A3 /* RecordsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecordsViewController.m; sourceTree = "<group>"; };
-		272666D81375E6DB00FD28A3 /* RecordsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RecordsViewController.xib; sourceTree = "<group>"; };
 		2736707613BED1FE0030D83A /* 19-gear.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "19-gear.png"; sourceTree = "<group>"; };
 		2736707813BED2420030D83A /* 56-cloud.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "56-cloud.png"; sourceTree = "<group>"; };
 		2736707A13BED3070030D83A /* 44-shoebox.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "44-shoebox.png"; sourceTree = "<group>"; };
@@ -105,7 +99,6 @@
 		27428A40135B85900003E419 /* SelectView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SelectView.xib; sourceTree = "<group>"; };
 		2765D747135BB2AE00E4E184 /* FormDownloadViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FormDownloadViewController.h; sourceTree = "<group>"; };
 		2765D748135BB2AE00E4E184 /* FormDownloadViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FormDownloadViewController.m; sourceTree = "<group>"; };
-		2765D749135BB2AE00E4E184 /* FormDownloadViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FormDownloadViewController.xib; sourceTree = "<group>"; };
 		27686CB1135948BE00C07594 /* SelectOneView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SelectOneView.xib; sourceTree = "<group>"; };
 		27776C371341593300473F80 /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
 		277E257D13B64BA600909F66 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
@@ -128,13 +121,10 @@
 		27AE69131353BE2700C0A0DD /* QuestionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuestionView.m; sourceTree = "<group>"; };
 		27AE69151353C56A00C0A0DD /* QuestionViewFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QuestionViewFactory.h; sourceTree = "<group>"; };
 		27AE69161353C56A00C0A0DD /* QuestionViewFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuestionViewFactory.m; sourceTree = "<group>"; };
-		27BE7C791350E0710005698B /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = iPhone/en.lproj/FormsView.xib; sourceTree = "<group>"; };
 		27BE7CB61350E4D40005698B /* FormsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FormsViewController.h; sourceTree = "<group>"; };
 		27BE7CB71350E4D40005698B /* FormsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FormsViewController.m; sourceTree = "<group>"; };
-		27BE7CD91351050E0005698B /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = iPhone/en.lproj/FormDetailsView.xib; sourceTree = "<group>"; };
 		27BE7CE1135107460005698B /* FormDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FormDetailViewController.h; sourceTree = "<group>"; };
 		27BE7CE2135107460005698B /* FormDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FormDetailViewController.m; sourceTree = "<group>"; };
-		27BE7CE513512F450005698B /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = iPhone/en.lproj/QuestionsView.xib; sourceTree = "<group>"; };
 		27BE7CE713512F870005698B /* QuestionController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QuestionController.h; sourceTree = "<group>"; };
 		27BE7CE813512F880005698B /* QuestionController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuestionController.m; sourceTree = "<group>"; };
 		27E0ADB5135529A7001A695D /* QuestionView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = QuestionView.xib; sourceTree = "<group>"; };
@@ -221,10 +211,8 @@
 				27834CFE13522099004ABC26 /* QuestionsViewController.m */,
 				2765D747135BB2AE00E4E184 /* FormDownloadViewController.h */,
 				2765D748135BB2AE00E4E184 /* FormDownloadViewController.m */,
-				2765D749135BB2AE00E4E184 /* FormDownloadViewController.xib */,
 				272666D61375E6DB00FD28A3 /* RecordsViewController.h */,
 				272666D71375E6DB00FD28A3 /* RecordsViewController.m */,
-				272666D81375E6DB00FD28A3 /* RecordsViewController.xib */,
 				277E257D13B64BA600909F66 /* LoginViewController.h */,
 				277E257E13B64BA600909F66 /* LoginViewController.m */,
 				277E257F13B64BA600909F66 /* LoginViewController.xib */,
@@ -249,9 +237,6 @@
 				27834D2413526BD2004ABC26 /* Questions */,
 				2724F831132C2B04009CECAF /* iRosaAppDelegate_iPhone.h */,
 				2724F832132C2B04009CECAF /* iRosaAppDelegate_iPhone.m */,
-				27BE7C781350E0710005698B /* FormsView.xib */,
-				27BE7CD81351050E0005698B /* FormDetailsView.xib */,
-				27BE7CE413512F450005698B /* QuestionsView.xib */,
 				2724F834132C2B04009CECAF /* MainWindow_iPhone.xib */,
 				278594F113B2D3AC00EC6E28 /* RecordSubmitViewController.h */,
 				278594F213B2D3AD00EC6E28 /* RecordSubmitViewController.m */,
@@ -399,17 +384,12 @@
 				2724F836132C2B04009CECAF /* MainWindow_iPhone.xib in Resources */,
 				2724F83D132C2B04009CECAF /* MainWindow_iPad.xib in Resources */,
 				2724F857132C2E45009CECAF /* ocRosa.sqlite in Resources */,
-				27BE7C7A1350E0710005698B /* FormsView.xib in Resources */,
-				27BE7CDA1351050E0005698B /* FormDetailsView.xib in Resources */,
-				27BE7CE613512F450005698B /* QuestionsView.xib in Resources */,
 				27E0ADB6135529A7001A695D /* QuestionView.xib in Resources */,
 				27686CB2135948BE00C07594 /* SelectOneView.xib in Resources */,
 				27428A2E135B55240003E419 /* NumberView.xib in Resources */,
 				27428A37135B69260003E419 /* TextView.xib in Resources */,
 				27428A39135B703F0003E419 /* DateView.xib in Resources */,
 				27428A41135B85920003E419 /* SelectView.xib in Resources */,
-				2765D74B135BB2AE00E4E184 /* FormDownloadViewController.xib in Resources */,
-				272666DA1375E6DB00FD28A3 /* RecordsViewController.xib in Resources */,
 				278594F513B2D3AD00EC6E28 /* RecordSubmitViewController.xib in Resources */,
 				277E258113B64BA600909F66 /* LoginViewController.xib in Resources */,
 				2736707713BED1FE0030D83A /* 19-gear.png in Resources */,
@@ -475,30 +455,6 @@
 				2724F83C132C2B04009CECAF /* en */,
 			);
 			name = MainWindow_iPad.xib;
-			sourceTree = "<group>";
-		};
-		27BE7C781350E0710005698B /* FormsView.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				27BE7C791350E0710005698B /* en */,
-			);
-			name = FormsView.xib;
-			sourceTree = "<group>";
-		};
-		27BE7CD81351050E0005698B /* FormDetailsView.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				27BE7CD91351050E0005698B /* en */,
-			);
-			name = FormDetailsView.xib;
-			sourceTree = "<group>";
-		};
-		27BE7CE413512F450005698B /* QuestionsView.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				27BE7CE513512F450005698B /* en */,
-			);
-			name = QuestionsView.xib;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
