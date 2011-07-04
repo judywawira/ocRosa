@@ -17,8 +17,17 @@
 #import <UIKit/UIKit.h>
 
 
-@interface RecordCompleteViewController : UIViewController {
-    
+@interface SettingsViewController : UIViewController {
+ 
+    IBOutlet UILabel *title;
+    IBOutlet UILabel *version;
+    IBOutlet UITextField *username;
 }
+
+@property (nonatomic, retain) UILabel *title;
+@property (nonatomic, retain) UILabel *version;
+@property (nonatomic, retain) UITextField *username;
+
+- (IBAction)logout:(id)sender;
 
 @end

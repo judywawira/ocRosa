@@ -37,4 +37,6 @@
 
 + (void)authenticateLocalDatabaseWithUsername:(NSString *)username andPassword:(NSString *)password;
 
++ (void)logout;
+
 @end

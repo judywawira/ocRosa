@@ -57,6 +57,16 @@
     UIAppDelegate.formManager = [FormManager createTemporaryFormManager:&error];
 }
 
++ (void)logout {
+    
+    KeychainItemWrapper *keychain = [[KeychainItemWrapper alloc] initWithIdentifier:@"OPENROSA" accessGroup:nil];
+    [keychain setObject:nil forKey:(id)kSecAttrAccount];
+    [keychain setObject:nil forKey:(id)kSecValueData];
+    [keychain release];
+    
+    UIAppDelegate.formManager = nil;
+}
+
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {

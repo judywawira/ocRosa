@@ -14,10 +14,13 @@
  * the License.
  */
 
-#import "RecordCompleteViewController.h"
+#import "SettingsViewController.h"
+#import "LoginViewController.h"
 
 
-@implementation RecordCompleteViewController
+@implementation SettingsViewController
+
+@synthesize title, version, username;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -46,7 +49,23 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
+
+    NSDictionary *infoPList = [[NSBundle mainBundle] infoDictionary];
+    self.title.text = [infoPList objectForKey:@"CFBundleDisplayName"];
+    self.version.text = [infoPList objectForKey:@"CFBundleVersion"]; 
+    
+    NSString *keychainUsername = nil;
+    NSString *keychainPassword = nil;
+        
+    if ([LoginViewController authenticateFromKeychainUsername:&keychainUsername andPassword:&keychainPassword]) {
+        
+        self.username.text = keychainUsername;
+        self.username.enabled = NO;
+        
+    } else {
+        [LoginViewController showLoginModallyOverView:self];
+    }
+    
 }
 
 - (void)viewDidUnload
@@ -60,6 +79,11 @@
 {
     // Return YES for supported orientations
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
+}
+
+- (void)logout:(id)sender {
+    [LoginViewController logout];
+    [LoginViewController showLoginModallyOverView:self];
 }
 
 @end

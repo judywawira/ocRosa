@@ -181,7 +181,7 @@
     if (![LoginViewController authenticateFromKeychainUsername:&username andPassword:&password]) {
         [self.navigationController popToRootViewControllerAnimated:YES];
         [LoginViewController showLoginModallyOverView:
-         [self.navigationController.viewControllers objectAtIndex:0]];
+        [self.navigationController.viewControllers objectAtIndex:0]];
     }
     
     UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
