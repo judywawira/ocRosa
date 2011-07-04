@@ -22,7 +22,7 @@
 
 @implementation LoginViewController
 
-@synthesize title, username, password, rememberSwitch;
+@synthesize appTitle, username, password, rememberSwitch;
 @synthesize mainViewController;
 
 + (BOOL)authenticateFromKeychainUsername:(NSString**)username andPassword:(NSString**)password {
@@ -131,7 +131,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
+
+    NSDictionary *infoPList = [[NSBundle mainBundle] infoDictionary];
+    self.appTitle.text = [infoPList objectForKey:@"CFBundleDisplayName"];
 }
 
 - (void)viewDidUnload

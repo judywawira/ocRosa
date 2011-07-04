@@ -20,7 +20,7 @@
 
 @implementation SettingsViewController
 
-@synthesize title, version, username;
+@synthesize appTitle, appVersion, username;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -51,8 +51,8 @@
     [super viewDidLoad];
 
     NSDictionary *infoPList = [[NSBundle mainBundle] infoDictionary];
-    self.title.text = [infoPList objectForKey:@"CFBundleDisplayName"];
-    self.version.text = [infoPList objectForKey:@"CFBundleVersion"]; 
+    self.appTitle.text = [infoPList objectForKey:@"CFBundleDisplayName"];
+    self.appVersion.text = [infoPList objectForKey:@"CFBundleVersion"]; 
     
     NSString *keychainUsername = nil;
     NSString *keychainPassword = nil;

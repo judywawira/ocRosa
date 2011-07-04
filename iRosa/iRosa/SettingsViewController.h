@@ -19,13 +19,13 @@
 
 @interface SettingsViewController : UIViewController {
  
-    IBOutlet UILabel *title;
-    IBOutlet UILabel *version;
+    IBOutlet UILabel *appTitle;
+    IBOutlet UILabel *appVersion;
     IBOutlet UITextField *username;
 }
 
-@property (nonatomic, retain) UILabel *title;
-@property (nonatomic, retain) UILabel *version;
+@property (nonatomic, retain) UILabel *appTitle;
+@property (nonatomic, retain) UILabel *appVersion;
 @property (nonatomic, retain) UITextField *username;
 
 - (IBAction)logout:(id)sender;

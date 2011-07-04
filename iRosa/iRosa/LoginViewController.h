@@ -17,12 +17,14 @@
 #import <UIKit/UIKit.h>
 
 @interface LoginViewController : UIViewController {
+    IBOutlet UILabel *appTitle;
     IBOutlet UITextField *username;
     IBOutlet UITextField *password;
     IBOutlet UISwitch *rememberSwitch;    
     UITabBarController *mainViewController;
 }
 
+@property (nonatomic, retain) UILabel *appTitle;
 @property (nonatomic, retain) UITextField *username;
 @property (nonatomic, retain) UITextField *password;
 @property (nonatomic, retain) UISwitch *rememberSwitch;

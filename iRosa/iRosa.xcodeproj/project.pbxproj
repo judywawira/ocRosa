@@ -55,6 +55,7 @@
 		27BE7CE913512F890005698B /* QuestionController.m in Sources */ = {isa = PBXBuildFile; fileRef = 27BE7CE813512F880005698B /* QuestionController.m */; };
 		27C4626B13C156D400963A34 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 27C4626913C156D400963A34 /* SettingsViewController.m */; };
 		27C4626C13C156D400963A34 /* SettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 27C4626A13C156D400963A34 /* SettingsViewController.xib */; };
+		27C4626F13C1644300963A34 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 27C4626E13C1644300963A34 /* Icon.png */; };
 		27E0ADB6135529A7001A695D /* QuestionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 27E0ADB5135529A7001A695D /* QuestionView.xib */; };
 		27EFB7E21359232800B32CA3 /* SelectOneView.m in Sources */ = {isa = PBXBuildFile; fileRef = 27EFB7E11359232800B32CA3 /* SelectOneView.m */; };
 		27F6D37213C102F6003019FF /* RecordCompleteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 27F6D37013C102F4003019FF /* RecordCompleteViewController.m */; };
@@ -134,6 +135,7 @@
 		27C4626813C156D400963A34 /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
 		27C4626913C156D400963A34 /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
 		27C4626A13C156D400963A34 /* SettingsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingsViewController.xib; sourceTree = "<group>"; };
+		27C4626E13C1644300963A34 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
 		27E0ADB5135529A7001A695D /* QuestionView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = QuestionView.xib; sourceTree = "<group>"; };
 		27EFB7E01359232700B32CA3 /* SelectOneView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectOneView.h; sourceTree = "<group>"; };
 		27EFB7E11359232800B32CA3 /* SelectOneView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectOneView.m; sourceTree = "<group>"; };
@@ -311,6 +313,7 @@
 		2794B27D13BED47A0091755A /* icons */ = {
 			isa = PBXGroup;
 			children = (
+				27C4626E13C1644300963A34 /* Icon.png */,
 				2736707A13BED3070030D83A /* 44-shoebox.png */,
 				2736707813BED2420030D83A /* 56-cloud.png */,
 				2736707613BED1FE0030D83A /* 19-gear.png */,
@@ -413,6 +416,7 @@
 				2736707B13BED3070030D83A /* 44-shoebox.png in Resources */,
 				27F6D37313C102F6003019FF /* RecordCompleteViewController.xib in Resources */,
 				27C4626C13C156D400963A34 /* SettingsViewController.xib in Resources */,
+				27C4626F13C1644300963A34 /* Icon.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
