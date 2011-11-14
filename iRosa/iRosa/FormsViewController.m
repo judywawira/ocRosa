@@ -127,7 +127,7 @@
 
     [self.navigationController pushViewController:download animated:YES];
     [download release];
-    [server release];
+    //[server release];
     
     [DSActivityView removeView];
     [addButton setEnabled:YES];

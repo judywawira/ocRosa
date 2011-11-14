@@ -17,10 +17,10 @@
 #import <Foundation/Foundation.h>
 #import "OpenRosaServer.h"
 
-@interface EpiSurveyor : NSObject <OpenRosaServer, NSXMLParserDelegate> {
-
+@interface ODK : NSObject <OpenRosaServer, NSXMLParserDelegate> {
+    
     id <OpenRosaServerDelegate> delegate;
-
+    
     NSInteger requestType;
     
     NSString *username;
@@ -28,20 +28,24 @@
     NSString *password;
     
     NSMutableData *receivedData;
-
+    
     NSMutableArray *xFormIDs;
     NSMutableArray *xFormNames;
     NSMutableString *currentXMLString;
+    
+    NSString *requestedFormID;
+    Record   *submittedRecord;
+    Form     *submittedForm;
 }
+
+@property (nonatomic, retain) NSString  *requestedFormID;
+@property (nonatomic, retain) Record    *submittedRecord;
+@property (nonatomic, retain) Form      *submittedForm;
 
 - (void)requestWithURL:(NSString *)url;
 
 - (void)requestSuccessful;
 
 - (void)requestFailedWithMessage:(NSString *)message;
-
-// Replicate Java's DataOutputStream methods
-- (void)writeUTF:(NSString *)value toBuffer:(NSMutableData *)buffer;
-- (void)writeUTFDate:(NSDate *)date toBuffer:(NSMutableData *)buffer;
 
 @end

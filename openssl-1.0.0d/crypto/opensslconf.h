@@ -38,9 +38,6 @@
 #ifndef OPENSSL_THREADS
 # define OPENSSL_THREADS
 #endif
-#ifndef OPENSSL_NO_ASM
-# define OPENSSL_NO_ASM
-#endif
 #ifndef OPENSSL_NO_DYNAMIC_ENGINE
 # define OPENSSL_NO_DYNAMIC_ENGINE
 #endif
@@ -75,6 +72,8 @@
 #  define NO_STORE
 # endif
 #endif
+
+#define OPENSSL_CPUID_OBJ
 
 /* crypto/opensslconf.h.in */
 

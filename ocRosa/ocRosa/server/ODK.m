@@ -14,15 +14,16 @@
  * the License.
  */
 
-#import "EpiSurveyor.h"
+#import "ODK.h"
+#import "ASIHTTPRequest.h"
 #import "Record.h"
 #import "RecordXML.h"
 #import "Form.h"
 
-NSInteger const kOpenRosaServer_Request_Login       = 1;
-NSInteger const kOpenRosaServer_Request_FormList    = 2;
-NSInteger const kOpenRosaServer_Request_Form        = 3;
-NSInteger const kOpenRosaServer_Request_Submit      = 4;
+//NSInteger const kOpenRosaServer_Request_Login       = 1;
+//NSInteger const kOpenRosaServer_Request_FormList    = 2;
+//NSInteger const kOpenRosaServer_Request_Form        = 3;
+//NSInteger const kOpenRosaServer_Request_Submit      = 4;
 
 // Constants from http://www.datadyne.org/episurveyor/api
 static NSString * const kMOBILE_RESPONSE_ERROR_IN_DOWNLOAD                  = @"400";
@@ -42,11 +43,11 @@ static NSString * const kMOBILE_RESPONSE_TYPE_INVALIDUSER_FOR_FORMLIST      = @"
 static NSString * const kMOBILE_RESPONSE_TYPE_DBERROR_FOR_FORMLIST          = @"702";
 static NSString * const kMOBILE_RESPONSE_TYPE_SURVEYNOTEXIST_FOR_FORMLIST   = @"703";
 
-@implementation EpiSurveyor
+@implementation ODK
 
 @synthesize delegate;
-@synthesize requestType, username, password, receivedData, xFormIDs, xFormNames;
-@synthesize submittedRecord, submittedForm;
+@synthesize requestType, username, password, xFormIDs, xFormNames, receivedData;
+@synthesize requestedFormID, submittedRecord, submittedForm;
 
 - (void)dealloc {
     self.username = nil;
@@ -62,34 +63,45 @@ static NSString * const kMOBILE_RESPONSE_TYPE_SURVEYNOTEXIST_FOR_FORMLIST   = @"
 #pragma mark OpenRosaServer Methods
 
 - (void) login {
-    NSString *url = 
-        [NSString stringWithFormat:@"http://episurveyor.org/AuthenticateLogin?id=%@&pwd=%@&version=2.3",
-            self.username,
-            self.password];
-    
-    self.requestType = kOpenRosaServer_Request_Login;
-    [self requestWithURL:url];
+    ASIHTTPRequest *theRequest = [ASIHTTPRequest requestWithURL:[NSURL URLWithString:@"http://localhost:8080/ODKAggregate/local_login.html"]];
+	[theRequest setDelegate:self];
+    [theRequest setUsername:username];
+    [theRequest setPassword:password];
+	[theRequest setDidFinishSelector:@selector(loginRequestFinished:)];
+    [theRequest startAsynchronous];
 }
-     
+
+- (void)authenticationNeededForRequest:(ASIHTTPRequest *)request {
+    [request setUsername:username];
+    [request setPassword:password];
+    [request retryUsingSuppliedCredentials];
+}
+
+- (void)proxyAuthenticationNeededForRequest:(ASIHTTPRequest *)request {
+    [request setProxyUsername:username];
+    [request setProxyPassword:password];
+    [request retryUsingSuppliedCredentials];
+}
+
 - (void)requestFormList {
-    NSString *url = 
-        [NSString stringWithFormat:@"http://episurveyor.org/GetFormList?userid=%@&pwd=%@&version=2.3&formtype=private",
-            self.username,
-            self.password];
-    
     self.requestType = kOpenRosaServer_Request_FormList;
+    [self login];
+}
+
+- (void)doRequestFormList {
+    NSString *url = @"http://localhost:8080/ODKAggregate/formList";
     [self requestWithURL:url]; 
 }
 
 - (void)requestForm:(NSString *)xFormID {
-    NSString *url = 
-        [NSString stringWithFormat:@"http://episurveyor.org/GetSurveyForm?userId=%@&pwd=%@&version=2.3&formId=%@",
-            self.username,
-            self.password,
-            xFormID];
-    
+    self.requestedFormID = xFormID;
     self.requestType = kOpenRosaServer_Request_Form;
-    [self requestWithURL:url];    
+    [self login];    
+}
+
+- (void)doRequestForm {
+    NSString* url = [NSString stringWithFormat:@"http://localhost:8080/ODKAggregate/formXml?formId=%@", self.requestedFormID];
+    [self requestWithURL:url];
 }
 
 - (void)submitRecord:(Record *)record
@@ -100,9 +112,8 @@ static NSString * const kMOBILE_RESPONSE_TYPE_SURVEYNOTEXIST_FOR_FORMLIST   = @"
     
     self.requestType = kOpenRosaServer_Request_Submit;
     
-    
     NSString *url = 
-        [NSString stringWithFormat:@"http://episurveyor.org/UploadRecordsNew?version=2.3"];  
+    [NSString stringWithFormat:@"http://episurveyor.org/UploadRecordsNew?version=2.3"];  
     
     
     // Note: we're creating a mutable request so we can change the HTTPBody buffer
@@ -111,13 +122,13 @@ static NSString * const kMOBILE_RESPONSE_TYPE_SURVEYNOTEXIST_FOR_FORMLIST   = @"
                                                           timeoutInterval:60];
     /*
      The EpiSurveyor API docs: http://www.datadyne.org/episurveyor/api
-        
-        "The client uses the DataOutputStream to write the records to the server."
+     
+     "The client uses the DataOutputStream to write the records to the server."
      
      */
     
     NSMutableData *data = [NSMutableData data];    
-
+    
     [self writeUTF:self.username toBuffer:data];    
     [self writeUTF:self.password toBuffer:data];
     [self writeUTF:form.serverID toBuffer:data];
@@ -129,10 +140,10 @@ static NSString * const kMOBILE_RESPONSE_TYPE_SURVEYNOTEXIST_FOR_FORMLIST   = @"
     long long tempy = 0x0000000000000000L;
     [data appendBytes:&tempy length:sizeof(long long)];
     [data appendBytes:&tempy length:sizeof(long long)];
-
+    
     [self writeUTF:@"2.6" toBuffer:data];
     [self writeUTF:@"a6393b90-6694-42a3-9ff8-c2d91ea9e66c" toBuffer:data];
-     
+    
     [theRequest setHTTPMethod:@"POST"];
     [theRequest setHTTPBody:data];
     [theRequest setValue:@"application/octet-stream" forHTTPHeaderField:@"Content-Type"];
@@ -144,7 +155,7 @@ static NSString * const kMOBILE_RESPONSE_TYPE_SURVEYNOTEXIST_FOR_FORMLIST   = @"
 
 // Simulate Java DataOutputStream.writeUTF()
 - (void)writeUTF:(NSString *)value toBuffer:(NSMutableData *)buffer {
-
+    
     // Convert 'value' to a UTF8 buffer
     NSData *utfData = [value dataUsingEncoding:NSUTF8StringEncoding];
     uint16_t utfDataSize = (uint16_t)[utfData length];
@@ -169,14 +180,15 @@ static NSString * const kMOBILE_RESPONSE_TYPE_SURVEYNOTEXIST_FOR_FORMLIST   = @"
 #pragma mark ---
 
 - (void)requestWithURL:(NSString *)url {
-
-    NSURLRequest *theRequest = [NSURLRequest requestWithURL:[NSURL URLWithString:url]
-                                                cachePolicy:NSURLRequestReloadIgnoringLocalCacheData
-                                            timeoutInterval:60];
-    
-    if ([NSURLConnection connectionWithRequest:theRequest delegate:self] == nil) {
-        [self requestFailedWithMessage:@"Unable to initiate request"];
-    }
+        
+    ASIHTTPRequest *theRequest = [ASIHTTPRequest requestWithURL:[NSURL URLWithString:url]];
+	
+    [theRequest setUseKeychainPersistence:false]; // We've implemented our own Keychain access
+	[theRequest setDelegate:self];
+	[theRequest setShouldPresentAuthenticationDialog:false];
+    [theRequest setUsername:username];
+    [theRequest setPassword:password];
+	[theRequest startAsynchronous];
 }
 
 #pragma mark OpenRosaServerDelegate Responders
@@ -186,7 +198,6 @@ static NSString * const kMOBILE_RESPONSE_TYPE_SURVEYNOTEXIST_FOR_FORMLIST   = @"
         [[self delegate] requestSuccessful:self];
     }
 }
-
 
 - (void)requestFailedWithMessage:(NSString *)message {
     if([[self delegate] respondsToSelector:@selector(requestFailed:)]) {
@@ -201,7 +212,7 @@ static NSString * const kMOBILE_RESPONSE_TYPE_SURVEYNOTEXIST_FOR_FORMLIST   = @"
  qualifiedName:(NSString *) qualifiedName 
     attributes:(NSDictionary *)attributeDict {
     
-    if ([elementName isEqualToString:@"formlist"]) {
+    if ([elementName isEqualToString:@"forms"]) {
         
         [xFormIDs release];
         xFormIDs = [[NSMutableArray alloc] init];
@@ -210,10 +221,27 @@ static NSString * const kMOBILE_RESPONSE_TYPE_SURVEYNOTEXIST_FOR_FORMLIST   = @"
         xFormNames = [[NSMutableArray alloc] init];
         
     } else if ([elementName isEqualToString:@"form"]) {
-    
-        [currentXMLString setString:@""];
-        [xFormIDs addObject:[attributeDict objectForKey:@"formid"]];
         
+        [currentXMLString setString:@""];
+        
+        // The form element looks like this:
+        // <form url="http://localhost:8080/ODKAggregate/formXml?formId=build_Test-Form-001_1319933414">Test Form 001</form>
+        // We want the form ID "build_Test-Form-001_1319933414"
+        
+        // Even though we have the url, we extract just the ID
+        NSString *url = [attributeDict objectForKey:@"url"];
+        NSRange formIDRange = [url rangeOfString:@"formId=" options:NSCaseInsensitiveSearch range:NSMakeRange(0, [url length])];
+        if (formIDRange.location != NSNotFound) {
+
+            int pos = formIDRange.location + 7;
+            NSString *formID = [url substringFromIndex:pos];
+            [xFormIDs addObject:formID];
+            
+        } else {
+            // Use the entire URL as the ID
+            [xFormIDs addObject:[attributeDict objectForKey:@"url"]];
+
+        }
     }
 }
 
@@ -222,7 +250,7 @@ static NSString * const kMOBILE_RESPONSE_TYPE_SURVEYNOTEXIST_FOR_FORMLIST   = @"
     if ([elementName isEqualToString:@"form"]) {
         [xFormNames addObject:[NSString stringWithString:currentXMLString]];
         
-    } else if ([elementName isEqualToString:@"formlist"]) {
+    } else if ([elementName isEqualToString:@"forms"]) {
         [self requestSuccessful];
     }
 }
@@ -233,34 +261,25 @@ static NSString * const kMOBILE_RESPONSE_TYPE_SURVEYNOTEXIST_FOR_FORMLIST   = @"
 
 #pragma mark NSURLConnection Delegates
 
-- (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {
+- (void)requestFailed:(ASIHTTPRequest *)request {
+    NSLog(@"Failed");
+}
 
-    NSInteger statusCode = [(NSHTTPURLResponse *)response statusCode];
-    
-    if (statusCode < 400) {
-        
-        // Response was successful
-        long long contentLength = [response expectedContentLength];
-        if (contentLength == NSURLResponseUnknownLength) {
-            contentLength = 500000;
-        }
-        self.receivedData = [NSMutableData dataWithCapacity:(NSUInteger)contentLength];
-    
+- (void)loginRequestFinished:(ASIHTTPRequest *)request {
+    if (self.requestType == kOpenRosaServer_Request_FormList) {
+        [self doRequestFormList];
+    } else if (self.requestType == kOpenRosaServer_Request_Form) { 
+        [self doRequestForm];
     } else {
-        
-        self.receivedData = nil;
-        
-        // TODO: Better failure messages!
-        [self requestFailedWithMessage:@"Failed!"];
+        [self requestSuccessful];
     }
 }
 
-- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data {
-    [self.receivedData appendData:data];
-}
-
-- (void)connectionDidFinishLoading:(NSURLConnection *)connection {
-    
+- (void)requestFinished:(ASIHTTPRequest *)request {
+        
+    self.receivedData = nil;
+    self.receivedData = [NSData dataWithData:[request responseData]];
+        
     if ([self.receivedData length] == 3) {
         NSString *result = [NSString stringWithFormat:@"%.*s", [receivedData length], [receivedData bytes]];
         if ([result isEqualToString:@"600"]) {
@@ -275,7 +294,7 @@ static NSString * const kMOBILE_RESPONSE_TYPE_SURVEYNOTEXIST_FOR_FORMLIST   = @"
     
     if (self.requestType == kOpenRosaServer_Request_FormList) {
         currentXMLString = [NSMutableString string];
-        NSXMLParser *parser = [[NSXMLParser alloc] initWithData:self.receivedData];
+        NSXMLParser *parser = [[NSXMLParser alloc] initWithData:[request responseData]];
         parser.delegate = self;
         [parser parse];
         [parser release];
@@ -288,22 +307,4 @@ static NSString * const kMOBILE_RESPONSE_TYPE_SURVEYNOTEXIST_FOR_FORMLIST   = @"
     [self requestFailedWithMessage:[error localizedDescription]];
 }
 
-/*
-- (BOOL)connection:(NSURLConnection *)connection canAuthenticateAgainstProtectionSpace:(NSURLProtectionSpace *)protectionSpace {
-    NSString *foo = protectionSpace.authenticationMethod;
-    
-    return [protectionSpace.authenticationMethod isEqualToString:NSURLAuthenticationMethodServerTrust];
-}
-
-- (void)connection:(NSURLConnection *)connection didReceiveAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge {
-    NSArray *trustedHosts = [NSArray arrayWithObjects:@"episurveyor.org", nil];
-
-    if ([challenge.protectionSpace.authenticationMethod isEqualToString:NSURLAuthenticationMethodServerTrust])
-        if ([trustedHosts containsObject:challenge.protectionSpace.host])
-            [challenge.sender useCredential:[NSURLCredential credentialForTrust:challenge.protectionSpace.serverTrust] forAuthenticationChallenge:challenge];
-    
-    [challenge.sender continueWithoutCredentialForAuthenticationChallenge:challenge];
-}
- 
- */
 @end

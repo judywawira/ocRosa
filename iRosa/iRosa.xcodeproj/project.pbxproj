@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2713CAFD146A1EB000B739B6 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2713CAFC146A1EB000B739B6 /* CFNetwork.framework */; };
+		2713CAFF146A1ECD00B739B6 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2713CAFE146A1ECD00B739B6 /* SystemConfiguration.framework */; };
+		2713CB01146A1ED700B739B6 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2713CB00146A1ED700B739B6 /* MobileCoreServices.framework */; };
+		2713CB03146A1EF900B739B6 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 2713CB02146A1EF900B739B6 /* libz.dylib */; };
 		2724F81F132C2B04009CECAF /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2724F81E132C2B04009CECAF /* UIKit.framework */; };
 		2724F821132C2B04009CECAF /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2724F820132C2B04009CECAF /* Foundation.framework */; };
 		2724F823132C2B04009CECAF /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2724F822132C2B04009CECAF /* CoreGraphics.framework */; };
@@ -63,6 +67,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2713CAFC146A1EB000B739B6 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		2713CAFE146A1ECD00B739B6 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		2713CB00146A1ED700B739B6 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		2713CB02146A1EF900B739B6 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		2724F81A132C2B04009CECAF /* iRosa.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iRosa.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2724F81E132C2B04009CECAF /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		2724F820132C2B04009CECAF /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -149,6 +157,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2713CB03146A1EF900B739B6 /* libz.dylib in Frameworks */,
+				2724F823132C2B04009CECAF /* CoreGraphics.framework in Frameworks */,
+				2713CB01146A1ED700B739B6 /* MobileCoreServices.framework in Frameworks */,
+				2713CAFF146A1ECD00B739B6 /* SystemConfiguration.framework in Frameworks */,
+				2713CAFD146A1EB000B739B6 /* CFNetwork.framework in Frameworks */,
 				277E25D613B6A8DC00909F66 /* Security.framework in Frameworks */,
 				278717BF13528122007BA879 /* QuartzCore.framework in Frameworks */,
 				27776C381341593300473F80 /* libxml2.dylib in Frameworks */,
@@ -159,7 +172,6 @@
 				2724F84C132C2C3B009CECAF /* libsqlcipher.a in Frameworks */,
 				2724F81F132C2B04009CECAF /* UIKit.framework in Frameworks */,
 				2724F821132C2B04009CECAF /* Foundation.framework in Frameworks */,
-				2724F823132C2B04009CECAF /* CoreGraphics.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -169,6 +181,10 @@
 		2724F80F132C2B04009CECAF = {
 			isa = PBXGroup;
 			children = (
+				2713CB02146A1EF900B739B6 /* libz.dylib */,
+				2713CB00146A1ED700B739B6 /* MobileCoreServices.framework */,
+				2713CAFE146A1ECD00B739B6 /* SystemConfiguration.framework */,
+				2713CAFC146A1EB000B739B6 /* CFNetwork.framework */,
 				2794B27D13BED47A0091755A /* icons */,
 				277E25D513B6A8DB00909F66 /* Security.framework */,
 				2724F855132C2E35009CECAF /* Resources */,
@@ -375,6 +391,7 @@
 		2724F811132C2B04009CECAF /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastUpgradeCheck = 0420;
 				ORGANIZATIONNAME = n/a;
 			};
 			buildConfigurationList = 2724F814132C2B04009CECAF /* Build configuration list for PBXProject "iRosa" */;
@@ -496,7 +513,7 @@
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 3.1.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 3.1;
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-all_load",
@@ -517,7 +534,7 @@
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 3.1.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 3.1;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				OTHER_LDFLAGS = (
 					"-ObjC",

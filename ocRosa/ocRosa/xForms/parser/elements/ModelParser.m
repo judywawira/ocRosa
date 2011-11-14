@@ -25,9 +25,7 @@
     self.dbid = [self.operations createModelInForm:self.parentElementParser.dbid
                                           xFormsID:[self getAttribute:@"id"]
                                           serverID:[self getAttribute:@"dd:formid"]
-                                            geotag:[[self getAttribute:@"dd:geotag"] isEqualToString:@"on"] 
-                                                    ? [NSNumber numberWithBool:YES] 
-                                                    : [NSNumber numberWithBool:NO]
+                                            geotag:[NSNumber numberWithBool:YES] 
                                              error:error];
     
     return (self.dbid != nil);

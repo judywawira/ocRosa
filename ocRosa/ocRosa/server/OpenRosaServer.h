@@ -14,7 +14,8 @@
  * the License.
  */
 
-#define OPENROSA_SERVER EpiSurveyor
+//#define OPENROSA_SERVER EpiSurveyor
+#define OPENROSA_SERVER ODK
 
 #import <Foundation/Foundation.h>
 
@@ -42,7 +43,7 @@ extern NSInteger const kOpenRosaServer_Request_Submit;
 @property (nonatomic, copy) NSString *username;
 @property (nonatomic, copy) NSString *password;
 
-@property (nonatomic, retain) NSMutableData *receivedData;
+@property (nonatomic, retain) NSData *receivedData;
 
 // After requesting the FormList, this is an array of remote xForm IDs
 // Order matches xFormsNames
